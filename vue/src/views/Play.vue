@@ -1,20 +1,22 @@
 <template>
-    <div>
-        <Join v-if="!joined"/>
+    <div v-if="isReady">
+        <Join v-if="!playerJoined"/>
         <section v-else>game</section>
     </div>
 </template>
 
 <script>
-import { game, me } from '@/utils/game'
+import { goToGame, game, me } from '@/utils/game'
 import Join from '@/components/Join'
 import { computed } from 'vue';
 
 export default {
     setup(){
-        const joined = computed(() => me.name && me.icon && me.color && game.value.players.find(p => p.uid === me.uid))
+        goToGame('vWedmfs0m7zNaAdi4Yib');
+        const playerJoined = computed(() => me.name && me.icon && me.color && game.value.players.find(p => p.uid === me.uid))
+        const isReady = computed(() => !!game.value.quizid);
 
-        return { joined }
+        return { playerJoined, isReady }
     },
     components: { Join }
 }

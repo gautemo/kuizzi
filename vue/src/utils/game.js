@@ -27,7 +27,7 @@ const addMe = async (name, icon, color) => {
 
 let gameRef = null;
 
-const listenToGame = id => {
+const goToGame = id => {
     gameRef = db.collection('games').doc(id);
     gameRef.onSnapshot(async doc => {
         const data = doc.data();
@@ -47,6 +47,4 @@ const listenToGame = id => {
     })
 }
 
-listenToGame('vWedmfs0m7zNaAdi4Yib');
-
-export { game, me, addMe };
+export { goToGame, game, me, addMe };

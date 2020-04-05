@@ -6,7 +6,7 @@
       <input type="text" v-model="form.name" @focus="form.nameFocus = true" @blur="form.nameFocus = false" maxlength="25">
     </label>
     <span class="validation">{{form.nameNotValid}}</span>
-    <button class="fancyfont" @click="form.savedName = form.name" :disabled="!form.name || form.nameNotValid.length > 0">Next</button>
+    <button class="fancyfont" @click="form.savedName = true" :disabled="!form.name || form.nameNotValid.length > 0">Next</button>
   </section>
   <section v-else-if="!form.savedIcon">
     <label class="fancyfont">Chose your icon</label>
@@ -14,8 +14,8 @@
       <span class="icon" @click="form.icon = icon" :class="{selected: form.icon === icon}" v-for="icon in icons" :key="icon">{{icon}}</span>
     </div>
     <div class="buttons">
-      <button class="fancyfont" @click="form.savedName = ''">Back</button>
-      <button class="fancyfont" @click="form.savedIcon = form.icon" :disabled="!form.icon">Next</button>
+      <button class="fancyfont" @click="form.savedName = false">Back</button>
+      <button class="fancyfont" @click="form.savedIcon = true" :disabled="!form.icon">Next</button>
     </div>
   </section>
   <section v-else-if="!form.savedColor">
@@ -24,15 +24,15 @@
       <span class="color" @click="form.color = color" :class="{selected: form.color === color}" v-for="color in colors" :key="color" :style="{background: color}"></span>
     </div>
     <div class="buttons">
-      <button class="fancyfont" @click="form.savedIcon = ''">Back</button>
-      <button class="fancyfont" @click="form.savedColor = form.color" :disabled="!form.color">Next</button>
+      <button class="fancyfont" @click="form.savedIcon = false">Back</button>
+      <button class="fancyfont" @click="form.savedColor = true" :disabled="!form.color">Next</button>
     </div>
   </section>
   <section v-else>
     <label class="fancyfont">Use this?</label>
     <div class="user-info">
-      <span class="portrait" :style="{background: form.savedColor}">{{form.savedIcon}}</span>
-      <span class="name">{{form.savedName}}</span>
+      <span class="portrait" :style="{background: form.color}">{{form.icon}}</span>
+      <span class="name">{{form.name}}</span>
     </div>
     <div class="buttons">
       <button class="fancyfont" @click="clear">No</button>
@@ -44,7 +44,7 @@
 
 <script>
 import { game, addMe } from '@/utils/game'
-import { reactive, computed } from 'vue'
+import { reactive, computed, watch } from 'vue'
 import { db } from '@/firebase'
 
 const icons = [
@@ -58,7 +58,7 @@ const colors = [
   '#34495E', '#2C3E50',
 ]
 
-const validName = name => !game.value.players.some(p => p.name === name);
+const isNameTaken = name => game.value.players.some(p => p.name === name);
 
 export default {
   setup(){
@@ -66,40 +66,49 @@ export default {
       name: '',
       nameFocus: false,
       nameNotValid: computed(() => {
-        if(!validName(form.name)){
+        if(isNameTaken(form.name)){
           return `Nickname is alrady taken in this game 😢`
         }
         return ''
       }),
       icon: '',
       color: '',
-      savedName: '',
-      savedIcon: '',
-      savedColor: '',
+      savedName: false,
+      savedIcon: false,
+      savedColor: false,
     })
 
     let oldForm = localStorage.getItem('user');
     if(oldForm){
       oldForm = JSON.parse(oldForm);
-      if(validName(oldForm.savedName)){
-        form.savedName = oldForm.savedName;
-        form.savedIcon = oldForm.savedIcon;
-        form.savedColor = oldForm.savedColor;
+      form.name = oldForm.name;
+      form.icon = oldForm.icon;
+      form.color = oldForm.color;
+      form.savedName = true;
+      form.savedIcon = true;
+      form.savedColor = true;
+    }
+
+    const checkIfNameIsTaken = () => {
+      if(form.name && form.savedName && isNameTaken(form.name)){
+        form.savedName = false;
       }
     }
+    watch(game, checkIfNameIsTaken);
+    checkIfNameIsTaken();
 
     const save = () => {
       localStorage.setItem('user', JSON.stringify({...form}));
-      addMe(form.savedName, form.savedIcon, form.savedColor);
+      addMe(form.name, form.icon, form.color);
     }
 
     const clear = () => {
       form.name = '';
-      form.savedName = '';
+      form.savedName = false;
       form.icon = '';
-      form.savedIcon = '';
+      form.savedIcon = false;
       form.color = '';
-      form.savedColor = '';
+      form.savedColor = false;
     }
 
     return { form, icons, colors, save, clear }
