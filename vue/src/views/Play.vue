@@ -2,7 +2,8 @@
     <div v-if="isReady">
         <Join v-if="!playerJoined"/>
         <section v-else>
-            <Lobby v-if="game.question === 1 && !game.questionStarted" />
+            <Lobby v-if="game.state === 'notstarted'" />
+            <Score v-else-if="game.state === 'score'" />
         </section>
     </div>
 </template>
@@ -11,6 +12,7 @@
 import { goToGame, game, me } from '@/utils/game'
 import Join from '@/components/Join'
 import Lobby from '@/components/Lobby'
+import Score from '@/components/Score'
 import { computed } from 'vue';
 
 export default {
@@ -21,6 +23,6 @@ export default {
 
         return { playerJoined, isReady, game }
     },
-    components: { Join, Lobby }
+    components: { Join, Lobby, Score }
 }
 </script>

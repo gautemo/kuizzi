@@ -31,7 +31,7 @@
   <section v-else>
     <label class="fancyfont">Use this?</label>
     <div class="user-info">
-      <span class="portrait" :style="{background: form.color}">{{form.icon}}</span>
+      <Portrait :icon="form.icon" :color="form.color" size="100"/>
       <span class="name">{{form.name}}</span>
     </div>
     <div class="buttons">
@@ -46,6 +46,7 @@
 import { game, addMe } from '@/utils/game'
 import { ref, reactive, computed, watch } from 'vue'
 import { db } from '@/firebase'
+import Portrait from '@/components/Portrait'
 
 const icons = [
   '😃', '🤣', '😇', '🥰', '🤩', '🤪', '🤑', '🤔', '😬', '🤥', '🥶', '🤠', '😎', '🤓', '😈',
@@ -114,7 +115,8 @@ export default {
     const iconNext = ref(null);
     const colorNext = ref(null);
     return { form, icons, colors, save, clear, iconNext, colorNext }
-  }
+  },
+  components: { Portrait }
 }
 
 </script>
@@ -238,16 +240,6 @@ label.fancyfont{
 .select.colors{
   margin-top: 15px;
   gap: 10px;
-}
-
-.portrait{
-  font-size: 3em;
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .user-info{

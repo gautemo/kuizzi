@@ -20,6 +20,7 @@ const addMe = async (name, icon, color) => {
     me.name = name;
     me.icon = icon;
     me.color = color;
+    me.score = 0;
     gameRef.update({
         players: firebase.firestore.FieldValue.arrayUnion(JSON.stringify({...me}))
     });
@@ -42,6 +43,7 @@ const goToGame = id => {
                 me.icon = meInDb.icon;
                 me.color = meInDb.color;
                 me.uid = meInDb.uid;
+                me.score = meInDb.score;
             }
         }
     })
