@@ -1,0 +1,39 @@
+<template>
+  <div>
+    <router-view/>
+  </div>
+</template>
+
+<script>
+let bgcolor = 1;
+setInterval(() => {
+  bgcolor++;
+  if(bgcolor > 5) bgcolor = 1;
+  document.documentElement.style.setProperty('--bg', `var(--pastel${bgcolor})`);
+}, 15*1000);
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Oswald:wght@500&display=swap');
+
+:root{
+  --pastel1: #CAFFD0;
+  --pastel2: #C9E4E7;
+  --pastel3: #B4A0E5;
+  --pastel4: #FAA4BD;
+  --pastel5: #C6D2ED;
+  --bg: var(--pastel1);
+}
+
+body{
+  margin: 0;
+  height: 100vh;
+  font-family: 'Oswald', sans-serif;
+  background-color: var(--bg);
+  transition: background-color 7s ease-in-out;
+}
+
+.fancyfont{
+  font-family: 'Audiowide', cursive;
+}
+</style>
