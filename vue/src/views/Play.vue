@@ -1,13 +1,16 @@
 <template>
     <div v-if="isReady">
         <Join v-if="!playerJoined"/>
-        <section v-else>game</section>
+        <section v-else>
+            <Lobby v-if="game.question === 1 && !game.questionStarted" />
+        </section>
     </div>
 </template>
 
 <script>
 import { goToGame, game, me } from '@/utils/game'
 import Join from '@/components/Join'
+import Lobby from '@/components/Lobby'
 import { computed } from 'vue';
 
 export default {
@@ -16,8 +19,8 @@ export default {
         const playerJoined = computed(() => me.name && me.icon && me.color && game.value.players.find(p => p.uid === me.uid))
         const isReady = computed(() => !!game.value.quizid);
 
-        return { playerJoined, isReady }
+        return { playerJoined, isReady, game }
     },
-    components: { Join }
+    components: { Join, Lobby }
 }
 </script>

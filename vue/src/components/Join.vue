@@ -3,7 +3,7 @@
   <section v-if="!form.savedName" class="section-name">
     <label>
       <span :class="{active: form.name || form.nameFocus}" class="fancyfont">Nickname</span>
-      <input type="text" v-model="form.name" @focus="form.nameFocus = true" @blur="form.nameFocus = false" maxlength="25">
+      <input type="text" v-model="form.name" @focus="form.nameFocus = true" @blur="form.nameFocus = false" maxlength="25" @keyup.enter="form.savedName = true">
     </label>
     <span class="validation">{{form.nameNotValid}}</span>
     <button class="fancyfont" @click="form.savedName = true" :disabled="!form.name || form.nameNotValid.length > 0">Next</button>
@@ -11,21 +11,21 @@
   <section v-else-if="!form.savedIcon">
     <label class="fancyfont">Chose your icon</label>
     <div class="select">
-      <span class="icon" @click="form.icon = icon" :class="{selected: form.icon === icon}" v-for="icon in icons" :key="icon">{{icon}}</span>
+      <span class="icon" @click="form.icon = icon" :class="{selected: form.icon === icon}" v-for="icon in icons" :key="icon" tabindex="0" @keyup.enter="form.icon = icon; iconNext.focus()">{{icon}}</span>
     </div>
     <div class="buttons">
       <button class="fancyfont" @click="form.savedName = false">Back</button>
-      <button class="fancyfont" @click="form.savedIcon = true" :disabled="!form.icon">Next</button>
+      <button class="fancyfont" @click="form.savedIcon = true" :disabled="!form.icon" ref="iconNext">Next</button>
     </div>
   </section>
   <section v-else-if="!form.savedColor">
     <label class="fancyfont">Chose your color</label>
     <div class="select colors">
-      <span class="color" @click="form.color = color" :class="{selected: form.color === color}" v-for="color in colors" :key="color" :style="{background: color}"></span>
+      <span class="color" @click="form.color = color" :class="{selected: form.color === color}" v-for="color in colors" :key="color" :style="{background: color}" @keyup.enter="form.color = color; colorNext.focus()" tabindex="0"></span>
     </div>
     <div class="buttons">
       <button class="fancyfont" @click="form.savedIcon = false">Back</button>
-      <button class="fancyfont" @click="form.savedColor = true" :disabled="!form.color">Next</button>
+      <button class="fancyfont" @click="form.savedColor = true" :disabled="!form.color" ref="colorNext">Next</button>
     </div>
   </section>
   <section v-else>
@@ -44,7 +44,7 @@
 
 <script>
 import { game, addMe } from '@/utils/game'
-import { reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import { db } from '@/firebase'
 
 const icons = [
@@ -111,7 +111,9 @@ export default {
       form.savedColor = false;
     }
 
-    return { form, icons, colors, save, clear }
+    const iconNext = ref(null);
+    const colorNext = ref(null);
+    return { form, icons, colors, save, clear, iconNext, colorNext }
   }
 }
 
@@ -211,9 +213,11 @@ label.fancyfont{
 
 .icon:hover,
 .color:hover,
-.icon:focus,
-.color:focus{
+.icon:focus{
   border: 3px solid rgba(255, 255, 255, 0.7);
+}
+.color:focus{
+  border: 6px solid rgba(255, 255, 255, 0.7);
 }
 
 .icon.selected{
