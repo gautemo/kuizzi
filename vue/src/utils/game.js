@@ -1,5 +1,6 @@
-import { firebase, db, getCurrentUser } from '@/firebase'
 import { ref, reactive } from 'vue'
+import { quizId } from '@/utils/questions'
+import { dbGame, getUid } from '@/utils/db'
 
 const game = ref({
     players: [],
@@ -15,29 +16,26 @@ const me = reactive({
 })
 
 const addMe = async (name, icon, color) => {
-    const user = await getCurrentUser();
-    me.uid = user.uid;
     me.name = name;
     me.icon = icon;
     me.color = color;
     me.score = 0;
-    gameRef.update({
-        players: firebase.firestore.FieldValue.arrayUnion(JSON.stringify({...me}))
-    });
+    me.uid = dbGame.addPlayer(me);
 }
 
-let gameRef = null;
-
 const goToGame = id => {
-    gameRef = db.collection('games').doc(id);
-    gameRef.onSnapshot(async doc => {
-        const data = doc.data();
+    dbGame.setGame(id);
+    dbGame.listen(async data => {
         data.players = data.players.map(p => JSON.parse(p));
         game.value = data;
 
+        if (quizId.value !== data.quizid){
+            quizId.value = data.quizid;
+        }
+
         if(!me.name){
-            const user = await getCurrentUser();
-            const meInDb = data.players.find(p => p.uid === user.uid);
+            const uid = await getUid();
+            const meInDb = data.players.find(p => p.uid === uid);
             if(meInDb){
                 me.name = meInDb.name;
                 me.icon = meInDb.icon;

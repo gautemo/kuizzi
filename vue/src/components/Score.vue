@@ -60,6 +60,6 @@ ul{
 }
 
 .leaders-move{
-  transition: transform 2s;
+  transition: transform 5s;
 }
 </style>
