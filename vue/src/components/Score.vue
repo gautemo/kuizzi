@@ -11,6 +11,7 @@
         </li>
       </transition-group>
     </div>
+    <Summary />
   </div>
 </template>
 
@@ -18,12 +19,13 @@
 import { game, scores } from '@/utils/game'
 import { computed } from 'vue'
 import Portrait from '@/components/Portrait'
+import Summary from '@/components/Summary'
 
 export default {
   setup(){
     return { scores }
   },
-  components: { Portrait }
+  components: { Portrait, Summary }
 }
 </script>
 

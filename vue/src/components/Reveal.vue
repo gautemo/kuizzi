@@ -11,16 +11,15 @@
       <img src="https://media.giphy.com/media/Ty9Sg8oHghPWg/giphy.gif" alt="wrong img">
     </div>
     <p><b>Correct Answer:</b> {{question[question.correct]}}</p>
-    <section>
-      <p>{{rank}}</p>
-    </section>
+    <Summary/>
   </main>
 </template>
 
 <script>
 import { questions } from '@/utils/questions'
-import { game, me, scores } from '@/utils/game'
+import { game, me } from '@/utils/game'
 import { computed } from 'vue'
+import Summary from '@/components/Summary'
 
 export default {
   props: {
@@ -32,26 +31,10 @@ export default {
     const myAnswer = computed(() => game.value[`answer${props.nr}`] ? game.value[`answer${props.nr}`].find(a => a.uid === me.uid) : null);
     const wasCorrect = computed(() => myAnswer.value && myAnswer.value.alt === question.value.correct);
 
-    const rank = computed(() => {
-      const meIndex = scores.value.findIndex(p => p.uid === me.uid);
-      return `${format(meIndex+1)} of ${scores.value.length} players with a total of ${scores.value[meIndex].score} points`
-    })
-
-    return { wasCorrect, myAnswer, question, rank }
-  }
+    return { wasCorrect, myAnswer, question }
+  },
+  components: { Summary }
 }
-
-const suffixes = {
-  'one': 'st',
-  'two': 'nd',
-  'few': 'rd',
-  'other': 'th'
-}
-
-const pr = new Intl.PluralRules('en-US', {
-    type: 'ordinal'
-})
-const format = (number) => `${number}${suffixes[pr.select(number)]}`
 </script>
 
 <style scoped>
@@ -87,12 +70,4 @@ div{
   border-radius: 5px;
 }
 
-section{
-  position: absolute;
-  bottom: 20px;
-  padding: 0 15px;
-  background: white;
-  border-radius: 5px;
-  width: 80vw;
-}
 </style>

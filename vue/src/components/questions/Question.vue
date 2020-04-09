@@ -49,7 +49,7 @@ export default {
     const answer = alt => {
       clearInterval(scoreIntervalId)
       let gotScore = 0;
-      if(alt === question.correct){
+      if(alt === question.value.correct){
         gotScore = score.value;
       }
       addAnswer(props.nr, alt, gotScore);

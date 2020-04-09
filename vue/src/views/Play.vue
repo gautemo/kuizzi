@@ -6,12 +6,15 @@
             <Question v-else-if="game.state === 'question'" :nr="game.question"/>
             <Reveal v-else-if="game.state === 'reveal'" :nr="game.question" />
             <Score v-else-if="game.state === 'score'" />
+
+            <div v-if="game.state === 'score' || game.state === 'reveal'" class="progress">{{game.question}} of {{questions.length}}</div>
         </section>
     </div>
 </template>
 
 <script>
 import { goToGame, game, me } from '@/utils/game'
+import { questions } from '@/utils/questions'
 import Join from '@/components/Join'
 import Lobby from '@/components/Lobby'
 import Score from '@/components/Score'
@@ -25,8 +28,16 @@ export default {
         const playerJoined = computed(() => me.name && me.icon && me.color && game.value.players.find(p => p.uid === me.uid))
         const isReady = computed(() => !!game.value.quizid);
 
-        return { playerJoined, isReady, game }
+        return { playerJoined, isReady, game, questions }
     },
     components: { Join, Lobby, Score, Question, Reveal }
 }
 </script>
+
+<style scoped>
+.progress{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+</style>
