@@ -3,7 +3,7 @@
     <h2>Scoreboard</h2>
     <div class="scores">
       <transition-group class="leaders" name="leaders" tag="ul">
-        <li :class="{row: i < 5, rest: i>=5}" v-for="(player, i) in playersSorted" :key="player.uid">
+        <li :class="{row: i < 5, rest: i>=5}" v-for="(player, i) in scores" :key="player.uid">
           <span v-if="i < 5">{{i+1}}</span>
           <Portrait :icon="player.icon" :color="player.color" size="40"/>
           <span v-if="i < 5" class="name">{{player.name}}</span>
@@ -15,14 +15,13 @@
 </template>
 
 <script>
-import { game } from '@/utils/game'
+import { game, scores } from '@/utils/game'
 import { computed } from 'vue'
 import Portrait from '@/components/Portrait'
 
 export default {
   setup(){
-    const playersSorted = computed(() => game.value.players.sort((a,b) => b.score - a.score));
-    return { playersSorted }
+    return { scores }
   },
   components: { Portrait }
 }

@@ -7,7 +7,8 @@
       <p class="gain">+{{myAnswer.score}}</p>
     </div>
     <div v-else>
-      Buhu
+      <h2>❌Wrong</h2>
+      <img src="https://media.giphy.com/media/Ty9Sg8oHghPWg/giphy.gif" alt="wrong img">
     </div>
     <p><b>Correct Answer:</b> {{question[question.correct]}}</p>
     <section>
