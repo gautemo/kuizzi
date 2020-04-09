@@ -2,7 +2,9 @@
     <div v-if="isReady">
         <Join v-if="!playerJoined"/>
         <section v-else>
-            <Lobby v-if="game.state === 'notstarted'" />
+            <Lobby v-if="game.state === 'notstarted'" >
+                <h2 class="fancyfont">Waiting for the host to start the Kuizzi</h2>
+            </Lobby>
             <Question v-else-if="game.state === 'question'" :nr="game.question"/>
             <Reveal v-else-if="game.state === 'reveal'" :nr="game.question" />
             <Score v-else-if="game.state === 'score'" />
@@ -13,7 +15,8 @@
 </template>
 
 <script>
-import { goToGame, game, me } from '@/utils/game'
+import { game } from '@/utils/game'
+import { goToGame, me } from '@/utils/player'
 import { questions } from '@/utils/questions'
 import Join from '@/components/Join'
 import Lobby from '@/components/Lobby'

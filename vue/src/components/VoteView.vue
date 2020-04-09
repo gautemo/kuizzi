@@ -1,0 +1,53 @@
+<template>
+  <main v-if="question">
+    <h2>{{question.text}}</h2>
+    <p><b>Correct Answer:</b> {{question[question.correct]}}</p>
+    <div class="bars">
+      <VoteBar :class="{red: true}" :alt="question.a" :players="playersA" :total="total"/>
+    </div>
+  </main>
+</template>
+
+<script>
+import { questions } from '@/utils/questions'
+import { game, me } from '@/utils/game'
+import { computed } from 'vue'
+import VoteBar from '@/components/VoteBar'
+
+export default {
+  setup(){
+    const question = computed(() => questions.value.find(q => q.id === game.value.question.toString()));
+
+    //const myAnswer = computed(() => game.value[`answer${props.nr}`] ? game.value[`answer${props.nr}`].find(a => a.uid === me.uid) : null);
+    //const wasCorrect = computed(() => myAnswer.value && myAnswer.value.alt === question.value.correct);
+
+    const playersA = computed(() => {
+      if(!game.value[`answer${game.value.question}`]) return [];
+      return game.value.players.filter(p => game.value[`answer${game.value.question}`].some(a => a.uid === p.uid));
+    })
+
+    const total = computed(() => game.value.players.length);
+
+    return { question, playersA, total }
+  },
+  components: { VoteBar }
+}
+</script>
+
+<style scoped>
+main{
+  padding: 25px;
+  height: 100vh;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+}
+
+.bars{
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: end;
+  align-self: end;
+}
+</style>

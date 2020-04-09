@@ -23,6 +23,13 @@ const game = {
     const update = {};
     update[`answer${nr}`] = firebase.firestore.FieldValue.arrayUnion({uid, alt, score})
     game.ref.update(update);
+  },
+  updateState: (state, question) => {
+    const update = {state}
+    if(question){
+      update.question = question;
+    }
+    game.ref.update(update);
   }
 };
 

@@ -6,7 +6,7 @@
   <div v-else-if="!answered" class="question">
     <div class="header">
       <h2>{{question.text}}</h2>
-      <CountDown :from="30" class="countdown"/>
+      <CountDown :from="30" class="countdown" v-on:done="$emit('done')"/>
     </div>
     <div class="alternatives">
       <QButton :alternative="question.a" @click="answer('a')" nr="one"/>

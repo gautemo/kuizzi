@@ -1,9 +1,12 @@
 <template>
   <div class="lobby">
-    <h2 class="fancyfont">Waiting for the host to start the Kuizzi</h2>
+    <slot></slot>
     <h3>Players</h3>
     <div class="players">
-      <Portrait v-for="player in game.players" :key="player.uid" :icon="player.icon" :color="player.color" size="80"/>
+      <div v-for="player in game.players" :key="player.uid" class="player">
+        <Portrait :icon="player.icon" :color="player.color" size="80"/>
+        <span class="name">{{player.name}}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -31,5 +34,22 @@ export default {
   gap: 10px;
   justify-content: center;
   justify-items: center;
+}
+
+.player{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.name{
+  font-size: 1.1em;
+}
+
+@media only screen and (max-width: 700px) {
+  .name{
+    display: none;
+  }
 }
 </style>
