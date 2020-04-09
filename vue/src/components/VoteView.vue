@@ -3,7 +3,10 @@
     <h2>{{question.text}}</h2>
     <p><b>Correct Answer:</b> {{question[question.correct]}}</p>
     <div class="bars">
-      <VoteBar :class="{red: true}" :alt="question.a" :players="playersA" :total="total"/>
+      <VoteBar class="red" :alt="question.a" :players="playersA" :total="total"/>
+      <VoteBar class="blue" :alt="question.b" :players="playersB" :total="total"/>
+      <VoteBar class="yellow" :alt="question.c" :players="playersC" :total="total"/>
+      <VoteBar class="green" :alt="question.d" :players="playersD" :total="total"/>
     </div>
   </main>
 </template>
@@ -23,7 +26,22 @@ export default {
 
     const playersA = computed(() => {
       if(!game.value[`answer${game.value.question}`]) return [];
-      return game.value.players.filter(p => game.value[`answer${game.value.question}`].some(a => a.uid === p.uid));
+      return game.value.players.filter(p => game.value[`answer${game.value.question}`].some(a => a.uid === p.uid && a.alt === 'a'));
+    })
+
+    const playersB = computed(() => {
+      if(!game.value[`answer${game.value.question}`]) return [];
+      return game.value.players.filter(p => game.value[`answer${game.value.question}`].some(a => a.uid === p.uid && a.alt === 'b'));
+    })
+
+    const playersC = computed(() => {
+      if(!game.value[`answer${game.value.question}`]) return [];
+      return game.value.players.filter(p => game.value[`answer${game.value.question}`].some(a => a.uid === p.uid && a.alt === 'c'));
+    })
+
+    const playersD = computed(() => {
+      if(!game.value[`answer${game.value.question}`]) return [];
+      return game.value.players.filter(p => game.value[`answer${game.value.question}`].some(a => a.uid === p.uid && a.alt === 'd'));
     })
 
     const total = computed(() => game.value.players.length);

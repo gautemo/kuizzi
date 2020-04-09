@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="alt">
     <div class="bar" :style="heightStyle">
       <Portrait v-for="player in players" :key="player.uid" :icon="player.icon" :color="player.color" size="60" :class="{hide: !show}"/>
     </div>
@@ -51,7 +51,19 @@ export default {
 }
 
 .red .bar{
-  background: #f4303c;
+  background: var(--red);
+}
+
+.blue .bar{
+  background: var(--blue);
+}
+
+.yellow .bar{
+  background: var(--yellow);
+}
+
+.green .bar{
+  background: var(--green);
 }
 
 .alt{
@@ -62,7 +74,19 @@ export default {
 }
 
 .red .alt{
-  background: linear-gradient(0deg, white 10%, #f99298 85%, #f4303c 100%);
+  background: linear-gradient(0deg, white 10%, #f99298 85%, var(--red) 100%);
+}
+
+.blue .alt{
+  background: linear-gradient(0deg, white 10%, #4f84c5 85%, var(--blue) 100%);
+}
+
+.yellow .alt{
+  background: linear-gradient(0deg, white 10%, #d3af63 85%, var(--yellow) 100%);
+}
+
+.green .alt{
+  background: linear-gradient(0deg, white 10%, #64a354 85%, var(--green) 100%);
 }
 
 .hide{

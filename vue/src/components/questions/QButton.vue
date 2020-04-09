@@ -10,19 +10,19 @@ export default {
 
 <style scoped>
 .one{
-  background: #f4303c;
+  background: var(--red);
 }
 
 .two{
-  background: #0a65d3;
+  background: var(--blue);
 }
 
 .three{
-  background: #df9900;
+  background: var(--yellow);
 }
 
 .four{
-  background: #227e0a;
+  background: var(--green);
 }
 
 button{

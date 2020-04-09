@@ -23,6 +23,11 @@ setInterval(() => {
   --pastel4: #FAA4BD;
   --pastel5: #C6D2ED;
   --bg: var(--pastel1);
+
+  --red: #f4303c;
+  --blue: #0a65d3;
+  --yellow: #df9900;
+  --green: #227e0a;
 }
 
 body{
