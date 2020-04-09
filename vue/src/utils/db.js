@@ -14,7 +14,7 @@ const game = {
   addPlayer: async player => {
     const uid = await getUid();
     game.ref.update({
-      players: firebase.firestore.FieldValue.arrayUnion(JSON.stringify({ ...player, uid }))
+      players: firebase.firestore.FieldValue.arrayUnion({ ...player, uid })
     });
     return uid;
   },

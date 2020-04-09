@@ -1,9 +1,9 @@
 <template>
-  <div v-if="!started">
+  <div v-if="!started" class="mid">
     <p>Get Ready</p>
     <CountDown :from="3" v-on:done="started = true"/>
   </div>
-  <div v-else class="question">
+  <div v-else-if="!answered" class="question">
     <div class="header">
       <h2>{{question.text}}</h2>
       <CountDown :from="30" class="countdown"/>
@@ -15,6 +15,7 @@
       <QButton :alternative="question.d" @click="answer('d')" nr="four"/>
     </div>
   </div>
+  <div v-else class="mid">Was that correct?</div>
 </template>
 
 <script>
@@ -26,11 +27,14 @@ import CountDown from './CountDown'
 let scoreIntervalId;
 
 export default {
-  props: ['nr'],
+  props: {
+    nr: Number,
+  },
   setup(props){
     const started = ref(false);
+    const answered = ref(false);
     const score = ref(1000);
-    const question = computed(() => questions.value.find(q => q.id === props.nr));
+    const question = computed(() => questions.value.find(q => q.id === props.nr.toString()));
 
     watch(started, () => {
       if(started.value){
@@ -49,9 +53,10 @@ export default {
         gotScore = score.value;
       }
       addAnswer(props.nr, alt, gotScore);
+      answered.value = true;
     }
 
-    return { question, started, answer }
+    return { question, started, answer, answered }
   },
   components: { QButton, CountDown }
 }
@@ -83,5 +88,14 @@ h2{
 
 .countdown{
   margin: 15px;
+}
+
+.mid{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
 }
 </style>
