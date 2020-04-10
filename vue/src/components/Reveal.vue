@@ -3,12 +3,12 @@
     <h2>{{question.text}}</h2>
     <div v-if="wasCorrect">
       <h2>✔️Correct!</h2>
-      <img src="https://media.giphy.com/media/3o7abGQa0aRJUurpII/giphy.gif" alt="correct img">
+      <Gif type="correct" />
       <p class="gain">+{{myAnswer.score}}</p>
     </div>
     <div v-else>
       <h2>❌Wrong</h2>
-      <img src="https://media.giphy.com/media/Ty9Sg8oHghPWg/giphy.gif" alt="wrong img">
+      <Gif type="wrong" />
     </div>
     <p><b>Correct Answer:</b> {{question[question.correct]}}</p>
     <Summary/>
@@ -17,9 +17,11 @@
 
 <script>
 import { questions } from '@/utils/questions'
-import { game, me } from '@/utils/game'
+import { game } from '@/utils/game'
+import { me } from '@/utils/player'
 import { computed } from 'vue'
 import Summary from '@/components/Summary'
+import Gif from '@/components/Gif'
 
 export default {
   props: {
@@ -33,7 +35,7 @@ export default {
 
     return { wasCorrect, myAnswer, question }
   },
-  components: { Summary }
+  components: { Summary, Gif }
 }
 </script>
 
@@ -49,12 +51,6 @@ main{
 
 .failed{
   background: #f4303c;
-}
-
-img{
-  max-width: 70vw;
-  max-height: 150px;
-  border-radius: 5px;
 }
 
 div{

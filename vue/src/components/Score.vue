@@ -11,19 +11,37 @@
         </li>
       </transition-group>
     </div>
-    <Summary />
+    <Summary v-if="asPlayer"/>
   </div>
 </template>
 
 <script>
 import { game, scores } from '@/utils/game'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Portrait from '@/components/Portrait'
 import Summary from '@/components/Summary'
 
 export default {
+  props: {
+    asPlayer: Boolean,
+  },
   setup(){
-    return { scores }
+    const answers = game.value[`answer${game.value.question}`];
+    const newScores = ref(
+      scores.value
+        .map(p => ({...p, score: p.score - answers.find(a => a.uid === p.uid).score})));
+
+    const showScores = computed(() => newScores.value.sort((a,b) => b.score - a.score));
+
+    onMounted(() => {
+      setTimeout(() => {
+        for(const p of newScores.value){
+          p.score += answers.find(a => a.uid === p.uid).score;
+        }
+      }, 500)
+    })
+
+    return { scores: showScores }
   },
   components: { Portrait, Summary }
 }

@@ -15,22 +15,28 @@
       <QButton :alternative="question.d" @click="answer('d')" nr="four"/>
     </div>
   </div>
-  <div v-else class="mid">Was that correct?</div>
+  <div v-else class="mid">
+    Was that correct?
+    <Gif type="waiting" />
+  </div>
 </template>
 
 <script>
 import { questions, addAnswer } from '@/utils/questions'
+import { game } from '@/utils/game'
 import { watchEffect, ref, computed, onMounted, watch, onUnmounted } from 'vue';
 import QButton from './QButton'
 import CountDown from './CountDown'
+import Gif from '@/components/Gif'
 
 let scoreIntervalId;
 
 export default {
   props: {
     nr: Number,
+    host: Boolean,
   },
-  setup(props){
+  setup(props, {emit}){
     const started = ref(false);
     const answered = ref(false);
     const score = ref(1000);
@@ -47,6 +53,8 @@ export default {
     onUnmounted(() => clearInterval(scoreIntervalId));
 
     const answer = alt => {
+      if(props.host) return;
+
       clearInterval(scoreIntervalId)
       let gotScore = 0;
       if(alt === question.value.correct){
@@ -56,9 +64,18 @@ export default {
       answered.value = true;
     }
 
+    watchEffect(() => {
+      if(props.host){
+        const answers = game.value[`answer${game.value.question}`];
+        if(answers && answers.length === game.value.players.length){
+          emit('done')
+        }
+      }
+    })
+
     return { question, started, answer, answered }
   },
-  components: { QButton, CountDown }
+  components: { QButton, CountDown, Gif }
 }
 </script>
 

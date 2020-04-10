@@ -46,7 +46,7 @@ export default {
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 25px;
+  padding: 5px;
   box-sizing: border-box;
 }
 
@@ -95,5 +95,6 @@ export default {
 
 .bar > * {
   transition: opacity 1s ease-in-out;
+  margin: 15px;
 }
 </style>

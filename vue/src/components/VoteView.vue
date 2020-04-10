@@ -21,9 +21,6 @@ export default {
   setup(){
     const question = computed(() => questions.value.find(q => q.id === game.value.question.toString()));
 
-    //const myAnswer = computed(() => game.value[`answer${props.nr}`] ? game.value[`answer${props.nr}`].find(a => a.uid === me.uid) : null);
-    //const wasCorrect = computed(() => myAnswer.value && myAnswer.value.alt === question.value.correct);
-
     const playersA = computed(() => {
       if(!game.value[`answer${game.value.question}`]) return [];
       return game.value.players.filter(p => game.value[`answer${game.value.question}`].some(a => a.uid === p.uid && a.alt === 'a'));
@@ -46,7 +43,7 @@ export default {
 
     const total = computed(() => game.value.players.length);
 
-    return { question, playersA, total }
+    return { question, playersA, playersB, playersC, playersD, total }
   },
   components: { VoteBar }
 }

@@ -10,7 +10,7 @@ const game = ref({
     quizid: '',
 });
 
-const scores = computed(() => sortedPlayers(game.value.players))
+const scores = computed(() => sortedPlayers(game.value))
 
 const goToGame = (id, callback) => {
     dbGame.setGame(id);

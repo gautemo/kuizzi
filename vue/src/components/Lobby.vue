@@ -30,7 +30,7 @@ export default {
 
 .players{
   display: grid;
-  grid-template-columns: repeat(auto-fill, 90px);
+  grid-template-columns: repeat(auto-fill, 120px);
   gap: 10px;
   justify-content: center;
   justify-items: center;
@@ -50,6 +50,10 @@ export default {
 @media only screen and (max-width: 700px) {
   .name{
     display: none;
+  }
+
+  .players{
+    grid-template-columns: repeat(auto-fill, 90px);
   }
 }
 </style>

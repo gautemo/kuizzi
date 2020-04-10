@@ -5,9 +5,10 @@
             <Lobby v-if="game.state === 'notstarted'" >
                 <h2 class="fancyfont">Waiting for the host to start the Kuizzi</h2>
             </Lobby>
-            <Question v-else-if="game.state === 'question'" :nr="game.question"/>
+            <Question v-else-if="game.state === 'question'" :nr="game.question" :host="false"/>
             <Reveal v-else-if="game.state === 'reveal'" :nr="game.question" />
-            <Score v-else-if="game.state === 'score'" />
+            <Score v-else-if="game.state === 'score'" :asPlayer="true"/>
+            <EndPlayer v-else-if="game.state === 'ended'"/>
 
             <div v-if="game.state === 'score' || game.state === 'reveal'" class="progress">{{game.question}} of {{questions.length}}</div>
         </section>
@@ -23,6 +24,7 @@ import Lobby from '@/components/Lobby'
 import Score from '@/components/Score'
 import Question from '@/components/questions/Question'
 import Reveal from '@/components/Reveal'
+import EndPlayer from '@/components/EndPlayer'
 import { computed } from 'vue';
 
 export default {
@@ -33,7 +35,7 @@ export default {
 
         return { playerJoined, isReady, game, questions }
     },
-    components: { Join, Lobby, Score, Question, Reveal }
+    components: { Join, Lobby, Score, Question, Reveal, EndPlayer }
 }
 </script>
 

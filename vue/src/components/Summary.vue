@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import { me, scores } from '@/utils/game'
+import { scores } from '@/utils/game'
+import { me } from '@/utils/player'
 import { computed } from 'vue'
 
 export default {
