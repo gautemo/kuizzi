@@ -26,17 +26,28 @@ export default {
     asPlayer: Boolean,
   },
   setup(){
-    const answers = game.value[`answer${game.value.question}`];
+    const answers = game.value[`answer${game.value.question}`] || [];
     const newScores = ref(
-      scores.value
-        .map(p => ({...p, score: p.score - answers.find(a => a.uid === p.uid).score})));
+      scores.value.map(p => {
+        let thisRound = 0;
+        const answer = answers.find(a => a.uid === p.uid);
+        if(answer){
+          thisRound = answer.score;
+        }
+        return {...p, score: p.score - thisRound}
+      }));
 
     const showScores = computed(() => newScores.value.sort((a,b) => b.score - a.score));
 
     onMounted(() => {
       setTimeout(() => {
         for(const p of newScores.value){
-          p.score += answers.find(a => a.uid === p.uid).score;
+          let thisRound = 0;
+          const answer = answers.find(a => a.uid === p.uid);
+          if(answer){
+            thisRound = answer.score;
+          }
+          p.score += thisRound;
         }
       }, 500)
     })

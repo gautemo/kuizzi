@@ -1,7 +1,10 @@
 <template>
   <main v-if="question">
     <h2>{{question.text}}</h2>
-    <p><b>Correct Answer:</b> {{question[question.correct]}}</p>
+    <div>
+      <p><b>Correct Answer:</b></p>
+      <p v-for="answer in correctAnswers" :key="answer">{{answer}}</p>
+    </div>
     <div class="bars">
       <VoteBar class="red" :alt="question.a" :players="playersA" :total="total"/>
       <VoteBar class="blue" :alt="question.b" :players="playersB" :total="total"/>
@@ -43,7 +46,9 @@ export default {
 
     const total = computed(() => game.value.players.length);
 
-    return { question, playersA, playersB, playersC, playersD, total }
+    const correctAnswers = computed(() => question.value.correct.map(c => question.value[c]))
+
+    return { question, playersA, playersB, playersC, playersD, total, correctAnswers }
   },
   components: { VoteBar }
 }

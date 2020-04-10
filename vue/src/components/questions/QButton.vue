@@ -36,4 +36,10 @@ button{
   max-width: 100%;
   word-wrap: break-word;
 }
+
+@media only screen and (max-width: 600px) {
+  button{
+    font-size: 1.7em;
+  }
+}
 </style>

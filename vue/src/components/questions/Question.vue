@@ -5,10 +5,11 @@
   </div>
   <div v-else-if="!answered" class="question">
     <div class="header">
+      <img v-if="question.img" :src="img" alt="Question image">
       <h2>{{question.text}}</h2>
-      <CountDown :from="30" class="countdown" v-on:done="$emit('done')"/>
+      <CountDown v-if="question" :from="question.time" class="countdown" v-on:done="$emit('done')"/>
     </div>
-    <div class="alternatives">
+    <div class="alternatives" :class="{'two-rows': question.c}">
       <QButton :alternative="question.a" @click="answer('a')" nr="one"/>
       <QButton :alternative="question.b" @click="answer('b')" nr="two"/>
       <QButton :alternative="question.c" @click="answer('c')" nr="three"/>
@@ -28,6 +29,7 @@ import { watchEffect, ref, computed, onMounted, watch, onUnmounted } from 'vue';
 import QButton from './QButton'
 import CountDown from './CountDown'
 import Gif from '@/components/Gif'
+import { getImgUrl } from '@/utils/db'
 
 let scoreIntervalId;
 
@@ -57,7 +59,7 @@ export default {
 
       clearInterval(scoreIntervalId)
       let gotScore = 0;
-      if(alt === question.value.correct){
+      if(question.value.correct.includes(alt)){
         gotScore = score.value;
       }
       addAnswer(props.nr, alt, gotScore);
@@ -73,7 +75,14 @@ export default {
       }
     })
 
-    return { question, started, answer, answered }
+    const img = ref('')
+    watch(question, async () => {
+      if(question.value.img){
+        img.value = await getImgUrl(question.value.img)
+      }
+    })
+
+    return { question, started, answer, answered, img }
   },
   components: { QButton, CountDown, Gif }
 }
@@ -85,6 +94,10 @@ export default {
   display: grid;
   gap: 5px;
   grid-template-columns: 1fr 1fr;
+}
+
+.alternatives.two-rows{
+  grid-template-rows: 1fr 1fr;
 }
 
 .question{
@@ -114,5 +127,18 @@ h2{
   justify-content: center;
   align-items: center;
   font-size: 2em;
+}
+
+img{
+  margin: 20px;
+  max-height: 40vh;
+  max-width: 50vw;
+}
+
+@media only screen and (max-width: 600px) {
+  img{
+    max-height: 25vh;
+    max-width: 30vw;
+  }
 }
 </style>

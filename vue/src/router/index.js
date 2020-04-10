@@ -2,6 +2,7 @@ import { createRouter, createHistory } from '@posva/vue-router-next'
 import Home from '../views/Home.vue'
 import Host from '../views/Host.vue'
 import Play from '../views/Play.vue'
+import Create from '../views/Create.vue'
 
 const routes = [
   {
@@ -11,6 +12,10 @@ const routes = [
   {
     path: '/host',
     component: Host
+  },
+  {
+    path: '/create',
+    component: Create
   },
 ]
 

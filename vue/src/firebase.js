@@ -2,6 +2,7 @@ import * as firebase from "firebase/app";
 
 import "firebase/analytics";
 import "firebase/firestore";
+import "firebase/storage";
 import "firebase/auth";
 
 const firebaseConfig = {
@@ -18,6 +19,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 const db = firebase.firestore();
+const storage = firebase.storage().ref();
 
 firebase.auth().signInAnonymously().catch(() => console.error(`Could not anonymously sign in. You probably can't play`, error));
 
@@ -30,4 +32,4 @@ const getCurrentUser = () => {
     })
 };
 
-export { firebase, db, getCurrentUser };
+export { firebase, db, getCurrentUser, storage };

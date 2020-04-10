@@ -1,7 +1,7 @@
 <template>
   <div class="container" v-if="alt">
-    <div class="bar" :style="heightStyle">
-      <Portrait v-for="player in players" :key="player.uid" :icon="player.icon" :color="player.color" size="60" :class="{hide: !show}"/>
+    <div class="bar" :style="heightStyle" :class="{'hide-content': !show}">
+      <Portrait v-for="player in players" :key="player.uid" :icon="player.icon" :color="player.color" size="60"/>
     </div>
     <div class="alt">{{alt}}</div>
   </div>
@@ -89,7 +89,7 @@ export default {
   background: linear-gradient(0deg, white 10%, #64a354 85%, var(--green) 100%);
 }
 
-.hide{
+.hide-content > *{
   opacity: 0;
 }
 

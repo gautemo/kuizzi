@@ -10,7 +10,8 @@
       <h2>❌Wrong</h2>
       <Gif type="wrong" />
     </div>
-    <p><b>Correct Answer:</b> {{question[question.correct]}}</p>
+    <p><b>Correct Answer:</b></p>
+    <p v-for="answer in correctAnswers" :key="answer">{{answer}}</p>
     <Summary/>
   </main>
 </template>
@@ -31,9 +32,11 @@ export default {
     const question = computed(() => questions.value.find(q => q.id === props.nr.toString()));
 
     const myAnswer = computed(() => game.value[`answer${props.nr}`] ? game.value[`answer${props.nr}`].find(a => a.uid === me.uid) : null);
-    const wasCorrect = computed(() => myAnswer.value && myAnswer.value.alt === question.value.correct);
+    const wasCorrect = computed(() => myAnswer.value && question.value.correct.includes(myAnswer.value.alt));
 
-    return { wasCorrect, myAnswer, question }
+    const correctAnswers = computed(() => question.value.correct.map(c => question.value[c]))
+
+    return { wasCorrect, myAnswer, question, correctAnswers }
   },
   components: { Summary, Gif }
 }
