@@ -11,7 +11,10 @@
       <Gif type="wrong" />
     </div>
     <p><b>Correct Answer:</b></p>
-    <p v-for="answer in correctAnswers" :key="answer">{{answer}}</p>
+    <p v-for="answer in correctAnswers" :key="answer">
+      <span v-if="!answer.startsWith('[image]')">{{answer}}</span>
+      <AltImg :alternative="answer" pad="5" class="alt-img"/>
+    </p>
     <Summary/>
   </main>
 </template>
@@ -23,6 +26,7 @@ import { me } from '@/utils/player'
 import { computed } from 'vue'
 import Summary from '@/components/Summary'
 import Gif from '@/components/Gif'
+import AltImg from '@/components/AltImg'
 
 export default {
   props: {
@@ -38,7 +42,7 @@ export default {
 
     return { wasCorrect, myAnswer, question, correctAnswers }
   },
-  components: { Summary, Gif }
+  components: { Summary, Gif, AltImg }
 }
 </script>
 
@@ -67,6 +71,11 @@ div{
   background: white;
   padding: 10px 50px;
   border-radius: 5px;
+}
+
+.alt-img{
+  max-height: 60px;
+  max-width: 60px;
 }
 
 </style>

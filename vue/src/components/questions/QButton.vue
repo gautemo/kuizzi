@@ -1,10 +1,18 @@
 <template>
-  <button v-if="alternative" :class="nr">{{alternative}}</button>
+  <button v-if="alternative" :class="nr">
+    <span v-if="!alternative.startsWith('[image]')">{{alternative}}</span>
+    <AltImg :alternative="alternative" pad="20"/>
+  </button>
 </template>
 
 <script>
+import { getImgUrl } from '@/utils/db'
+import { ref } from 'vue'
+import AltImg from '@/components/AltImg'
+
 export default {
   props: ['alternative', 'nr'],
+  components: { AltImg }
 }
 </script>
 

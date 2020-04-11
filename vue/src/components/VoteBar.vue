@@ -3,13 +3,17 @@
     <div class="bar" :style="heightStyle" :class="{'hide-content': !show}">
       <Portrait v-for="player in players" :key="player.uid" :icon="player.icon" :color="player.color" size="60"/>
     </div>
-    <div class="alt">{{alt}}</div>
+    <div class="alt">
+      <span v-if="!alt.startsWith('[image]')">{{alt}}</span>
+      <AltImg :alternative="alt" pad="5" class="alt-img"/>
+    </div>
   </div>
 </template>
 
 <script>
 import { onMounted, ref } from 'vue'
 import Portrait from '@/components/Portrait'
+import AltImg from '@/components/AltImg'
 
 export default {
   props: {
@@ -34,7 +38,7 @@ export default {
 
     return { heightStyle, show }
   },
-  components: { Portrait }
+  components: { Portrait, AltImg }
 }
 </script>
 
@@ -96,5 +100,10 @@ export default {
 .bar > * {
   transition: opacity 1s ease-in-out;
   margin: 15px;
+}
+
+.alt-img{
+  max-height: 60px;
+  max-width: 60px;
 }
 </style>

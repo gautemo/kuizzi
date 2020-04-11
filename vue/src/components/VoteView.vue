@@ -3,7 +3,10 @@
     <h2>{{question.text}}</h2>
     <div>
       <p><b>Correct Answer:</b></p>
-      <p v-for="answer in correctAnswers" :key="answer">{{answer}}</p>
+      <p v-for="answer in correctAnswers" :key="answer">
+        <span v-if="!answer.startsWith('[image]')">{{answer}}</span>
+        <AltImg :alternative="answer" pad="5" class="alt-img"/>
+      </p>
     </div>
     <div class="bars">
       <VoteBar class="red" :alt="question.a" :players="playersA" :total="total"/>
@@ -19,6 +22,7 @@ import { questions } from '@/utils/questions'
 import { game, me } from '@/utils/game'
 import { computed } from 'vue'
 import VoteBar from '@/components/VoteBar'
+import AltImg from '@/components/AltImg'
 
 export default {
   setup(){
@@ -50,7 +54,7 @@ export default {
 
     return { question, playersA, playersB, playersC, playersD, total, correctAnswers }
   },
-  components: { VoteBar }
+  components: { VoteBar, AltImg }
 }
 </script>
 
@@ -69,5 +73,10 @@ main{
   grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: end;
   align-self: end;
+}
+
+.alt-img{
+  max-height: 100px;
+  max-width: 100px;
 }
 </style>
