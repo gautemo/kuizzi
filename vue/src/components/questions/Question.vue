@@ -5,7 +5,10 @@
   </div>
   <div v-else-if="!answered" class="question">
     <div class="header">
-      <img v-if="question.img" :src="img" alt="Question image">
+      <div class="question-img" v-if="question.img">
+        <RevealBlocks v-if="question.isReveal" />
+        <img :src="img" alt="Question image">
+      </div>
       <h2>{{question.text}}</h2>
       <CountDown v-if="question" :from="question.time" class="countdown" v-on:done="$emit('done')"/>
     </div>
@@ -29,6 +32,7 @@ import { watchEffect, ref, computed, onMounted, watch, onUnmounted } from 'vue';
 import QButton from './QButton'
 import CountDown from './CountDown'
 import Gif from '@/components/Gif'
+import RevealBlocks from '@/components/RevealBlocks'
 import { getImgUrl } from '@/utils/db'
 
 let scoreIntervalId;
@@ -76,6 +80,9 @@ export default {
     })
 
     const img = ref('')
+    if(question.value && question.value.img){
+        getImgUrl(question.value.img).then(url => img.value = url)
+    }
     watch(question, async () => {
       if(question.value.img){
         img.value = await getImgUrl(question.value.img)
@@ -84,7 +91,7 @@ export default {
 
     return { question, started, answer, answered, img }
   },
-  components: { QButton, CountDown, Gif }
+  components: { QButton, CountDown, Gif, RevealBlocks }
 }
 </script>
 
@@ -129,8 +136,12 @@ h2{
   font-size: 2em;
 }
 
-img{
+.question-img{
   margin: 20px;
+  position: relative;
+}
+
+img{
   max-height: 40vh;
   max-width: 50vw;
 }

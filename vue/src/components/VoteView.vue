@@ -1,6 +1,7 @@
 <template>
   <main v-if="question">
     <h2>{{question.text}}</h2>
+    <img :src="img" alt="Question image" class="question-image">
     <div>
       <p><b>Correct Answer:</b></p>
       <p v-for="answer in correctAnswers" :key="answer">
@@ -20,9 +21,10 @@
 <script>
 import { questions } from '@/utils/questions'
 import { game, me } from '@/utils/game'
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import VoteBar from '@/components/VoteBar'
 import AltImg from '@/components/AltImg'
+import { getImgUrl } from '@/utils/db'
 
 export default {
   setup(){
@@ -52,7 +54,17 @@ export default {
 
     const correctAnswers = computed(() => question.value.correct.map(c => question.value[c]))
 
-    return { question, playersA, playersB, playersC, playersD, total, correctAnswers }
+    const img = ref('')
+    if(question.value && question.value.img){
+        getImgUrl(question.value.img).then(url => img.value = url)
+    }
+    watch(question, async () => {
+      if(question.value.img){
+        img.value = await getImgUrl(question.value.img)
+      }
+    })
+
+    return { question, playersA, playersB, playersC, playersD, total, correctAnswers, img }
   },
   components: { VoteBar, AltImg }
 }
@@ -78,5 +90,10 @@ main{
 .alt-img{
   max-height: 100px;
   max-width: 100px;
+}
+
+.question-image{
+  max-height: 150px;
+  max-width: 400px;
 }
 </style>

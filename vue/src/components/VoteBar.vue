@@ -27,7 +27,7 @@ export default {
     })
 
     onMounted(() => {
-      setTimeout(() => heightStyle.value.height = `${(players.length / total)*50}vh`, 500)
+      setTimeout(() => heightStyle.value.height = `${(players.length / total)*40}vh`, 500)
     })
 
     const show = ref(false);

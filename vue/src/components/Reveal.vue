@@ -1,6 +1,7 @@
 <template>
   <main v-if="question">
     <h2>{{question.text}}</h2>
+    <img :src="img" alt="Question image" class="question-image">
     <div v-if="wasCorrect">
       <h2>✔️Correct!</h2>
       <Gif type="correct" />
@@ -23,10 +24,11 @@
 import { questions } from '@/utils/questions'
 import { game } from '@/utils/game'
 import { me } from '@/utils/player'
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Summary from '@/components/Summary'
 import Gif from '@/components/Gif'
 import AltImg from '@/components/AltImg'
+import { getImgUrl } from '@/utils/db'
 
 export default {
   props: {
@@ -40,7 +42,17 @@ export default {
 
     const correctAnswers = computed(() => question.value.correct.map(c => question.value[c]))
 
-    return { wasCorrect, myAnswer, question, correctAnswers }
+    const img = ref('')
+    if(question.value && question.value.img){
+        getImgUrl(question.value.img).then(url => img.value = url)
+    }
+    watch(question, async () => {
+      if(question.value.img){
+        img.value = await getImgUrl(question.value.img)
+      }
+    })
+
+    return { wasCorrect, myAnswer, question, correctAnswers, img }
   },
   components: { Summary, Gif, AltImg }
 }
@@ -76,6 +88,11 @@ div{
 .alt-img{
   max-height: 60px;
   max-width: 60px;
+}
+
+.question-image{
+  max-height: 70px;
+  max-width: 100px;
 }
 
 </style>
