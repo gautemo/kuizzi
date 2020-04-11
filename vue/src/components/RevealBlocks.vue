@@ -22,7 +22,7 @@ export default {
     const reveal = computed(() => revealOrder.slice(0, count.value))
 
     onMounted(() => {
-      interval = setInterval(() => count.value++, 700);
+      interval = setInterval(() => count.value++, 400);
     })
 
     onUnmounted(() => clearInterval(interval))

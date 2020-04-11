@@ -1,7 +1,7 @@
 <template>
   <main v-if="question">
     <h2>{{question.text}}</h2>
-    <img :src="img" alt="Question image" class="question-image">
+    <img v-if="question.img" :src="img" alt="Question image" class="question-image">
     <div>
       <p><b>Correct Answer:</b></p>
       <p v-for="answer in correctAnswers" :key="answer">

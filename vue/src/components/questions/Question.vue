@@ -74,7 +74,7 @@ export default {
       if(props.host){
         const answers = game.value[`answer${game.value.question}`];
         if(answers && answers.length === game.value.players.length){
-          emit('done')
+          setTimeout(() => emit('done'), 1500)
         }
       }
     })
