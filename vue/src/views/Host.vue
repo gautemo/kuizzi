@@ -2,7 +2,7 @@
     <div v-if="isReady">
         <section>
             <Lobby v-if="game.state === 'notstarted'" >
-              <h2 class="fancyfont">Go to TBD to join!</h2>
+              <h2 class="fancyfont">Go to kuizzi.web.app to join!</h2>
             </Lobby>
             <Question v-else-if="game.state === 'question'" :nr="game.question" v-on:done="next" :host="true"/>
             <VoteView v-else-if="game.state === 'reveal'" />
