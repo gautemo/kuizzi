@@ -64,14 +64,6 @@ main{
   height: 100vh;
 }
 
-.correct{
-  background: #227e0a;
-}
-
-.failed{
-  background: #f4303c;
-}
-
 div{
   display: flex;
   flex-direction: column;
