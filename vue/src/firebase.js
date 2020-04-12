@@ -18,10 +18,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+const signInAnonymously = async () => await firebase.auth().signInAnonymously().catch(() => console.error(`Could not anonymously sign in. You probably can't play`, error));
+
 const db = firebase.firestore();
 const storage = firebase.storage().ref();
-
-firebase.auth().signInAnonymously().catch(() => console.error(`Could not anonymously sign in. You probably can't play`, error));
 
 const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
@@ -32,4 +32,4 @@ const getCurrentUser = () => {
     })
 };
 
-export { firebase, db, getCurrentUser, storage };
+export { firebase, db, getCurrentUser, storage, signInAnonymously };

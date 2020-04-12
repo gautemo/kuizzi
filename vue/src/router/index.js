@@ -1,8 +1,9 @@
-import { createRouter, createHistory } from '@posva/vue-router-next'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Host from '../views/Host.vue'
 import Play from '../views/Play.vue'
 import Create from '../views/Create.vue'
+import { signInAnonymously } from '@/firebase'
 
 const routes = [
   {
@@ -19,7 +20,14 @@ const routes = [
   },
 ]
 
-export const router = createRouter({
-  history: createHistory(),
+const router = createRouter({
+  history: createWebHistory(),
   routes
 })
+
+router.beforeEach(async (to, from, next) => {
+  await signInAnonymously();
+  next();
+})
+
+export { router }
