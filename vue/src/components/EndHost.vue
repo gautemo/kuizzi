@@ -18,6 +18,8 @@
       <span class="name">{{scores[2].name}}</span> - 
       <span>{{scores[2].score}}</span>
     </h3>
+    <Fireworks size="5px" />
+    <Fireworks v-if="show1" size="12px" />
   </div>
 </template>
 
@@ -25,6 +27,7 @@
 import { onMounted, ref } from 'vue'
 import { scores } from '@/utils/game'
 import Portrait from '@/components/Portrait'
+import Fireworks from '@/components/Fireworks'
 
 export default {
   setup(){
@@ -33,14 +36,14 @@ export default {
     const show3 = ref(false)
 
     onMounted(() => {
-      setTimeout(() => show1.value = true, 5000)
-      setTimeout(() => show2.value = true, 3000)
+      setTimeout(() => show1.value = true, 4500)
+      setTimeout(() => show2.value = true, 2200)
       setTimeout(() => show3.value = true, 1000)
     })
 
     return { show1, show2, show3, scores }
   },
-  components: { Portrait }
+  components: { Portrait, Fireworks }
 }
 </script>
 
