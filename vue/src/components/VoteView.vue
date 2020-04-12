@@ -59,7 +59,7 @@ export default {
         getImgUrl(question.value.img).then(url => img.value = url)
     }
     watch(question, async () => {
-      if(question.value.img){
+      if(question.value && question.value.img){
         img.value = await getImgUrl(question.value.img)
       }
     })
