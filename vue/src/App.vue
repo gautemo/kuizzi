@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <router-view/>
-  </div>
+  <router-view/>
 </template>
 
 <script>
@@ -30,9 +28,12 @@ setInterval(() => {
   --green: #227e0a;
 }
 
+body, html, #app{
+  height: 100%;
+}
+
 body{
   margin: 0;
-  height: 100vh;
   font-family: 'Oswald', sans-serif;
   background-color: var(--bg);
   transition: background-color 7s ease-in-out;

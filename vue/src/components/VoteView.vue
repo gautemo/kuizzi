@@ -71,9 +71,17 @@ export default {
 </script>
 
 <style scoped>
+h2{
+  margin: 0;
+}
+
+p{
+  margin: 5px 0;
+}
+
 main{
   padding: 25px;
-  height: 100vh;
+  height: 100%;
   box-sizing: border-box;
   display: grid;
   grid-template-rows: auto auto 1fr;

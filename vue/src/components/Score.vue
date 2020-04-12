@@ -7,7 +7,7 @@
           <span v-if="i < 5">{{i+1}}</span>
           <Portrait :icon="player.icon" :color="player.color" size="40"/>
           <span v-if="i < 5" class="name">{{player.name}}</span>
-          <span v-if="i < 5">{{player.score}}</span>
+          <span v-if="i < 5">{{player.score.toFixed(0)}}</span>
         </li>
       </transition-group>
     </div>
@@ -17,9 +17,15 @@
 
 <script>
 import { game, scores } from '@/utils/game'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import Portrait from '@/components/Portrait'
 import Summary from '@/components/Summary'
+import TWEEN from '@tweenjs/tween.js'
+
+function animate() {
+    window.requestAnimationFrame(animate);
+    TWEEN.update();
+}
 
 export default {
   props: {
@@ -47,10 +53,15 @@ export default {
           if(answer){
             thisRound = answer.score;
           }
-          p.score += thisRound;
+          new TWEEN.Tween(p)
+            .to({score: p.score + thisRound}, 1500)
+            .start();
         }
+        animate()
       }, 500)
     })
+
+    watch(newScores, () => requestAnimationFrame)
 
     return { scores: showScores }
   },

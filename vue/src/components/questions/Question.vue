@@ -1,6 +1,6 @@
 <template>
   <div v-if="!started" class="mid">
-    <p>Get Ready</p>
+    <p>Get Ready!</p>
     <CountDown :from="3" v-on:done="started = true"/>
   </div>
   <div v-else-if="!answered" class="question">
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div v-else class="mid">
-    Was that correct?
+    <p>Was that correct?</p>
     <Gif type="waiting" />
   </div>
 </template>
@@ -110,25 +110,32 @@ export default {
 .question{
   display: grid;
   grid-auto-flow: column;
-  grid-template-rows: auto 1fr;
-  height: 100vh;
+  grid-template-rows: 3fr 5fr;
+  height: 100%;
 }
 
 h2{
   text-align: center;
   flex: 1;
+  margin: 0 50px;
 }
 
 .header{
   display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .countdown{
   margin: 15px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .mid{
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -141,15 +148,19 @@ h2{
   position: relative;
 }
 
-img{
+.question-img img{
   max-height: 40vh;
   max-width: 50vw;
 }
 
 @media only screen and (max-width: 600px) {
-  img{
+  .question-img img{
     max-height: 25vh;
     max-width: 30vw;
+  }
+
+  .question{
+    grid-template-rows: auto 1fr;
   }
 }
 </style>

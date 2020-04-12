@@ -1,5 +1,4 @@
 <template>
-<div>
   <section v-if="!form.savedName" class="section-name">
     <label>
       <span :class="{active: form.name || form.nameFocus}" class="fancyfont">Nickname</span>
@@ -39,7 +38,6 @@
       <button class="fancyfont" @click="save">Yes</button>
     </div>
   </section>
-</div>
 </template>
 
 <script>
@@ -124,7 +122,7 @@ export default {
 
 <style scoped>
 section{
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

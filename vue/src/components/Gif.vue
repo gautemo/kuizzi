@@ -57,8 +57,8 @@ export default {
 
 <style scoped>
 img{
-  max-width: 70vw;
-  max-height: 200px;
+  max-width: 90vw;
+  height: 230px;
   border-radius: 5px;
 }
 </style>

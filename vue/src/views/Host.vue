@@ -1,20 +1,18 @@
 <template>
-    <div v-if="isReady">
-        <section>
-            <Lobby v-if="game.state === 'notstarted'" >
-              <h2 class="fancyfont">Go to kuizzi.web.app to join!</h2>
-            </Lobby>
-            <Question v-else-if="game.state === 'question'" :nr="game.question" v-on:done="next" :host="true"/>
-            <VoteView v-else-if="game.state === 'reveal'" />
-            <Score v-else-if="game.state === 'score'" :asPlayer="false"/>
-            <EndHost v-else-if="game.state === 'ended'"/>
+    <section v-if="isReady">
+      <Lobby v-if="game.state === 'notstarted'" >
+        <h2 class="fancyfont">Go to kuizzi.web.app to join!</h2>
+      </Lobby>
+      <Question v-else-if="game.state === 'question'" :nr="game.question" v-on:done="next" :host="true"/>
+      <VoteView v-else-if="game.state === 'reveal'" />
+      <Score v-else-if="game.state === 'score'" :asPlayer="false"/>
+      <EndHost v-else-if="game.state === 'ended'"/>
 
-            <div class="topright">
-              <button v-if="game.state !== 'ended' && game.state !== 'question'" @click="next">Next</button>
-              <div v-if="game.state === 'score' || game.state === 'reveal'" class="progress">{{game.question}} of {{questions.length}}</div>
-            </div>
-        </section>
-    </div>
+      <div class="topright">
+        <button v-if="game.state !== 'ended' && game.state !== 'question'" @click="next">Next</button>
+        <div v-if="game.state === 'score' || game.state === 'reveal'" class="progress">{{game.question}} of {{questions.length}}</div>
+      </div>
+    </section>
 </template>
 
 <script>
@@ -30,7 +28,7 @@ import { computed } from 'vue';
 
 export default {
     setup(){
-        goToGame('vWedmfs0m7zNaAdi4Yib');
+        goToGame('100');
         const isReady = computed(() => !!game.value.quizid);
 
         const next = () => {
@@ -78,5 +76,9 @@ button{
   cursor: pointer;
   border-radius: 3px;
   font-family: inherit;
+}
+
+section{
+  height: 100%;
 }
 </style>

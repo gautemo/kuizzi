@@ -1,6 +1,6 @@
 <template>
   <main v-if="question">
-    <h2>{{question.text}}</h2>
+    <h2 class="question-text">{{question.text}}</h2>
     <img v-if="question.img" :src="img" alt="Question image" class="question-image">
     <div v-if="wasCorrect">
       <h2>✔️Correct!</h2>
@@ -61,7 +61,15 @@ export default {
 <style scoped>
 main{
   padding: 25px;
-  height: 100vh;
+  height: 100%;
+}
+
+.question-text{
+  margin: 0;
+}
+
+p{
+  margin: 5px 0;
 }
 
 div{
@@ -75,6 +83,7 @@ div{
   background: white;
   padding: 10px 50px;
   border-radius: 5px;
+  margin: 15px 0 10px 0;
 }
 
 .alt-img{
