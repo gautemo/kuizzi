@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div v-for="i in 64" :key="i" :style="{background: `rgb(${r()},${r()},${r()})`}" :class="{hide: reveal.includes(i)}"></div>
+    <div v-for="i in 64" :key="i" :style="{background: randomColors[i-1]}" :class="{hide: reveal.includes(i)}"></div>
   </main>
 </template>
 
@@ -16,7 +16,10 @@ let interval;
 
 export default {
   setup(){
-    const r = () => getRandomInt(255);
+    const randomColors = [];
+    for(let i = 0; i<64; i++){
+      randomColors.push(`rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`);
+    }
 
     const count = ref(0);
     const reveal = computed(() => revealOrder.slice(0, count.value))
@@ -27,7 +30,7 @@ export default {
 
     onUnmounted(() => clearInterval(interval))
 
-    return { r, reveal }
+    return { randomColors, reveal }
   }
 }
 </script>
@@ -43,7 +46,7 @@ main{
 }
 
 div{
-  background: red;
+  transition: opacity 1s ease-in-out;
 }
 
 .hide{

@@ -32,7 +32,7 @@ import { watchEffect, ref, computed, onMounted, watch, onUnmounted } from 'vue';
 import QButton from './QButton'
 import CountDown from './CountDown'
 import Gif from '@/components/Gif'
-import RevealBlocks from '@/components/RevealBlocks'
+import RevealBlocks from '@/components/questions/RevealBlocks'
 import { getImgUrl } from '@/utils/db'
 
 let scoreIntervalId;
