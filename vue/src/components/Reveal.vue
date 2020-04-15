@@ -2,20 +2,16 @@
   <main v-if="question">
     <h2 class="question-text">{{question.text}}</h2>
     <img v-if="question.img" :src="img" alt="Question image" class="question-image">
-    <div v-if="wasCorrect">
+    <div v-if="wasCorrect" class="correct">
       <h2>✔️Correct!</h2>
       <Gif type="correct" />
       <p class="gain">+{{myAnswer.score}}</p>
     </div>
-    <div v-else>
+    <div v-else class="wrong">
       <h2>❌Wrong</h2>
       <Gif type="wrong" />
     </div>
-    <p><b>Correct Answer:</b></p>
-    <p v-for="answer in correctAnswers" :key="answer">
-      <span v-if="!answer.startsWith('[image]')">{{answer}}</span>
-      <AltImg :alternative="answer" pad="5" class="alt-img"/>
-    </p>
+    <CorrectAnswers :question="question" />
     <Summary/>
   </main>
 </template>
@@ -27,7 +23,7 @@ import { me } from '@/utils/player'
 import { computed, ref, watch } from 'vue'
 import Summary from '@/components/Summary'
 import Gif from '@/components/Gif'
-import AltImg from '@/components/AltImg'
+import CorrectAnswers from '@/components/CorrectAnswers'
 import { getImgUrl } from '@/utils/db'
 
 export default {
@@ -40,8 +36,6 @@ export default {
     const myAnswer = computed(() => game.value[`answer${props.nr}`] ? game.value[`answer${props.nr}`].find(a => a.uid === me.uid) : null);
     const wasCorrect = computed(() => myAnswer.value && question.value.correct.includes(myAnswer.value.alt));
 
-    const correctAnswers = computed(() => question.value.correct.map(c => question.value[c]))
-
     const img = ref('')
     if(question.value && question.value.img){
         getImgUrl(question.value.img).then(url => img.value = url)
@@ -52,9 +46,9 @@ export default {
       }
     })
 
-    return { wasCorrect, myAnswer, question, correctAnswers, img }
+    return { wasCorrect, myAnswer, question, img }
   },
-  components: { Summary, Gif, AltImg }
+  components: { Summary, Gif, CorrectAnswers }
 }
 </script>
 
@@ -62,6 +56,7 @@ export default {
 main{
   padding: 25px;
   height: 100%;
+  box-sizing: border-box;
 }
 
 .question-text{
@@ -72,7 +67,7 @@ p{
   margin: 5px 0;
 }
 
-div{
+.correct, .wrong{
   display: flex;
   flex-direction: column;
   justify-content: center;

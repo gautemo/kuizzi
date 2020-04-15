@@ -8,7 +8,6 @@
         <Reveal v-else-if="game.state === 'reveal'" :nr="game.question" />
         <Score v-else-if="game.state === 'score'" :asPlayer="true"/>
         <EndPlayer v-else-if="game.state === 'ended'"/>
-
         <div v-if="game.state === 'score' || game.state === 'reveal'" class="progress">{{game.question}} of {{questions.length}}</div>
     </section>
 </template>

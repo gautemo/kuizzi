@@ -2,13 +2,7 @@
   <main v-if="question">
     <h2>{{question.text}}</h2>
     <img v-if="question.img" :src="img" alt="Question image" class="question-image">
-    <div>
-      <p><b>Correct Answer:</b></p>
-      <p v-for="answer in correctAnswers" :key="answer">
-        <span v-if="!answer.startsWith('[image]')">{{answer}}</span>
-        <AltImg :alternative="answer" pad="5" class="alt-img"/>
-      </p>
-    </div>
+    <CorrectAnswers :question="question" />
     <div class="bars">
       <VoteBar class="red" :alt="question.a" :players="playersA" :total="total"/>
       <VoteBar class="blue" :alt="question.b" :players="playersB" :total="total"/>
@@ -23,8 +17,8 @@ import { questions } from '@/utils/questions'
 import { game, me } from '@/utils/game'
 import { computed, ref, watch } from 'vue'
 import VoteBar from '@/components/VoteBar'
-import AltImg from '@/components/AltImg'
 import { getImgUrl } from '@/utils/db'
+import CorrectAnswers from '@/components/CorrectAnswers'
 
 export default {
   setup(){
@@ -52,8 +46,6 @@ export default {
 
     const total = computed(() => game.value.players.length);
 
-    const correctAnswers = computed(() => question.value.correct.map(c => question.value[c]))
-
     const img = ref('')
     if(question.value && question.value.img){
         getImgUrl(question.value.img).then(url => img.value = url)
@@ -64,9 +56,9 @@ export default {
       }
     })
 
-    return { question, playersA, playersB, playersC, playersD, total, correctAnswers, img }
+    return { question, playersA, playersB, playersC, playersD, total, img }
   },
-  components: { VoteBar, AltImg }
+  components: { VoteBar, CorrectAnswers }
 }
 </script>
 
@@ -93,11 +85,6 @@ main{
   grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: end;
   align-self: end;
-}
-
-.alt-img{
-  max-height: 100px;
-  max-width: 100px;
 }
 
 .question-image{
