@@ -23,10 +23,12 @@ import Question from '@/components/questions/Question'
 import Reveal from '@/components/Reveal'
 import EndPlayer from '@/components/EndPlayer'
 import { computed } from 'vue';
+import { router } from '@/router';
 
 export default {
     setup(){
-        goToGame('100');
+        const gamepin = router.currentRoute.value.params.pin;
+        goToGame(gamepin);
         const playerJoined = computed(() => me.name && me.icon && me.color && game.value.players.find(p => p.uid === me.uid))
         const isReady = computed(() => !!game.value.quizid);
 

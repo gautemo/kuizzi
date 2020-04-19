@@ -1,6 +1,6 @@
 <template>
   <header>
-    <a href="/" class="fancyfont">Kuizzi</a>
+    <router-link to="/" class="fancyfont">Kuizzi</router-link>
     <div id="topright"></div>
   </header>
 </template>
@@ -16,5 +16,9 @@ a{
   text-decoration: none;
   color: black;
   font-size: 1.5rem;
+}
+
+#topright{
+  grid-column: -1;
 }
 </style>

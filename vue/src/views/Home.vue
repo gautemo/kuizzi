@@ -7,25 +7,33 @@
       <input type="text" v-model="game.pin" @focus="game.pinFocus = true" @blur="game.pinFocus = false" maxlength="25" @keyup.enter="enter">
     </label>
     <button class="fancyfont" @click="enter" :disabled="!game.pin">Enter</button>
+
+    <Teleport to="#topright" v-if="isMounted">
+      <router-link to="/my-games" class="my-games fancyfont">My Games</router-link>
+    </Teleport>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
-import { reactive } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
+import { router } from '@/router';
 
 export default {
-  setup(){
+  setup(props, context){
     const game = reactive({
       pin: '',
       pinFocus: false,
     });
 
     const enter = () => {
-
+      router.push('/play/' + game.pin)
     }
 
-    return { game, enter }
+    const isMounted = ref(false)
+    onMounted(() => isMounted.value = true)
+
+    return { game, enter, isMounted }
   },
   components: { Header }
 }
@@ -82,5 +90,15 @@ input, button{
 button:disabled{
   opacity: 0.7;
   cursor: auto;
+}
+
+.my-games{
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.my-games:hover{
+  text-decoration: underline;
 }
 </style>

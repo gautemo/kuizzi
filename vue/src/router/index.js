@@ -11,7 +11,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/play/:id',
+    path: '/play/:pin',
     component: Play
   },
   {

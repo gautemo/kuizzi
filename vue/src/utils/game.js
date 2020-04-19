@@ -15,6 +15,11 @@ const scores = computed(() => sortedPlayers(game.value))
 const goToGame = (id, callback) => {
     dbGame.setGame(id);
     dbGame.listen(async data => {
+        if(!data){
+            alert('Game PIN does not exist');
+            location.href = '/';
+            return;
+        }
         game.value = data;
 
         if (quizId.value !== data.quizid){
