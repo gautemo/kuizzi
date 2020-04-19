@@ -97,10 +97,12 @@ export default {
 
 <style scoped>
 .alternatives{
+  flex: 1;
   margin: 5px;
   display: grid;
   gap: 5px;
   grid-template-columns: 1fr 1fr;
+  overflow: hidden;
 }
 
 .alternatives.two-rows{
@@ -108,9 +110,8 @@ export default {
 }
 
 .question{
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: 3fr 5fr;
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
@@ -124,6 +125,7 @@ h2{
   display: flex;
   align-items: center;
   position: relative;
+  min-height: 150px;
 }
 
 .countdown{

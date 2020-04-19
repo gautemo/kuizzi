@@ -1,7 +1,7 @@
 <template>
   <button v-if="alternative" :class="nr">
     <span v-if="!alternative.startsWith('[image]')">{{alternative}}</span>
-    <AltImg :alternative="alternative" pad="20"/>
+    <AltImg :alternative="alternative" pad="10"/>
   </button>
 </template>
 
@@ -43,6 +43,8 @@ button{
   cursor: pointer;
   max-width: 100%;
   word-wrap: break-word;
+  height: 100%;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 600px) {

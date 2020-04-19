@@ -37,5 +37,6 @@ img{
   max-width: 100%;
   max-height: 100%;
   border-radius: 10px;
+  object-fit: contain;
 }
 </style>

@@ -8,6 +8,10 @@ import { signInAnonymously } from '@/firebase'
 const routes = [
   {
     path: '/',
+    component: Home
+  },
+  {
+    path: '/play/:id',
     component: Play
   },
   {
