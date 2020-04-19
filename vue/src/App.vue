@@ -1,5 +1,12 @@
 <template>
-  <router-view/>
+  <Suspense>
+    <template #default>
+      <router-view/>
+    </template>
+    <template #fallback>
+      ...Loading
+    </template>
+  </Suspense>
 </template>
 
 <script>
@@ -41,5 +48,9 @@ body{
 
 .fancyfont{
   font-family: 'Audiowide', cursive;
+}
+
+button{
+  font-family: inherit;
 }
 </style>

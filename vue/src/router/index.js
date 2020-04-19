@@ -3,7 +3,10 @@ import Home from '../views/Home.vue'
 import Host from '../views/Host.vue'
 import Play from '../views/Play.vue'
 import Create from '../views/Create.vue'
-import { signInAnonymously } from '@/firebase'
+import MyGames from '../views/MyGames.vue'
+import SignIn from '../views/SignIn.vue'
+import EditGame from '../views/EditGame.vue'
+import { signInAnonymously, getCurrentUser } from '@/firebase'
 
 const routes = [
   {
@@ -12,7 +15,28 @@ const routes = [
   },
   {
     path: '/play/:pin',
-    component: Play
+    component: Play,
+    meta: {
+      requiresAnonymAuth: true
+    }
+  },
+  {
+    path: '/my-games',
+    component: MyGames,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/my-games/:id',
+    component: EditGame,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/signin',
+    component: SignIn
   },
   {
     path: '/host',
@@ -30,8 +54,17 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  await signInAnonymously();
-  next();
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const user = await getCurrentUser();
+  if (requiresAuth && (!user || user.isAnonymous)) {
+    next('/signin');
+  } else {
+    const requiresAnonymAuth = to.matched.some(record => record.meta.requiresAnonymAuth);
+    if (requiresAnonymAuth) {
+      await signInAnonymously();
+    }
+    next();
+  }
 })
 
 export { router }

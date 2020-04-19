@@ -16,11 +16,12 @@
 
 <script>
 import Header from '@/components/Header'
-import { reactive, ref, onMounted } from 'vue'
+import { reactive, ref } from 'vue'
 import { router } from '@/router';
+import { isMounted } from '@/utils/isMounted'
 
 export default {
-  setup(props, context){
+  setup(){
     const game = reactive({
       pin: '',
       pinFocus: false,
@@ -30,10 +31,7 @@ export default {
       router.push('/play/' + game.pin)
     }
 
-    const isMounted = ref(false)
-    onMounted(() => isMounted.value = true)
-
-    return { game, enter, isMounted }
+    return { game, enter, isMounted: isMounted() }
   },
   components: { Header }
 }
