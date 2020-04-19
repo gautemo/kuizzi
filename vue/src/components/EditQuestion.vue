@@ -18,30 +18,46 @@
       <span class="prop">Reveal:</span>
       <input type="checkbox" v-model="question.isReveal">
     </label>
-    <label>
+    <div class="label">
       <span class="a">A</span>
-      <input type="text" v-model="question.a">
-      <input type="file" accept="image/*" ref="aImg">
+      <input v-if="!aImgSrc" type="text" v-model="question.a">
+      <div v-if="aImgSrc" @click.prevent class="alt-img">
+        <img :src="aImgSrc"/>
+        <button @click.prevent="aImgSrc = ''">❌</button>
+      </div>
+      <label v-else class="img"><input type="file" accept="image/*" ref="aImg" @input="aImgSrc = getSrc(aImg)"></label>
       <input type="checkbox" v-model="correct.a" title="correct">
-    </label>
-    <label>
+    </div>
+    <div class="label">
       <span class="b">B</span>
-      <input type="text" v-model="question.b">
-      <input type="file" accept="image/*" ref="bImg">
+      <input v-if="!bImgSrc" type="text" v-model="question.b">
+      <div v-if="bImgSrc" @click.prevent class="alt-img">
+        <img :src="bImgSrc"/>
+        <button @click.prevent="bImgSrc = ''">❌</button>
+      </div>
+      <label v-else class="img"><input type="file" accept="image/*" ref="bImg" @input="bImgSrc = getSrc(bImg)"></label>
       <input type="checkbox" v-model="correct.b" title="correct">
-    </label>
-    <label>
+    </div>
+    <div class="label">
       <span class="c">C</span>
-      <input type="text" v-model="question.c">
-      <input type="file" accept="image/*" ref="cImg">
+      <input v-if="!cImgSrc" type="text" v-model="question.c">
+      <div v-if="cImgSrc" @click.prevent class="alt-img">
+        <img :src="cImgSrc"/>
+        <button @click.prevent="cImgSrc = ''">❌</button>
+      </div>
+      <label v-else class="img"><input type="file" accept="image/*" ref="cImg" @input="cImgSrc = getSrc(cImg)"></label>
       <input type="checkbox" v-model="correct.c" title="correct">
-    </label>
-    <label>
+    </div>
+    <div class="label">
       <span class="d">D</span>
-      <input type="text" v-model="question.d">
-      <input type="file" accept="image/*" ref="dImg">
+      <input v-if="!dImgSrc" type="text" v-model="question.d">
+      <div v-if="dImgSrc" @click.prevent class="alt-img">
+        <img :src="dImgSrc"/>
+        <button @click.prevent="dImgSrc = ''">❌</button>
+      </div>
+      <label v-else class="img"><input type="file" accept="image/*" ref="dImg" @input="dImgSrc = getSrc(dImg)"></label>
       <input type="checkbox" v-model="correct.d" title="correct">
-    </label>        
+    </div>        
   </details>
 </template>
 
@@ -68,10 +84,14 @@ export default {
     const dImg = ref(null)
 
     const qImgSrc = ref('')
+    const aImgSrc = ref('')
+    const bImgSrc = ref('')
+    const cImgSrc = ref('')
+    const dImgSrc = ref('')
 
     const getSrc = imgRef => URL.createObjectURL(imgRef.files[0]);
 
-    return { correct, qImg, aImg, bImg, cImg, dImg, qImgSrc, getSrc }
+    return { correct, qImg, aImg, bImg, cImg, dImg, qImgSrc, aImgSrc, bImgSrc, cImgSrc, dImgSrc, getSrc }
   },
   components: { RevealBlocks }
 }
@@ -137,7 +157,7 @@ input[type=checkbox] {
   height: 25px;
 }
 
-label input[type=text]{
+label input[type=text], .label input[type=text]{
   font-size: 1.2rem;
   flex: 1;
 }
@@ -181,7 +201,7 @@ input[type=number]{
   border: 3px solid var(--green);
 }
 
-.q-img{
+.q-img, .alt-img{
   position: relative;
 }
 
@@ -190,7 +210,12 @@ input[type=number]{
   max-width: 50vw;
 }
 
-.q-img button{
+.alt-img img{
+  max-height: 20vh;
+  max-width: 20vw;
+}
+
+.q-img button, .alt-img button{
   background: rgba(255, 255, 255, 0.7);
   border: none;
   border-radius: 50%;
@@ -207,7 +232,7 @@ input[type=number]{
   padding-bottom: 5px;
 }
 
-.q-img button:hover{
+.q-img button:hover, .alt-img button:hover{
   background: rgba(255, 255, 255);
 }
 </style>
