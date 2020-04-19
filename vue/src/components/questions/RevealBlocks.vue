@@ -41,6 +41,8 @@ main{
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
 }

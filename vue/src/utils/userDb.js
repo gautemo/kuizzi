@@ -5,12 +5,18 @@ const getUserQuizzes = async uid => {
   return quizzes.docs.map(doc => ({ id: doc.id, ...doc.data() }) );
 }
 
+const getQuiz = async id => {
+  const doc = await db.collection('quizzes').doc(id).get();
+  return { id: doc.id, ...doc.data() }
+}
+
 const createQuiz = async uid => {
   const doc = await db.collection('quizzes').add({
     name: 'no name',
-    owner: uid
+    owner: uid,
+    questions: [],
   });
   return doc.id;
 }
 
-export { getUserQuizzes, createQuiz }
+export { getUserQuizzes, getQuiz, createQuiz }

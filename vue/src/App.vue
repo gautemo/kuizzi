@@ -50,7 +50,7 @@ body{
   font-family: 'Audiowide', cursive;
 }
 
-button{
+button, input{
   font-family: inherit;
 }
 </style>
