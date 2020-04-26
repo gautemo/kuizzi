@@ -20,5 +20,6 @@ jobs:
         cd ..
     - name: firebase - install & deploy
       run: |
+        cd firebase
         sudo npm install -g firebase-tools
         firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
