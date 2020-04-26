@@ -89,14 +89,4 @@ button:disabled{
   opacity: 0.7;
   cursor: auto;
 }
-
-.my-games{
-  text-decoration: none;
-  color: black;
-  font-size: 1.5rem;
-}
-
-.my-games:hover{
-  text-decoration: underline;
-}
 </style>

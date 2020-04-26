@@ -7,8 +7,8 @@
     </label>
     <div class="label">
       <span class="prop">Image:</span>
-      <label v-if="!qImgSrc" class="img"><input type="file" accept="image/*" ref="qImg" @input="qImgSrc = getSrc(qImg)"></label>
-      <div v-else @click.prevent class="q-img">
+      <label v-show="!qImgSrc" class="img"><input type="file" accept="image/*" ref="qImg" @input="qImgSrc = getSrc(qImg)"></label>
+      <div v-if="qImgSrc" @click.prevent class="q-img">
         <img :src="qImgSrc"/>
         <RevealBlocks v-if="question.isReveal" />
         <button @click.prevent="qImgSrc = ''">❌</button>
@@ -23,9 +23,9 @@
       <input v-if="!aImgSrc" type="text" v-model="question.a">
       <div v-if="aImgSrc" @click.prevent class="alt-img">
         <img :src="aImgSrc"/>
-        <button @click.prevent="aImgSrc = ''">❌</button>
+        <button @click.prevent="aImgSrc = ''; question.a = ''">❌</button>
       </div>
-      <label v-else class="img"><input type="file" accept="image/*" ref="aImg" @input="aImgSrc = getSrc(aImg)"></label>
+      <label v-show="!aImgSrc" class="img"><input type="file" accept="image/*" ref="aImg" @input="aImgSrc = getSrc(aImg)"></label>
       <input type="checkbox" v-model="correct.a" title="correct">
     </div>
     <div class="label">
@@ -33,9 +33,9 @@
       <input v-if="!bImgSrc" type="text" v-model="question.b">
       <div v-if="bImgSrc" @click.prevent class="alt-img">
         <img :src="bImgSrc"/>
-        <button @click.prevent="bImgSrc = ''">❌</button>
+        <button @click.prevent="bImgSrc = ''; question.b = ''">❌</button>
       </div>
-      <label v-else class="img"><input type="file" accept="image/*" ref="bImg" @input="bImgSrc = getSrc(bImg)"></label>
+      <label v-show="!bImgSrc" class="img"><input type="file" accept="image/*" ref="bImg" @input="bImgSrc = getSrc(bImg)"></label>
       <input type="checkbox" v-model="correct.b" title="correct">
     </div>
     <div class="label">
@@ -43,9 +43,9 @@
       <input v-if="!cImgSrc" type="text" v-model="question.c">
       <div v-if="cImgSrc" @click.prevent class="alt-img">
         <img :src="cImgSrc"/>
-        <button @click.prevent="cImgSrc = ''">❌</button>
+        <button @click.prevent="cImgSrc = ''; question.c = ''">❌</button>
       </div>
-      <label v-else class="img"><input type="file" accept="image/*" ref="cImg" @input="cImgSrc = getSrc(cImg)"></label>
+      <label v-show="!cImgSrc" class="img"><input type="file" accept="image/*" ref="cImg" @input="cImgSrc = getSrc(cImg)"></label>
       <input type="checkbox" v-model="correct.c" title="correct">
     </div>
     <div class="label">
@@ -53,23 +53,26 @@
       <input v-if="!dImgSrc" type="text" v-model="question.d">
       <div v-if="dImgSrc" @click.prevent class="alt-img">
         <img :src="dImgSrc"/>
-        <button @click.prevent="dImgSrc = ''">❌</button>
+        <button @click.prevent="dImgSrc = ''; question.d = ''">❌</button>
       </div>
-      <label v-else class="img"><input type="file" accept="image/*" ref="dImg" @input="dImgSrc = getSrc(dImg)"></label>
+      <label v-show="!dImgSrc" class="img"><input type="file" accept="image/*" ref="dImg" @input="dImgSrc = getSrc(dImg)"></label>
       <input type="checkbox" v-model="correct.d" title="correct">
     </div>        
   </details>
 </template>
 
 <script>
-import { reactive, ref } from 'vue'
+import { reactive, ref, watchEffect, watch } from 'vue'
 import RevealBlocks from '@/components/questions/RevealBlocks'
+import { getImgUrl } from '@/utils/db'
 
 export default {
   props: {
-    question: Object,
+    questionProp: Object,
   },
-  setup(){
+  setup({ questionProp }, { emit }){
+    const question = reactive(questionProp);
+
     const correct = reactive({
       a: false,
       b: false,
@@ -89,11 +92,58 @@ export default {
     const cImgSrc = ref('')
     const dImgSrc = ref('')
 
+    if(question.img){
+      getImgUrl(question.img).then(url => qImgSrc.value = url);
+    }
+    setImage(question.a, aImgSrc);
+    setImage(question.b, bImgSrc);
+    setImage(question.c, cImgSrc);
+    setImage(question.d, dImgSrc);
+
     const getSrc = imgRef => URL.createObjectURL(imgRef.files[0]);
 
-    return { correct, qImg, aImg, bImg, cImg, dImg, qImgSrc, aImgSrc, bImgSrc, cImgSrc, dImgSrc, getSrc }
+    const update = () => {
+      const imgs = {
+        q: qImgSrc.value ? qImg.value.files[0] : null,
+        a: aImgSrc.value ? aImg.value.files[0] : null,
+        b: bImgSrc.value ? bImg.value.files[0] : null,
+        c: cImgSrc.value ? cImg.value.files[0] : null,
+        d: dImgSrc.value ? dImg.value.files[0] : null,
+      }
+
+      const corrects = [];
+      if(correct.a) corrects.push('a')
+      if(correct.b) corrects.push('b')
+      if(correct.c) corrects.push('c')
+      if(correct.d) corrects.push('d')
+
+      const updateQuestion = {
+        text: question.text,
+        time: question.time,
+        isReveal: question.isReveal,
+        a: question.a,
+        b: question.b,
+        c: question.c,
+        d: question.d,
+        correct: corrects,
+        imgs
+      }
+
+      emit('update', updateQuestion);
+    }
+
+    watchEffect(update)
+
+    return { question, correct, qImg, aImg, bImg, cImg, dImg, qImgSrc, aImgSrc, bImgSrc, cImgSrc, dImgSrc, getSrc }
   },
   components: { RevealBlocks }
+}
+
+const setImage = async (alternative, imgSrc) => {
+    if(alternative.startsWith('[image]')){
+      const path = alternative.replace('[image]','');
+      imgSrc.value = await getImgUrl(path);
+    }
 }
 </script>
 
@@ -129,7 +179,7 @@ label span, .label span{
   display: inline-block;
   border-radius: 5px;
   padding: 5px 10px;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .a{

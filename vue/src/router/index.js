@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Host from '../views/Host.vue'
 import Play from '../views/Play.vue'
-import Create from '../views/Create.vue'
 import MyGames from '../views/MyGames.vue'
 import SignIn from '../views/SignIn.vue'
 import EditGame from '../views/EditGame.vue'
@@ -41,10 +40,6 @@ const routes = [
   {
     path: '/host',
     component: Host
-  },
-  {
-    path: '/create',
-    component: Create
   },
 ]
 

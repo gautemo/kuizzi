@@ -42,33 +42,4 @@ const getQuiz = async id => {
 
 const getImgUrl = async path => await storage.child(path).getDownloadURL();
 
-// Create questions code 👇
-const uploadImg = img => {
-  const path = `123/${img.name}`;
-  storage.child(path).put(img);
-  return path;
-}
-
-const addQuestion = async (quizId, question, imgs) => {
-  if(imgs.q){
-    question.img = uploadImg(imgs.q);
-  }
-  if (imgs.a){
-    question.a = '[image]' + uploadImg(imgs.a);
-  }
-  if (imgs.b) {
-    question.b = '[image]' + uploadImg(imgs.b);
-  }
-  if (imgs.c) {
-    question.c = '[image]' + uploadImg(imgs.c);
-  }
-  if (imgs.d) {
-    question.d = '[image]' + uploadImg(imgs.d);
-  }
-
-  const ref = db.collection('quizzes').doc(quizId).collection('questions');
-  const nextId = (await ref.get()).docs.length + 1;
-  ref.doc(nextId.toString()).set(question)
-}
-
-export { game as dbGame, getQuiz, getUid, addQuestion, getImgUrl }
+export { game as dbGame, getQuiz, getUid, getImgUrl }

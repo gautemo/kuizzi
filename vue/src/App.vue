@@ -53,4 +53,14 @@ body{
 button, input{
   font-family: inherit;
 }
+
+.my-games{
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+}
+
+.my-games:hover{
+  text-decoration: underline;
+}
 </style>
