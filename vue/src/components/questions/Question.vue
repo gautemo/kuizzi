@@ -5,18 +5,18 @@
   </div>
   <div v-else-if="!answered" class="question">
     <div class="header">
-      <div class="question-img" v-if="question.img">
-        <RevealBlocks v-if="question.isReveal" />
+      <div class="question-img" v-if="currentQuestion.img">
+        <RevealBlocks v-if="currentQuestion.isReveal" />
         <img :src="img" alt="Question image">
       </div>
-      <h2>{{question.text}}</h2>
-      <CountDown v-if="question" :from="question.time" class="countdown" v-on:done="$emit('done')"/>
+      <h2>{{currentQuestion.text}}</h2>
+      <CountDown v-if="currentQuestion" :from="currentQuestion.time" class="countdown" v-on:done="$emit('done')"/>
     </div>
-    <div class="alternatives" :class="{'two-rows': question.c}">
-      <QButton :alternative="question.a" @click="answer('a')" nr="one"/>
-      <QButton :alternative="question.b" @click="answer('b')" nr="two"/>
-      <QButton :alternative="question.c" @click="answer('c')" nr="three"/>
-      <QButton :alternative="question.d" @click="answer('d')" nr="four"/>
+    <div class="alternatives" :class="{'two-rows': currentQuestion.c}">
+      <QButton :alternative="currentQuestion.a" @click="answer('a')" nr="one"/>
+      <QButton :alternative="currentQuestion.b" @click="answer('b')" nr="two"/>
+      <QButton :alternative="currentQuestion.c" @click="answer('c')" nr="three"/>
+      <QButton :alternative="currentQuestion.d" @click="answer('d')" nr="four"/>
     </div>
   </div>
   <div v-else class="mid">
@@ -26,8 +26,7 @@
 </template>
 
 <script>
-import { questions, addAnswer } from '@/utils/questions'
-import { game } from '@/utils/game'
+import { game, currentQuestion, addAnswer } from '@/utils/game'
 import { watchEffect, ref, computed, onMounted, watch, onUnmounted } from 'vue';
 import QButton from './QButton'
 import CountDown from './CountDown'
@@ -39,14 +38,12 @@ let scoreIntervalId;
 
 export default {
   props: {
-    nr: Number,
     host: Boolean,
   },
   setup(props, {emit}){
     const started = ref(false);
     const answered = ref(false);
     const score = ref(1000);
-    const question = computed(() => questions.value.find(q => q.id === props.nr.toString()));
 
     watch(started, () => {
       if(started.value){
@@ -63,10 +60,10 @@ export default {
 
       clearInterval(scoreIntervalId)
       let gotScore = 0;
-      if(question.value.correct.includes(alt)){
+      if(currentQuestion.value.correct.includes(alt)){
         gotScore = score.value;
       }
-      addAnswer(props.nr, alt, gotScore);
+      addAnswer(alt, gotScore);
       answered.value = true;
     }
 
@@ -80,16 +77,16 @@ export default {
     })
 
     const img = ref('')
-    if(question.value && question.value.img){
-        getImgUrl(question.value.img).then(url => img.value = url)
+    if(currentQuestion.value && currentQuestion.value.img){
+        getImgUrl(currentQuestion.value.img).then(url => img.value = url)
     }
-    watch(question, async () => {
-      if(question.value.img){
-        img.value = await getImgUrl(question.value.img)
+    watch(currentQuestion, async () => {
+      if(currentQuestion.value.img){
+        img.value = await getImgUrl(currentQuestion.value.img)
       }
     })
 
-    return { question, started, answer, answered, img }
+    return { currentQuestion, started, answer, answered, img }
   },
   components: { QButton, CountDown, Gif, RevealBlocks }
 }

@@ -24,7 +24,7 @@ import Header from '@/components/Header'
 import { isMounted as isMountedUtil } from '@/utils/isMounted'
 import { getCurrentUser } from '@/firebase'
 import { ref } from 'vue'
-import { getUserQuizzes, createQuiz as createQuizDb } from '@/utils/userDb'
+import { getUserQuizzes, createQuiz as createQuizDb, createGame } from '@/utils/userDb'
 import { router } from '@/router';
 
 export default {
@@ -42,8 +42,9 @@ export default {
     }
 
     const editQuiz = id => router.push(`/my-games/${id}`)
-    const playQuiz = id => {
-      console.log(`should play ${id}`)
+    const playQuiz = async quizId => {
+      const pin = await createGame(quizId);
+      router.push(`/host/${pin}`);
     }
 
     return { email, isMounted, quizzes, editQuiz, playQuiz, createQuiz }

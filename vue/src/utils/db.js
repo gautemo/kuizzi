@@ -7,8 +7,8 @@ const game = {
   get game(){ 
     return this.ref 
   },
-  setGame(id){ 
-    this.ref = db.collection('games').doc(id);
+  setGame(pin){ 
+    this.ref = db.collection('games').doc(pin.toString());
   },
   listen: fun => game.ref.onSnapshot(doc => fun(doc.data())),
   addPlayer: async player => {

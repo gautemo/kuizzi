@@ -1,20 +1,19 @@
 <template>
-  <main v-if="question">
-    <h2>{{question.text}}</h2>
-    <img v-if="question.img" :src="img" alt="Question image" class="question-image">
-    <CorrectAnswers :question="question" />
+  <main v-if="currentQuestion">
+    <h2>{{currentQuestion.text}}</h2>
+    <img v-if="currentQuestion.img" :src="img" alt="Question image" class="question-image">
+    <CorrectAnswers :question="currentQuestion" />
     <div class="bars">
-      <VoteBar class="red" :alt="question.a" :players="playersA" :total="total"/>
-      <VoteBar class="blue" :alt="question.b" :players="playersB" :total="total"/>
-      <VoteBar class="yellow" :alt="question.c" :players="playersC" :total="total"/>
-      <VoteBar class="green" :alt="question.d" :players="playersD" :total="total"/>
+      <VoteBar class="red" :alt="currentQuestion.a" :players="playersA" :total="total"/>
+      <VoteBar class="blue" :alt="currentQuestion.b" :players="playersB" :total="total"/>
+      <VoteBar class="yellow" :alt="currentQuestion.c" :players="playersC" :total="total"/>
+      <VoteBar class="green" :alt="currentQuestion.d" :players="playersD" :total="total"/>
     </div>
   </main>
 </template>
 
 <script>
-import { questions } from '@/utils/questions'
-import { game, me } from '@/utils/game'
+import { game, me, currentQuestion } from '@/utils/game'
 import { computed, ref, watch } from 'vue'
 import VoteBar from '@/components/VoteBar'
 import { getImgUrl } from '@/utils/db'
@@ -22,8 +21,6 @@ import CorrectAnswers from '@/components/CorrectAnswers'
 
 export default {
   setup(){
-    const question = computed(() => questions.value.find(q => q.id === game.value.question.toString()));
-
     const playersA = computed(() => {
       if(!game.value[`answer${game.value.question}`]) return [];
       return game.value.players.filter(p => game.value[`answer${game.value.question}`].some(a => a.uid === p.uid && a.alt === 'a'));
@@ -47,16 +44,16 @@ export default {
     const total = computed(() => game.value.players.length);
 
     const img = ref('')
-    if(question.value && question.value.img){
-        getImgUrl(question.value.img).then(url => img.value = url)
+    if(currentQuestion.value && currentQuestion.value.img){
+        getImgUrl(currentQuestion.value.img).then(url => img.value = url)
     }
-    watch(question, async () => {
-      if(question.value && question.value.img){
-        img.value = await getImgUrl(question.value.img)
+    watch(currentQuestion, async () => {
+      if(currentQuestion.value && currentQuestion.value.img){
+        img.value = await getImgUrl(currentQuestion.value.img)
       }
     })
 
-    return { question, playersA, playersB, playersC, playersD, total, img }
+    return { currentQuestion, playersA, playersB, playersC, playersD, total, img }
   },
   components: { VoteBar, CorrectAnswers }
 }

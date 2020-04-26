@@ -38,8 +38,11 @@ const routes = [
     component: SignIn
   },
   {
-    path: '/host',
-    component: Host
+    path: '/host/:pin',
+    component: Host,
+    meta: {
+      requiresAuth: true
+    }
   },
 ]
 
@@ -55,7 +58,7 @@ router.beforeEach(async (to, from, next) => {
     next('/signin');
   } else {
     const requiresAnonymAuth = to.matched.some(record => record.meta.requiresAnonymAuth);
-    if (requiresAnonymAuth) {
+    if (requiresAnonymAuth && !user) {
       await signInAnonymously();
     }
     next();

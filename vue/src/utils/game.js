@@ -1,5 +1,4 @@
 import { ref, computed } from 'vue'
-import { quizId } from '@/utils/questions'
 import { dbGame } from '@/utils/db'
 import { sortedPlayers } from '@/utils/helper'
 
@@ -7,8 +6,15 @@ const game = ref({
     players: [],
     question: 0,
     state: '',
-    quizid: '',
+    quiz: {
+        owner: '',
+        name: '',
+        questions: [],
+    },
 });
+
+const questions = computed(() => game.value.quiz.questions);
+const currentQuestion = computed(() => game.value.quiz.questions[game.value.question - 1]);
 
 const scores = computed(() => sortedPlayers(game.value))
 
@@ -22,10 +28,6 @@ const goToGame = (id, callback) => {
         }
         game.value = data;
 
-        if (quizId.value !== data.quizid){
-            quizId.value = data.quizid;
-        }
-
         if(callback){
             callback(data)
         }
@@ -34,4 +36,8 @@ const goToGame = (id, callback) => {
 
 const updateState = dbGame.updateState;
 
-export { goToGame, game, scores, updateState };
+const addAnswer = (alt, score) => {
+    dbGame.answer(game.value.question, alt, score)
+}
+
+export { goToGame, game, scores, updateState, questions, currentQuestion, addAnswer };

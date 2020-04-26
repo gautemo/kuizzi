@@ -58,4 +58,25 @@ const uploadImg = (uid, quizId, img) => {
   return path;
 }
 
-export { getUserQuizzes, getQuiz, createQuiz, updateQuiz }
+const createGame = async quizId => {
+  const pinsRef = db.collection('info').doc('pins');
+  
+  const gameId = await db.runTransaction(async transaction => {
+    const pinDoc = await transaction.get(pinsRef);
+    const pin = pinDoc.data().count + 1;
+
+    const quizDoc = await transaction.get(db.collection('quizzes').doc(quizId));
+
+    await transaction.set(db.collection('games').doc(pin.toString()), {
+      players: [],
+      question: 0,
+      state: 'notstarted',
+      quiz: quizDoc.data()
+    })
+    await transaction.update(pinsRef, { count: pin })
+    return pin;
+  })
+  return gameId;
+}
+
+export { getUserQuizzes, getQuiz, createQuiz, updateQuiz, createGame }

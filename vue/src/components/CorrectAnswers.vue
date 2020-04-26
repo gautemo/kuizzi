@@ -1,10 +1,12 @@
 <template>
   <div>
-    <p><b>Correct Answer:</b></p>
-    <p v-for="answer in correctAnswers" :key="answer.alt" class="correct" :class="answer.alt">
-      <span v-if="!answer.text.startsWith('[image]')">{{answer.text}}</span>
-      <AltImg :alternative="answer.text" pad="5" class="alt-img"/>
-    </p>
+    <b>Correct Answer:</b>
+    <div class="flex">
+      <p v-for="answer in correctAnswers" :key="answer.alt" class="correct" :class="answer.alt">
+        <span v-if="!answer.text.startsWith('[image]')">{{answer.text}}</span>
+        <AltImg :alternative="answer.text" pad="5" class="alt-img"/>
+      </p>
+    </div>
   </div>  
 </template>
 
@@ -62,5 +64,10 @@ p{
 .alt-img{
   max-height: 100px;
   max-width: 100px;
+}
+
+.flex{
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <main v-if="question">
-    <h2 class="question-text">{{question.text}}</h2>
-    <img v-if="question.img" :src="img" alt="Question image" class="question-image">
+  <main v-if="currentQuestion">
+    <h2 class="question-text">{{currentQuestion.text}}</h2>
+    <img v-if="currentQuestion.img" :src="img" alt="Question image" class="question-image">
     <div v-if="wasCorrect" class="correct">
       <h2>✔️Correct!</h2>
       <Gif type="correct" />
@@ -11,14 +11,13 @@
       <h2>❌Wrong</h2>
       <Gif type="wrong" />
     </div>
-    <CorrectAnswers :question="question" />
+    <CorrectAnswers :question="currentQuestion" />
     <Summary/>
   </main>
 </template>
 
 <script>
-import { questions } from '@/utils/questions'
-import { game } from '@/utils/game'
+import { game, currentQuestion } from '@/utils/game'
 import { me } from '@/utils/player'
 import { computed, ref, watch } from 'vue'
 import Summary from '@/components/Summary'
@@ -31,22 +30,20 @@ export default {
     nr: Number,
   },
   setup(props){
-    const question = computed(() => questions.value.find(q => q.id === props.nr.toString()));
-
     const myAnswer = computed(() => game.value[`answer${props.nr}`] ? game.value[`answer${props.nr}`].find(a => a.uid === me.uid) : null);
-    const wasCorrect = computed(() => myAnswer.value && question.value.correct.includes(myAnswer.value.alt));
+    const wasCorrect = computed(() => myAnswer.value && currentQuestion.value.correct.includes(myAnswer.value.alt));
 
     const img = ref('')
-    if(question.value && question.value.img){
-        getImgUrl(question.value.img).then(url => img.value = url)
+    if(currentQuestion.value && currentQuestion.value.img){
+        getImgUrl(currentQuestion.value.img).then(url => img.value = url)
     }
-    watch(question, async () => {
-      if(question.value.img){
-        img.value = await getImgUrl(question.value.img)
+    watch(currentQuestion, async () => {
+      if(currentQuestion.value.img){
+        img.value = await getImgUrl(currentQuestion.value.img)
       }
     })
 
-    return { wasCorrect, myAnswer, question, img }
+    return { wasCorrect, myAnswer, currentQuestion, img }
   },
   components: { Summary, Gif, CorrectAnswers }
 }

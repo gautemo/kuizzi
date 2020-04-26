@@ -13,9 +13,8 @@
 </template>
 
 <script>
-import { game } from '@/utils/game'
+import { game, questions } from '@/utils/game'
 import { goToGame, me } from '@/utils/player'
-import { questions } from '@/utils/questions'
 import Join from '@/components/Join'
 import Lobby from '@/components/Lobby'
 import Score from '@/components/Score'
@@ -30,7 +29,7 @@ export default {
         const gamepin = router.currentRoute.value.params.pin;
         goToGame(gamepin);
         const playerJoined = computed(() => me.name && me.icon && me.color && game.value.players.find(p => p.uid === me.uid))
-        const isReady = computed(() => !!game.value.quizid);
+        const isReady = computed(() => !!game.value.state);
 
         return { playerJoined, isReady, game, questions }
     },
