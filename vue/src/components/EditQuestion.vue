@@ -74,10 +74,10 @@ export default {
     const question = reactive(questionProp);
 
     const correct = reactive({
-      a: false,
-      b: false,
-      c: false,
-      d: false,
+      a: questionProp.correct.includes('a'),
+      b: questionProp.correct.includes('b'),
+      c: questionProp.correct.includes('c'),
+      d: questionProp.correct.includes('d'),
     })
 
     const qImg = ref(null)
@@ -118,6 +118,7 @@ export default {
       if(correct.d) corrects.push('d')
 
       const updateQuestion = {
+        id: question.id,
         text: question.text,
         time: question.time,
         isReveal: question.isReveal,
@@ -154,7 +155,7 @@ const setImage = async (alternative, imgSrc) => {
 }
 
 details{
-  margin: 15px 0;
+  margin: 5px 0;
   padding-bottom: 5px;
   border-bottom: 3px solid black;
 }

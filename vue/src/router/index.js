@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, onBeforeRouteLeave } from 'vue-router'
 import Home from '../views/Home.vue'
 import Host from '../views/Host.vue'
 import Play from '../views/Play.vue'
@@ -65,4 +65,4 @@ router.beforeEach(async (to, from, next) => {
   }
 })
 
-export { router }
+export { router, onBeforeRouteLeave }
