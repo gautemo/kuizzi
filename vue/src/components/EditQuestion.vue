@@ -26,7 +26,7 @@
         <button @click.prevent="aImgSrc = ''; question.a = ''">❌</button>
       </div>
       <label v-show="!aImgSrc" class="img"><input type="file" accept="image/*" ref="aImg" @input="aImgSrc = getSrc(aImg)"></label>
-      <input type="checkbox" v-model="correct.a" title="correct">
+      <label class="correct">Correct<input type="checkbox" v-model="correct.a" title="correct"></label>
     </div>
     <div class="label">
       <span class="b">B</span>
@@ -36,7 +36,7 @@
         <button @click.prevent="bImgSrc = ''; question.b = ''">❌</button>
       </div>
       <label v-show="!bImgSrc" class="img"><input type="file" accept="image/*" ref="bImg" @input="bImgSrc = getSrc(bImg)"></label>
-      <input type="checkbox" v-model="correct.b" title="correct">
+      <label class="correct">Correct<input type="checkbox" v-model="correct.b" title="correct"></label>
     </div>
     <div class="label">
       <span class="c">C</span>
@@ -46,7 +46,7 @@
         <button @click.prevent="cImgSrc = ''; question.c = ''">❌</button>
       </div>
       <label v-show="!cImgSrc" class="img"><input type="file" accept="image/*" ref="cImg" @input="cImgSrc = getSrc(cImg)"></label>
-      <input type="checkbox" v-model="correct.c" title="correct">
+      <label class="correct">Correct<input type="checkbox" v-model="correct.c" title="correct"></label>
     </div>
     <div class="label">
       <span class="d">D</span>
@@ -56,7 +56,7 @@
         <button @click.prevent="dImgSrc = ''; question.d = ''">❌</button>
       </div>
       <label v-show="!dImgSrc" class="img"><input type="file" accept="image/*" ref="dImg" @input="dImgSrc = getSrc(dImg)"></label>
-      <input type="checkbox" v-model="correct.d" title="correct">
+      <label class="correct">Correct<input type="checkbox" v-model="correct.d" title="correct"></label>
     </div>        
   </details>
 </template>
@@ -285,5 +285,11 @@ input[type=number]{
 
 .q-img button:hover, .alt-img button:hover{
   background: rgba(255, 255, 255);
+}
+
+.correct{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
 }
 </style>
