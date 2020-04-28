@@ -4,8 +4,8 @@
     <input type="text" v-model="quiz.name" class="name">
     <div v-for="(question, i) in quiz.questions" :key="question.id" class="question">
       <div class="zone" v-show="i === 0" @dragenter="dragTo = 0" :class="{active: dragTo === 0, show: isDragging !== -1}" @drop="dropped" @dragover.prevent></div>
-      <div draggable="true" @dragstart="isDragging = i" @dragend="isDragging = -1" class="flex">
-        <EditQuestion :questionProp="question" v-on:update="q => update(q)" class="grow"/>
+      <div draggable="true" @dragstart="isDragging = i; close()" @dragend="isDragging = -1" class="flex">
+        <EditQuestion :questionProp="question" v-on:update="q => update(q)" class="grow" :opened="opened" v-on:open="toggleOpen(question.id)"/>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
       </div>
       <div class="zone" @dragenter="dragTo = i+1" :class="{active: dragTo === i + 1, show: isDragging !== -1}" @drop="dropped" @dragover.prevent></div>
@@ -65,8 +65,9 @@ export default {
     })
 
     const newQuestion = () => {
+      const id = Date.now();
       quiz.questions.push({
-        id: Date.now(),
+        id,
         text: 'The question?',
         a: '',
         b: '',
@@ -76,6 +77,7 @@ export default {
         time: 20,
         isReveal: false,
       })
+      opened.value = id;
     }
 
     const update = (question) => {
@@ -104,7 +106,19 @@ export default {
       dragTo.value = -1;
     }
 
-    return { quiz, newQuestion, save, update, isMounted, changed, isDragging, dragTo, dropped }
+    const opened = ref(-1);
+    const toggleOpen = id => {
+      if(opened.value === id){
+        opened.value = -1;
+      }else{
+        opened.value = id;
+      }
+    }
+    const close = () => {
+      setTimeout(() => opened.value = -1, 10);
+    }
+
+    return { quiz, newQuestion, save, update, isMounted, changed, isDragging, dragTo, dropped, opened, toggleOpen, close }
   },
   components: { EditQuestion, Header }
 }

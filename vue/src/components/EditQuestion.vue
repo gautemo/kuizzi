@@ -1,6 +1,6 @@
 <template>
-  <details>
-    <summary><input type="text" v-model="question.text"></summary>
+  <details :open="opened === question.id">
+    <summary @click.prevent="$emit('open')"><input type="text" v-model="question.text" @click.stop></summary>
     <label>
       <span class="prop">Time:</span>
       <input type="number" v-model="question.time" class="time">
@@ -69,6 +69,7 @@ import { getImgUrl } from '@/utils/db'
 export default {
   props: {
     questionProp: Object,
+    opened: Number,
   },
   setup({ questionProp }, { emit }){
     const question = reactive(questionProp);
