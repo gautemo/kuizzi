@@ -131,7 +131,7 @@ export default {
         imgs
       }
 
-      emit('update', updateQuestion);
+      debounce(() => emit('update', updateQuestion))
     }
 
     watchEffect(update)
@@ -139,6 +139,15 @@ export default {
     return { question, correct, qImg, aImg, bImg, cImg, dImg, qImgSrc, aImgSrc, bImgSrc, cImgSrc, dImgSrc, getSrc }
   },
   components: { RevealBlocks }
+}
+
+let debounceTimer;
+const debounce = func => {
+  if(debounceTimer){
+    clearTimeout(debounceTimer);
+    debounceTimer = null;
+  }
+  debounceTimer = setTimeout(func, 1000);
 }
 
 const setImage = async (alternative, imgSrc) => {

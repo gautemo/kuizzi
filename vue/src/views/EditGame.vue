@@ -7,6 +7,7 @@
       <div draggable="true" @dragstart="isDragging = i; close()" @dragend="isDragging = -1" class="flex">
         <EditQuestion :questionProp="question" v-on:update="q => update(q)" class="grow" :opened="opened" v-on:open="toggleOpen(question.id)"/>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <svg @click="delQuestion(question)" class="delete" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
       </div>
       <div class="zone" @dragenter="dragTo = i+1" :class="{active: dragTo === i + 1, show: isDragging !== -1}" @drop="dropped" @dragover.prevent></div>
     </div>
@@ -81,7 +82,7 @@ export default {
     }
 
     const update = (question) => {
-      if(Date.now() - timestamp < 1000){
+      if(Date.now() - timestamp < 3000){
         return;
       }
       const index = quiz.questions.findIndex(q => q.id === question.id);
@@ -118,7 +119,14 @@ export default {
       setTimeout(() => opened.value = -1, 10);
     }
 
-    return { quiz, newQuestion, save, update, isMounted, changed, isDragging, dragTo, dropped, opened, toggleOpen, close }
+    const delQuestion = question => {
+      if(window.confirm(`Sure you want to delete question: ${question.text}`)){
+        const index = quiz.questions.findIndex(q => q.id === question.id);
+        quiz.questions.splice(index, 1);
+      }
+    }
+
+    return { quiz, newQuestion, save, update, isMounted, changed, isDragging, dragTo, dropped, opened, toggleOpen, close, delQuestion }
   },
   components: { EditQuestion, Header }
 }
@@ -183,8 +191,21 @@ button:disabled{
 }
 
 svg{
-  cursor: grab;
   align-self: flex-start;
-  margin-top: 15px;
+  height: 30px;
+  width: 30px;
+  margin: 10px;
+}
+
+svg:not(.delete){
+  cursor: grab;
+}
+
+.delete{
+  cursor: pointer;
+}
+
+.delete:hover{
+  fill: rgb(139, 0, 0);
 }
 </style>
