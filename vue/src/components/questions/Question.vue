@@ -34,8 +34,6 @@ import Gif from '@/components/Gif'
 import RevealBlocks from '@/components/questions/RevealBlocks'
 import { getImgUrl } from '@/utils/db'
 
-let scoreIntervalId;
-
 export default {
   props: {
     host: Boolean,
@@ -43,25 +41,22 @@ export default {
   setup(props, {emit}){
     const started = ref(false);
     const answered = ref(false);
-    const score = ref(1000);
-
-    watch(started, () => {
-      if(started.value){
-        scoreIntervalId = setInterval(() => {
-          if(score.value > 500) score.value--;
-        }, 50);
-      }
-    });
-
-    onUnmounted(() => clearInterval(scoreIntervalId));
 
     const answer = alt => {
       if(props.host) return;
 
-      clearInterval(scoreIntervalId)
       let gotScore = 0;
       if(currentQuestion.value.correct.includes(alt)){
-        gotScore = score.value;
+        const questionTimeMillis = currentQuestion.value.time * 1000;
+        const scorePerMillisecond = 500 / questionTimeMillis;
+        const timeSpent = Date.now() - (game.value.timeStarted + 3000);
+        let score = 500 + (questionTimeMillis - timeSpent) * scorePerMillisecond;
+
+        if(score > 2000){
+          score = 500; //cheat
+        }
+
+        gotScore = Math.min(1000, Math.max(score | 0, 500));
       }
       addAnswer(alt, gotScore);
       answered.value = true;

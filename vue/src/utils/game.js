@@ -5,6 +5,7 @@ import { sortedPlayers } from '@/utils/helper'
 const game = ref({
     players: [],
     question: 0,
+    timeStarted: 0,
     state: '',
     quiz: {
         owner: '',

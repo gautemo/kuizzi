@@ -28,6 +28,7 @@ const game = {
     const update = {state}
     if(question){
       update.question = question;
+      update.timeStarted = Date.now();
     }
     game.ref.update(update);
   }
