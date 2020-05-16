@@ -57,7 +57,7 @@
       </div>
       <label v-show="!dImgSrc" class="img"><input type="file" accept="image/*" ref="dImg" @input="dImgSrc = getSrc(dImg)"></label>
       <label class="correct">Correct<input type="checkbox" v-model="correct.d" title="correct"></label>
-    </div>        
+    </div>
   </details>
 </template>
 
