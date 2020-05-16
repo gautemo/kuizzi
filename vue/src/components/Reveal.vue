@@ -58,6 +58,7 @@ main{
 
 .question-text{
   margin: 0;
+  padding-right: 35px;
 }
 
 p{
@@ -86,6 +87,17 @@ p{
 .question-image{
   max-height: 70px;
   max-width: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+  h2{
+    font-size: 1.15em;
+  }
+
+  .gain{
+    margin: 10px 0;
+    padding: 5px 50px;
+  }
 }
 
 </style>

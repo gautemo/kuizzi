@@ -47,4 +47,10 @@ section{
   left: 0;
   right: 0;
 }
+
+@media only screen and (max-width: 600px) {
+  p{
+    margin: 5px 0;
+  }
+}
 </style>
