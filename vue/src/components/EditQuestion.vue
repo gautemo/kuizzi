@@ -1,6 +1,6 @@
 <template>
   <details :open="opened === question.id">
-    <summary @click.prevent="$emit('open')"><input type="text" v-model="question.text" @click.stop></summary>
+    <summary @click.prevent="$emit('open')"><input type="text" v-model="question.text" @click.stop @keyup.space.prevent></summary>
     <label>
       <span class="prop">Time:</span>
       <input type="number" v-model="question.time" class="time">

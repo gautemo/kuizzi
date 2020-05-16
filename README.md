@@ -5,3 +5,4 @@ Quiz game
 
 ## TODO
 - reveal component often crashes
+- reveal image not working on iOS
