@@ -94,7 +94,9 @@ export default {
     const dImgSrc = ref('')
 
     if(question.img){
-      getImgUrl(question.img).then(url => qImgSrc.value = url);
+      getImgUrl(question.img).then(url => {
+        qImgSrc.value = url
+      });
     }
     setImage(question.a, aImgSrc);
     setImage(question.b, bImgSrc);
@@ -121,6 +123,7 @@ export default {
       const updateQuestion = {
         id: question.id,
         text: question.text,
+        img: question.img,
         time: question.time,
         isReveal: question.isReveal,
         a: question.a,

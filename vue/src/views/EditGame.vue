@@ -31,15 +31,13 @@ import { isMounted as Mounted } from '@/utils/isMounted'
 
 export default {
   async setup(){
-    const timestamp = Date.now();
     const isMounted = Mounted();
     const changed = ref(false);
 
     onBeforeRouteLeave(function(to, from, next) {
       if (!changed.value || window.confirm('Leave without saving?')){
         next()
-      }
-      else {
+      } else {
         next(false)
       }
     })
@@ -60,6 +58,7 @@ export default {
 
     const quizId = router.currentRoute.value.params.id;
     const quiz = reactive(await getQuiz(quizId))
+    const timestamp = Date.now();
 
     watch(() => quiz.name, () => {
       changed.value = true
@@ -70,6 +69,7 @@ export default {
       quiz.questions.push({
         id,
         text: 'The question?',
+        img: null,
         a: '',
         b: '',
         c: '',
@@ -82,7 +82,7 @@ export default {
     }
 
     const update = (question) => {
-      if(Date.now() - timestamp < 3000){
+      if(Date.now() - timestamp < 1500){
         return;
       }
       const index = quiz.questions.findIndex(q => q.id === question.id);

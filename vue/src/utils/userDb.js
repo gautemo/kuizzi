@@ -25,8 +25,8 @@ const updateQuiz = async (quizId, quiz) => {
 
   const questions = [];
 
-  for(const {id, text, time, isReveal, correct, a, b, c, d, imgs} of quiz.questions){
-    const question = { id, text, time, isReveal, correct, a, b, c, d };
+  for(const {id, text, time, isReveal, correct, a, b, c, d, img, imgs} of quiz.questions){
+    const question = { id, text, time, isReveal, correct, a, b, c, d, img: img || null };
 
     if (imgs && imgs.q) {
       question.img = uploadImg(uid, quizId, imgs.q);
