@@ -1,6 +1,8 @@
 {
   "scripts": {
     "deploy": "npm run build --prefix vue && (cd firebase && firebase deploy)",
-    "serve": "npm run serve --prefix vue"
-  }
+    "serve": "npm run serve --prefix vue",
+    "postinstall": "cd vue && npm i"
+  },
+  "dependencies": {}
 }

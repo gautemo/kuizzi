@@ -3,13 +3,13 @@
   <section>
     <input type="text" v-model="quiz.name" class="name">
     <div v-for="(question, i) in quiz.questions" :key="question.id" class="question">
-      <div class="zone" v-show="i === 0" @dragenter="dragTo = 0" :class="{active: dragTo === 0, show: isDragging !== -1}" @drop="dropped" @dragover.prevent></div>
+      <div class="zone" v-show="i === 0" @dragenter="dragTo = 0" :class="{active: dragTo === 0, show: isDragging !== -1}" @drop="dropped" @dragleave="dragTo = -1" @dragover.prevent></div>
       <div draggable="true" @dragstart="isDragging = i; close()" @dragend="isDragging = -1" class="flex">
         <EditQuestion draggable="true" @dragstart.prevent.stop :questionProp="question" v-on:update="q => update(q)" class="grow" :opened="opened" v-on:open="toggleOpen(question.id)"/>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
         <div draggable="true" @dragstart.prevent.stop><svg @click="delQuestion(question)" class="delete" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/><path d="M0 0h24v24H0z" fill="none"/></svg></div>
       </div>
-      <div class="zone" @dragenter="dragTo = i+1" :class="{active: dragTo === i + 1, show: isDragging !== -1}" @drop="dropped" @dragover.prevent></div>
+      <div class="zone" @dragenter="dragTo = i+1" :class="{active: dragTo === i + 1, show: isDragging !== -1}" @drop="dropped" @dragleave="dragTo = -1" @dragover.prevent></div>
     </div>
     <div>
       <button @click="newQuestion">New Question</button>
@@ -166,15 +166,16 @@ button:disabled{
   height: 0px;
   border-radius: 2px;
   background: rgba(51, 51, 51, 0.2);
-  transition: height 0.5s ease-in-out;
+  transition: height 0.3s ease-in-out;
 }
 
 .zone.show{
-  height: 40px;
+  height: 8px;
 }
 
 .zone.active{
   background: rgba(40, 170, 1, 0.5);
+  height: 40px;
 }
 
 .question{
