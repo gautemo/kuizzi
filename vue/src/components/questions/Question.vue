@@ -140,6 +140,7 @@ h2{
 .question-img{
   margin: 20px;
   position: relative;
+  display: grid;
 }
 
 .question-img img{

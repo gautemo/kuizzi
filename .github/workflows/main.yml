@@ -15,7 +15,7 @@ jobs:
     - name: vue - install & build
       run: |
         cd vue
-        npm i
+        npm ci
         npm run build
         cd ..
     - name: firebase - install & deploy

@@ -265,6 +265,10 @@ input[type=number]{
   border: 3px solid var(--green);
 }
 
+.q-img{
+  display: grid;
+}
+
 .q-img, .alt-img{
   position: relative;
 }
