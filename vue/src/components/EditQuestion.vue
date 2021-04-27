@@ -1,6 +1,9 @@
 <template>
   <details :open="opened === question.id">
-    <summary @click.prevent="$emit('open')"><input type="text" v-model="question.text" @click.stop @keyup.space.prevent></summary>
+    <summary @click.prevent="$emit('open')">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--ic" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path d="M5 20h14c.55 0 1 .45 1 1s-.45 1-1 1H5c-.55 0-1-.45-1-1s.45-1 1-1zM5 2h14c.55 0 1 .45 1 1s-.45 1-1 1H5c-.55 0-1-.45-1-1s.45-1 1-1zm8 7h1.79c.45 0 .67-.54.35-.85l-2.79-2.79c-.2-.2-.51-.2-.71 0L8.85 8.15a.5.5 0 0 0 .36.85H11v6H9.21c-.45 0-.67.54-.35.85l2.79 2.79c.2.2.51.2.71 0l2.79-2.79a.5.5 0 0 0-.35-.85H13V9z" fill="currentColor"></path></svg>
+      <input type="text" v-model="question.text" @click.stop @keyup.space.prevent>
+    </summary>
     <label>
       <span class="prop">Time:</span>
       <input type="number" v-model="question.time" class="time">
