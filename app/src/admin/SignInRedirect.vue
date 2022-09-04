@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { userIsSignedIn } from '../firebase';
+import { userIsSignedIn } from './firebaseAuth';
 import { useRoute } from 'vue-router'
 import { router } from '../router';
 import { useStorage } from '@vueuse/core'

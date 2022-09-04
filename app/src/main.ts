@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { checkIsSignInWithEmailLink } from './firebase'
 import { router } from './router'
 import 'uno.css'
+import { checkIsSignInWithEmailLink } from './admin/firebaseAuth'
 
 checkIsSignInWithEmailLink()
 

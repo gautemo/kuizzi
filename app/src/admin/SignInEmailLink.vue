@@ -2,7 +2,7 @@
 import { useAsyncState } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { signInEmailLink } from '../firebase';
+import { signInEmailLink } from './firebaseAuth';
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -31,7 +31,7 @@ const error = computed(() => {
 </label>
 <span class="loader" v-if="isLoading"></span>
 <p class="error" v-if="error">{{ error.message }}</p>
-<p class="done" v-if="isReady">We sent you an email with your login link</p>
+<p class="success" v-if="isReady">We sent you an email with your login link</p>
 <section>
   <button @click="emit('close')" class="secondary">Close</button>
   <button @click="execute()" :disabled="!email">Get login link</button>
@@ -64,15 +64,7 @@ section {
   width: 100%;
 }
 
-.error {
-  padding: 5px;
-  background-color: rgb(247, 138, 138);
-  width: 100%;
-}
-
-.done {
-  padding: 5px;
-  background-color: rgb(129, 229, 113);
+.success, .error {
   width: 100%;
 }
 </style>

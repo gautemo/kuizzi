@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { userIsSignedIn } from './firebase'
+import { userIsSignedIn } from './admin/firebaseAuth'
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -10,7 +10,14 @@ export const router = createRouter({
     },
     {
       path: '/my-games',
-      component: () => import('./admin/GameList.vue'),
+      component: () => import('./admin/QuizListShell.vue'),
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/my-games/:id',
+      component: () => import('./admin/EditQuizShell.vue'),
       meta: {
         auth: true
       }

@@ -4,7 +4,15 @@
       <slot></slot>
     </template>
     <template #fallback>
-      ...Loading
+      <span class="loader"></span>
     </template>
   </Suspense>
 </template>
+
+<style scoped>
+  .loader {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+  }
+</style>

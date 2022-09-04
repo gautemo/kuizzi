@@ -105,4 +105,14 @@ button.secondary:hover:not(:disabled) {
     transform: rotate(360deg);
   }
 }
+
+.error {
+  padding: 5px;
+  background-color: rgb(247, 138, 138);
+}
+
+.success {
+  padding: 5px;
+  background-color: rgb(129, 229, 113);
+}
 </style>

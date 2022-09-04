@@ -2,7 +2,7 @@
 import { useAsyncState } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { getEmailState, signInEmailAndPassword, createAccount, resetPassword } from '../firebase';
+import { getEmailState, signInEmailAndPassword, createAccount, resetPassword } from './firebaseAuth';
 
 const email = ref('')
 const password = ref('')
@@ -104,8 +104,6 @@ section {
 }
 
 .error {
-  padding: 5px;
-  background-color: rgb(247, 138, 138);
   width: 100%;
 }
 
