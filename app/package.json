@@ -12,11 +12,18 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "vue": "^3.2.38"
+    "@vueuse/firebase": "^9.1.1",
+    "firebase": "^9.9.4",
+    "vue": "^3.2.38",
+    "vue-router": "^4.1.5"
   },
   "devDependencies": {
+    "@iconify-json/ic": "^1.1.9",
+    "@iconify-json/logos": "^1.1.15",
+    "@unocss/preset-icons": "^0.45.14",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/eslint-config-typescript": "^11.0.0",
+    "@vueuse/core": "^9.1.1",
     "autoprefixer": "^10.4.8",
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
@@ -24,6 +31,7 @@
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "typescript": "^4.8.2",
+    "unocss": "^0.45.14",
     "vite": "^3.0.9",
     "vue-tsc": "^0.40.5"
   }

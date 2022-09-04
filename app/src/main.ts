@@ -1,5 +1,9 @@
 import { createApp } from 'vue'
-import './style.css'
 import App from './App.vue'
+import { checkIsSignInWithEmailLink } from './firebase'
+import { router } from './router'
+import 'uno.css'
 
-createApp(App).mount('#app')
+checkIsSignInWithEmailLink()
+
+createApp(App).use(router).mount('#app')
