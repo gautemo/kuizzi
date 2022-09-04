@@ -7,7 +7,7 @@ module.exports = {
   },
   rules: {
     'vue/return-in-computed-property': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
   ignorePatterns: ['postcss.config.js'],
 }

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import HeaderComponent from './shared/HeaderComponent.vue';
-let bgcolor = 1;
+import HeaderComponent from './shared/HeaderComponent.vue'
+let bgcolor = 1
 setInterval(() => {
-  bgcolor++;
-  if (bgcolor > 5) bgcolor = 1;
-  document.documentElement.style.setProperty('--bg', `var(--pastel${bgcolor})`);
-}, 15 * 1000);  
+  bgcolor++
+  if (bgcolor > 5) bgcolor = 1
+  document.documentElement.style.setProperty('--bg', `var(--pastel${bgcolor})`)
+}, 15 * 1000)
 </script>
 
 <template>
@@ -17,11 +17,11 @@ setInterval(() => {
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Roboto+Flex&display=swap');
 
 :root {
-  --pastel1: #CAFFD0;
-  --pastel2: #C9E4E7;
-  --pastel3: #B4A0E5;
-  --pastel4: #FAA4BD;
-  --pastel5: #C6D2ED;
+  --pastel1: #caffd0;
+  --pastel2: #c9e4e7;
+  --pastel3: #b4a0e5;
+  --pastel4: #faa4bd;
+  --pastel5: #c6d2ed;
   --bg: var(--pastel1);
 
   --red: #f4303c;

@@ -12,27 +12,27 @@ export const router = createRouter({
       path: '/my-games',
       component: () => import('./admin/QuizListShell.vue'),
       meta: {
-        auth: true
-      }
+        auth: true,
+      },
     },
     {
       path: '/my-games/:id',
       component: () => import('./admin/EditQuizShell.vue'),
       meta: {
-        auth: true
-      }
+        auth: true,
+      },
     },
     {
       path: '/signin',
-      component: () => import('./admin/SignIn.vue')
-    }
-  ]
+      component: () => import('./admin/SignIn.vue'),
+    },
+  ],
 })
 
 router.beforeEach(async to => {
-  if(to.matched.some(record => record.meta.auth)){
+  if (to.matched.some(record => record.meta.auth)) {
     const isSignedIn = await userIsSignedIn()
-    if(!isSignedIn){
+    if (!isSignedIn) {
       return '/signin'
     }
   }

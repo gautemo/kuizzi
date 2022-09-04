@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { router } from '../router';
+import { ref } from 'vue'
+import { router } from '../router'
 
 const gamePin = ref('')
-function enter(){
-  if(gamePin.value){
+function enter() {
+  if (gamePin.value) {
     router.push(`/play/${gamePin.value}`)
   }
 }
@@ -17,7 +17,7 @@ function enter(){
   <main>
     <h1>A quiz game for your friends!</h1>
     <label>
-      <input type="text" v-model="gamePin" maxlength="25" @keyup.enter="enter">
+      <input type="text" v-model="gamePin" maxlength="25" @keyup.enter="enter" />
       <span :class="{ active: gamePin }" class="fancyfont">Game PIN</span>
     </label>
     <button class="fancyfont" @click="enter" :disabled="!gamePin">Enter</button>

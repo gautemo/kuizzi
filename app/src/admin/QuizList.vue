@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { router } from '../router';
+import { router } from '../router'
 import { user } from './firebaseAuth'
-import { createQuiz, getQuizzes } from './firebaseGames';
+import { createQuiz, getQuizzes } from './firebaseGames'
 
 async function createQuizAndgoToPage() {
   const id = await createQuiz(user.value!.uid)
@@ -13,9 +13,7 @@ const quizzes = await getQuizzes()
 
 <template>
   <main>
-    <button @click="createQuizAndgoToPage">
-      Create New Game
-    </button>
+    <button @click="createQuizAndgoToPage">Create New Game</button>
     <ul>
       <li v-for="quiz of quizzes" :key="quiz.id">
         <span>{{ quiz.name }}</span>
@@ -45,7 +43,7 @@ li {
   align-items: center;
 }
 
-li>span {
+li > span {
   flex: 1;
 }
 

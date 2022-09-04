@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { inject } from 'vue';
-import { Quiz } from './types';
+import { inject } from 'vue'
+import { Quiz } from './types'
 
 const props = defineProps<{
   index: number
@@ -8,19 +8,18 @@ const props = defineProps<{
 }>()
 
 const quiz = inject('quiz') as Quiz
-
 </script>
 
 <template>
   <div class="container">
     <label class="question">
       <span>Question:</span>
-      <input type="text" v-model="quiz.questions[props.index].text">
+      <input type="text" v-model="quiz.questions[props.index].text" />
     </label>
     <div v-if="expanded">
       <label>
         <span>Time:</span>
-        <input type="number" v-model="quiz.questions[props.index].time">
+        <input type="number" v-model="quiz.questions[props.index].time" />
       </label>
       <label>
         <span>Image:</span>
@@ -28,22 +27,22 @@ const quiz = inject('quiz') as Quiz
       </label>
       <label>
         <span>A:</span>
-        <input type="text" v-model="quiz.questions[props.index].a">
+        <input type="text" v-model="quiz.questions[props.index].a" />
       </label>
       <label>
         <span>B:</span>
-        <input type="text" v-model="quiz.questions[props.index].b">
+        <input type="text" v-model="quiz.questions[props.index].b" />
       </label>
       <label>
         <span>C:</span>
-        <input type="text" v-model="quiz.questions[props.index].c">
+        <input type="text" v-model="quiz.questions[props.index].c" />
       </label>
       <label>
         <span>D:</span>
-        <input type="text" v-model="quiz.questions[props.index].d">
+        <input type="text" v-model="quiz.questions[props.index].d" />
       </label>
     </div>
-  </div>  
+  </div>
 </template>
 
 <style scoped>

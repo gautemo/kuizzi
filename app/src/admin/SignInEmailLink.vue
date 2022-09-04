@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useAsyncState } from '@vueuse/core';
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { signInEmailLink } from './firebaseAuth';
+import { useAsyncState } from '@vueuse/core'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { signInEmailLink } from './firebaseAuth'
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -11,31 +11,31 @@ const emit = defineEmits<{
 const email = ref('')
 const route = useRoute()
 
-async function signIn(){
-  if(!email.value) return
+async function signIn() {
+  if (!email.value) return
   await signInEmailLink(email.value, route.redirectedFrom?.path ?? '/my-games')
 }
 
 const { isReady, isLoading, execute, error: e } = useAsyncState(signIn, null, { immediate: false })
 const error = computed(() => {
-  if(!e.value) return null
-  if(e.value instanceof Error) return e.value
+  if (!e.value) return null
+  if (e.value instanceof Error) return e.value
   return new Error('unkown error')
 })
 </script>
 
 <template>
-<label>
-  <span>Email</span>
-  <input type="email" v-model="email" @keyup.enter="execute()">
-</label>
-<span class="loader" v-if="isLoading"></span>
-<p class="error" v-if="error">{{ error.message }}</p>
-<p class="success" v-if="isReady">We sent you an email with your login link</p>
-<section>
-  <button @click="emit('close')" class="secondary">Close</button>
-  <button @click="execute()" :disabled="!email">Get login link</button>
-</section>
+  <label>
+    <span>Email</span>
+    <input type="email" v-model="email" @keyup.enter="execute()" />
+  </label>
+  <span class="loader" v-if="isLoading"></span>
+  <p class="error" v-if="error">{{ error.message }}</p>
+  <p class="success" v-if="isReady">We sent you an email with your login link</p>
+  <section>
+    <button @click="emit('close')" class="secondary">Close</button>
+    <button @click="execute()" :disabled="!email">Get login link</button>
+  </section>
 </template>
 
 <style scoped>
@@ -47,7 +47,7 @@ label {
   font-size: 1rem;
 }
 
-label>span {
+label > span {
   min-width: 75px;
 }
 
@@ -64,7 +64,8 @@ section {
   width: 100%;
 }
 
-.success, .error {
+.success,
+.error {
   width: 100%;
 }
 </style>

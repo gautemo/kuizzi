@@ -10,9 +10,9 @@
 </template>
 
 <style scoped>
-  .loader {
-    position: absolute;
-    inset: 0;
-    margin: auto;
-  }
+.loader {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+}
 </style>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useAsyncState } from '@vueuse/core';
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { getEmailState, signInEmailAndPassword, createAccount, resetPassword } from './firebaseAuth';
+import { useAsyncState } from '@vueuse/core'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { getEmailState, signInEmailAndPassword, createAccount, resetPassword } from './firebaseAuth'
 
 const email = ref('')
 const password = ref('')
@@ -27,7 +27,12 @@ async function next() {
   return getEmailState(email.value)
 }
 
-const { state: emailState, isLoading: emailStateIsLoading, execute: executeEmailState, error: emailError } = useAsyncState(next, null, { immediate: false })
+const {
+  state: emailState,
+  isLoading: emailStateIsLoading,
+  execute: executeEmailState,
+  error: emailError,
+} = useAsyncState(next, null, { immediate: false })
 const { isLoading: saveIsLoading, execute: executeSave, error: saveError } = useAsyncState(save, null, { immediate: false })
 
 const error = computed(() => {
@@ -38,7 +43,7 @@ const error = computed(() => {
 })
 
 const doneReset = ref(false)
-async function resetEmailPassword(){
+async function resetEmailPassword() {
   await resetPassword(email.value)
   doneReset.value = true
 }
@@ -50,21 +55,21 @@ async function resetEmailPassword(){
   <Teleport v-else to="#sign-in-header">Sign in</Teleport>
   <label>
     <span>Email</span>
-    <input type="email" v-model="email" @keyup.enter="executeEmailState()" :disabled="emailState !== null">
+    <input type="email" v-model="email" @keyup.enter="executeEmailState()" :disabled="emailState !== null" />
   </label>
   <label v-if="emailState !== null">
     <span>Password</span>
-    <input type="password" v-model="password" @keyup.enter="executeSave()">
+    <input type="password" v-model="password" @keyup.enter="executeSave()" />
   </label>
   <span class="loader" v-if="emailStateIsLoading || saveIsLoading"></span>
   <p class="error" v-if="error">{{ error.message }}</p>
   <section>
     <div>
       <button @click="emit('close')" class="secondary">Close</button>
-      <button 
+      <button
         v-if="emailState === 'has_password'"
-        @click="resetEmailPassword" 
-        class="secondary" 
+        @click="resetEmailPassword"
+        class="secondary"
         :class="{ donereset: doneReset }"
         :disabled="doneReset"
       >
@@ -86,7 +91,7 @@ label {
   font-size: 1rem;
 }
 
-label>span {
+label > span {
   min-width: 75px;
 }
 

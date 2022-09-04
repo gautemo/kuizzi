@@ -11,7 +11,7 @@ export interface Question {
   b: string
   c: string
   d: string
-  correct: Array<'a'|'b'|'c'|'d'>
+  correct: Array<'a' | 'b' | 'c' | 'd'>
   time: number
   img: string | null
   isReveal: boolean

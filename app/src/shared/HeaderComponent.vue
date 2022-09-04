@@ -6,19 +6,19 @@
 </template>
 
 <style scoped>
-header{
+header {
   padding: 10px 20px;
   display: grid;
   grid-template-columns: auto 1fr auto;
 }
 
-a{
+a {
   text-decoration: none;
   color: black;
   font-size: 1.5rem;
 }
 
-#topright{
+#topright {
   grid-column: -1;
 }
 </style>

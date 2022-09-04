@@ -14,9 +14,9 @@ import { signUserOut, user } from './firebaseAuth'
 </template>
 
 <style scoped>
-  .right {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-  }
+.right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
 </style>
