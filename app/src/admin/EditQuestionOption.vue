@@ -1,9 +1,10 @@
-<script setup lang="ts">import { computed, inject } from 'vue';
-import { Quiz } from './types';
+<script setup lang="ts">
+import { computed, inject } from 'vue'
+import { Quiz } from './types'
 
 const props = defineProps<{
-  option: 'a' | 'b' | 'c' | 'd',
-  questionIndex: number,
+  option: 'a' | 'b' | 'c' | 'd'
+  questionIndex: number
 }>()
 
 const quiz = inject('quiz') as Quiz
@@ -24,23 +25,25 @@ function toggleCorrect(checked: boolean) {
 
 <template>
   <div class="option">
-    <label :class="{'has-img': question[props.option].startsWith('[image]')}">
+    <label :class="{ 'has-img': question[props.option].startsWith('[image]') }">
       <span :class="props.option">{{ props.option.toUpperCase() }}:</span>
       <input type="text" v-model="question[props.option]" />
     </label>
     <div class="img-container" v-if="question[props.option].startsWith('[image]')">
-      <img :src="question[props.option].substring(7)" alt="Question image">
+      <img :src="question[props.option].substring(7)" alt="Question image" />
       <button @click="question[props.option] = ''">Remove</button>
     </div>
     <label v-else>
       <span class="i-ic-baseline-image" />
-      <input type="file" accept="image/*"
-        @input="event => question[props.option] = getImgSrc(event.target as HTMLInputElement)">
+      <input type="file" accept="image/*" @input="event => question[props.option] = getImgSrc(event.target as HTMLInputElement)" />
     </label>
     <label>
       <span>Correct</span>
-      <input type="checkbox" :checked="question.correct.includes(props.option)"
-        @change="event => toggleCorrect((event.target as HTMLInputElement).checked)">
+      <input
+        type="checkbox"
+        :checked="question.correct.includes(props.option)"
+        @change="event => toggleCorrect((event.target as HTMLInputElement).checked)"
+      />
     </label>
   </div>
 </template>
@@ -78,30 +81,30 @@ function toggleCorrect(checked: boolean) {
   align-items: flex-end;
 }
 
-.option>label:first-child {
+.option > label:first-child {
   flex: 1;
 }
 
-.option>label:first-child>input {
+.option > label:first-child > input {
   flex: 1;
 }
 
-.option>label:last-child {
+.option > label:last-child {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
 }
 
-.option>label:last-child>span {
+.option > label:last-child > span {
   min-width: auto;
 }
 
-.option input[type=file] {
+.option input[type='file'] {
   display: none;
 }
 
-.option>label:nth-child(2)>span {
+.option > label:nth-child(2) > span {
   font-size: 2rem;
   min-width: auto;
 }

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import { Quiz } from './types'
-import RevealBlocks from '../shared/RevealBlocks.vue';
-import EditQuestionOption from './EditQuestionOption.vue';
+import RevealBlocks from '../shared/RevealBlocks.vue'
+import EditQuestionOption from './EditQuestionOption.vue'
 
 const props = defineProps<{
   index: number
@@ -30,14 +30,13 @@ function getImgSrc(input: HTMLInputElement) {
       </label>
       <label v-if="!question.img">
         <span>Image:</span>
-        <input type="file" accept="image/*"
-        @input="event => question.img = getImgSrc(event.target as HTMLInputElement)">
+        <input type="file" accept="image/*" @input="event => question.img = getImgSrc(event.target as HTMLInputElement)" />
       </label>
       <label @click.prevent v-else>
         <span>Image:</span>
         <div class="img-container">
           <div class="q-img">
-            <img :src="question.img" alt="Question image">
+            <img :src="question.img" alt="Question image" />
             <RevealBlocks v-if="question.isReveal" />
           </div>
           <button @click="question.img = null">Remove</button>
@@ -45,12 +44,12 @@ function getImgSrc(input: HTMLInputElement) {
       </label>
       <label v-if="question.img">
         <span class="prop">Image reveal:</span>
-        <input type="checkbox" v-model="question.isReveal">
+        <input type="checkbox" v-model="question.isReveal" />
       </label>
-      <EditQuestionOption option="a" :question-index="props.index"/>
-      <EditQuestionOption option="b" :question-index="props.index"/>
-      <EditQuestionOption option="c" :question-index="props.index"/>
-      <EditQuestionOption option="d" :question-index="props.index"/>
+      <EditQuestionOption option="a" :question-index="props.index" />
+      <EditQuestionOption option="b" :question-index="props.index" />
+      <EditQuestionOption option="c" :question-index="props.index" />
+      <EditQuestionOption option="d" :question-index="props.index" />
     </div>
     <p v-if="question.correct.length === 0" class="warning">No answer is selected as correct</p>
   </div>
@@ -86,16 +85,16 @@ function getImgSrc(input: HTMLInputElement) {
   gap: 5px;
 }
 
-:deep(label>span) {
+:deep(label > span) {
   min-width: 100px;
 }
 
-input[type="number"] {
+input[type='number'] {
   width: 50px;
   flex: none;
 }
 
-:deep(input[type=checkbox]) {
+:deep(input[type='checkbox']) {
   min-width: 26px;
   min-height: 26px;
 }
