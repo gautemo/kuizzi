@@ -115,4 +115,9 @@ button.secondary:hover:not(:disabled) {
   padding: 5px;
   background-color: rgb(129, 229, 113);
 }
+
+.warning {
+  padding: 5px;
+  background-color: rgb(224, 207, 125);
+}
 </style>

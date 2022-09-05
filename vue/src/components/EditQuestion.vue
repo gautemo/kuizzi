@@ -222,6 +222,8 @@ label span, .label span{
 input[type=checkbox] {
   width: 25px;
   height: 25px;
+  flex: none;
+  margin: 0;
 }
 
 label input[type=text], .label input[type=text]{

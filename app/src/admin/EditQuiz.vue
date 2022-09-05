@@ -75,8 +75,8 @@ function move(i: number, up: boolean) {
 <template>
   <main>
     <label>
-      <span>Quiz name</span>
-      <input type="text" v-model="quiz.name" />
+      <span>Quiz name: </span>
+      <input type="text" v-model="quiz.name" maxlength="50"/>
     </label>
     <ul>
       <li v-for="(question, i) in quiz.questions" :key="question.id">
@@ -89,7 +89,7 @@ function move(i: number, up: boolean) {
         <EditQuestion :index="i" :expanded="expanded === question.id" />
         <div :class="{ hide: i === 0 }" class="i-ic-round-arrow-upward icon" title="move up" @click="move(i, true)" />
         <div :class="{ hide: quiz.questions.length - 1 === i }" class="i-ic-round-arrow-downward icon" title="move down" @click="move(i, false)" />
-        <button>Delete</button>
+        <button @click="quiz.questions.splice(i, 1)">Delete</button>
       </li>
     </ul>
     <section>
@@ -152,5 +152,15 @@ li:not(:last-child) {
 
 .hide {
   visibility: hidden;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+input {
+  min-width: 300px;
 }
 </style>
