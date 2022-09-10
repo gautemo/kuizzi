@@ -113,4 +113,8 @@ button.secondary:focus:not(:disabled) {
     transform: rotate(360deg);
   }
 }
+
+main {
+  margin: 20px;
+}
 </style>

@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { router } from '../../router'
-import { user } from '../firebaseAuth'
-import { createQuiz, getQuizzes } from '../firebaseGames'
+import { createGame, createQuiz, getQuizzes } from '../firebaseGames'
 
-async function createQuizAndgoToPage() {
-  const id = await createQuiz(user.value!.uid)
+async function createQuizAndGoToPage() {
+  const id = await createQuiz()
   router.push(`/my-games/${id}`)
+}
+
+async function createGameAndGoToPage(quizId: string){
+  const id = await createGame(quizId)
+  router.push(`/host/${id}`)
 }
 
 const quizzes = await getQuizzes()
@@ -13,12 +17,12 @@ const quizzes = await getQuizzes()
 
 <template>
   <main>
-    <button @click="createQuizAndgoToPage">Create New Game</button>
+    <button @click="createQuizAndGoToPage">Create New Game</button>
     <ul>
       <li v-for="quiz of quizzes" :key="quiz.id">
         <span>{{ quiz.name }}</span>
         <button @click="router.push(`/my-games/${quiz.id}`)">Edit</button>
-        <button>Play</button>
+        <button @click="createGameAndGoToPage(quiz.id)">Play</button>
       </li>
     </ul>
   </main>
@@ -45,6 +49,8 @@ li {
 
 li > span {
   flex: 1;
+  font-size: 1.15rem;
+  font-weight: bold;
 }
 
 li:not(:last-child) {

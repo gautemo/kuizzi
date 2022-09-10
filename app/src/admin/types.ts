@@ -16,3 +16,15 @@ export interface Question {
   img: string | null
   isReveal: boolean
 }
+
+export interface Game {
+  players: {
+    uid: string
+    icon: string
+    color: string
+    name: string
+  }[]
+  question: 0
+  quiz: Quiz
+  state: 'notstarted'
+}

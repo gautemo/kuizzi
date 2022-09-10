@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { signUserOut, user } from './firebaseAuth'
+import { getUser, signUserOut } from './firebaseAuth'
+const user = getUser()
 </script>
 
 <template>
   <Teleport to="#topright">
     <div class="right">
       <router-link to="/my-games" class="my-games fancyfont">My Games</router-link>
-      <span>{{ user!.displayName ?? user!.email }}</span>
+      <span>{{ user.displayName ?? user.email }}</span>
       <button @click="signUserOut" class="secondary">Sign out</button>
     </div>
   </Teleport>

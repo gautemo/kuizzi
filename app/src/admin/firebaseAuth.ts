@@ -12,11 +12,8 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from 'firebase/auth'
-import { useAuth } from '@vueuse/firebase/useAuth'
 import { auth } from '../firebase'
 import { router } from '../router'
-
-export const { user } = useAuth(auth)
 
 export function userIsSignedIn(): Promise<boolean> {
   return new Promise((resolve, reject) => {
@@ -29,6 +26,12 @@ export function userIsSignedIn(): Promise<boolean> {
       reject
     )
   })
+}
+
+export function getUser(){
+  const user = auth.currentUser
+  if(!user) throw new Error('user is not signed in')
+  return user
 }
 
 export function signInGoogle() {

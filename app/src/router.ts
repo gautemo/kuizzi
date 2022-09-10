@@ -23,6 +23,13 @@ export const router = createRouter({
       },
     },
     {
+      path: '/host/:id',
+      component: () => import('./admin/host/HostGameShell.vue'),
+      meta: {
+        auth: true,
+      },
+    },
+    {
       path: '/signin',
       component: () => import('./admin/signin/SignIn.vue'),
     },

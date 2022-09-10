@@ -108,10 +108,6 @@ function move(i: number, up: boolean) {
 </template>
 
 <style scoped>
-main {
-  padding: 2rem 1rem;
-}
-
 section {
   display: flex;
   gap: 5px;

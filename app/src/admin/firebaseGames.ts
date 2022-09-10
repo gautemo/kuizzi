@@ -1,23 +1,23 @@
-import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, getDocs, query, runTransaction, setDoc, where } from 'firebase/firestore'
 import { ref, uploadBytes } from 'firebase/storage'
 import { db, storage } from '../firebase'
 import { ImageUtil } from '../shared/imageUtil'
-import { user } from './firebaseAuth'
-import { Quiz } from './types'
+import { getUser } from './firebaseAuth'
+import { Game, Quiz } from './types'
 
 const collectionQuizzes = collection(db, 'quizzes')
 
-export async function createQuiz(uid: string) {
+export async function createQuiz() {
   const doc = await addDoc(collectionQuizzes, {
     name: 'no name',
-    owner: uid,
+    owner: getUser().uid,
     questions: [],
   })
   return doc.id
 }
 
 export async function getQuizzes() {
-  const snapshot = await getDocs(query(collectionQuizzes, where('owner', '==', user.value!.uid)))
+  const snapshot = await getDocs(query(collectionQuizzes, where('owner', '==', getUser().uid)))
   return snapshot.docs.map(d => {
     return { id: d.id, ...(d.data() as Quiz) }
   })
@@ -55,7 +55,33 @@ export async function saveQuiz(id: string, quiz: Quiz, images: File[]) {
 }
 
 export async function uploadImage(quizId: string, img: File) {
-  const path = `${user.value!.uid}/${quizId}/${img.name}-${img.lastModified}`;
+  const path = `${getUser().uid}/${quizId}/${img.name}-${img.lastModified}`;
   await uploadBytes(ref(storage, path), img)
   return path;
+}
+
+
+export async function createGame(quizId: string) {
+  const gameId = await runTransaction(db, async (transaction) => {
+    const pinsRef = doc(db, 'info', 'pins')
+    const pinsDoc = await transaction.get(pinsRef)
+    if (!pinsDoc.exists()) throw "Document does not exist!"
+    const pin: number = pinsDoc.data().count + 1
+
+    const quizDoc = await transaction.get(doc(db, 'quizzes', quizId))
+    const initialGame: Game = {
+      players: [],
+      question: 0,
+      state: 'notstarted',
+      quiz: quizDoc.data() as Quiz
+    }
+    transaction.set(doc(db, 'games', pin.toString()), initialGame)
+    transaction.update(pinsRef, { count: pin })
+    return pin
+  })
+  return gameId
+}
+
+export function getGameRef(id: string){
+  return doc(db, 'games', id)
 }
