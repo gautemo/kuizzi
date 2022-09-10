@@ -1,6 +1,6 @@
 <template>
   <header>
-    <router-link to="/" class="fancyfont">Kuizzi</router-link>
+    <router-link to="/" class="fancy">Kuizzi</router-link>
     <div id="topright"></div>
   </header>
 </template>

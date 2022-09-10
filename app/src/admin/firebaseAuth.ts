@@ -21,17 +21,11 @@ export function userIsSignedIn(): Promise<boolean> {
       auth,
       user => {
         unsubscribe()
-        resolve(user !== null)
+        resolve(user !== null && !user.isAnonymous)
       },
       reject
     )
   })
-}
-
-export function getUser(){
-  const user = auth.currentUser
-  if(!user) throw new Error('user is not signed in')
-  return user
 }
 
 export function signInGoogle() {

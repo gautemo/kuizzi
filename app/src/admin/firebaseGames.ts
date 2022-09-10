@@ -1,9 +1,8 @@
 import { addDoc, collection, doc, getDoc, getDocs, query, runTransaction, setDoc, where } from 'firebase/firestore'
 import { ref, uploadBytes } from 'firebase/storage'
-import { db, storage } from '../firebase'
+import { db, getUser, storage } from '../firebase'
 import { ImageUtil } from '../shared/imageUtil'
-import { getUser } from './firebaseAuth'
-import { Game, Quiz } from './types'
+import { GameContent, Quiz } from '../shared/types'
 
 const collectionQuizzes = collection(db, 'quizzes')
 
@@ -69,8 +68,7 @@ export async function createGame(quizId: string) {
     const pin: number = pinsDoc.data().count + 1
 
     const quizDoc = await transaction.get(doc(db, 'quizzes', quizId))
-    const initialGame: Game = {
-      players: [],
+    const initialGame: GameContent = {
       question: 0,
       state: 'notstarted',
       quiz: quizDoc.data() as Quiz
@@ -80,8 +78,4 @@ export async function createGame(quizId: string) {
     return pin
   })
   return gameId
-}
-
-export function getGameRef(id: string){
-  return doc(db, 'games', id)
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, Ref } from 'vue'
-import { Quiz } from '../types'
+import { Quiz } from '../../shared/types'
 import RevealBlocks from '../../shared/RevealBlocks.vue'
 import EditQuestionOption from './EditQuestionOption.vue'
 import AlertMessage from '../../shared/AlertMessage.vue';

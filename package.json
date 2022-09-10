@@ -3,7 +3,7 @@
     "deploy": "npm run build --prefix vue && (cd firebase && firebase deploy)",
     "serve": "npm run serve --prefix vue",
     "postinstall": "cd vue && npm i",
-    "firebase:emulator": "cd firebase && firebase emulators:start"
+    "firebase:emulator": "cd firebase && firebase emulators:start --import seed"
   },
   "dependencies": {}
 }

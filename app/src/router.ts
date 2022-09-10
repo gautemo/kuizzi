@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { userIsSignedIn } from './admin/firebaseAuth'
+import { signInAnonym } from './firebase'
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -24,7 +25,7 @@ export const router = createRouter({
     },
     {
       path: '/host/:id',
-      component: () => import('./admin/host/HostGameShell.vue'),
+      component: () => import('./admin/host/HostGame.vue'),
       meta: {
         auth: true,
       },
@@ -33,6 +34,13 @@ export const router = createRouter({
       path: '/signin',
       component: () => import('./admin/signin/SignIn.vue'),
     },
+    {
+      path: '/play/:id',
+      component: () => import('./play/PlayGame.vue'),
+      meta: {
+        anonymAuth: true,
+      }
+    }
   ],
 })
 
@@ -42,5 +50,8 @@ router.beforeEach(async to => {
     if (!isSignedIn) {
       return '/signin'
     }
+  }
+  if (to.matched.some(record => record.meta.anonymAuth)) {
+    await signInAnonym()
   }
 })

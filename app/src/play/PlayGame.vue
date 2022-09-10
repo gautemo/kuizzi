@@ -1,9 +1,30 @@
 <script setup lang="ts">
+import { computed, provide } from 'vue';
+import { useRoute } from 'vue-router';
+import { getGamePlayersQuery, getGameRef, getUser } from '../firebase';
+import { Game, Player } from '../shared/types';
+import { useFirestore, useFirestoreList } from '../shared/useFirebase';
+import AlertMessage from '../shared/AlertMessage.vue';
+import CreateUser from './CreateUser.vue';
 
+const route = useRoute()
+if (typeof route.params.id !== 'string') throw new Error('unknown id')
+const { isLoading, error, data: game } = useFirestore<Game>(getGameRef(route.params.id))
+const { isLoading: playersLoading, error: playersError, data: players } = useFirestoreList<Player>(getGamePlayersQuery(route.params.id))
+const player = computed(() => players.value?.find(p => p.id === getUser().uid))
+provide('game', game)
+provide('players', players)
 </script>
 
 <template>
-playgame
+  <main>
+    <span class="loader" v-if="isLoading || playersLoading"></span>
+    <AlertMessage type="error" v-else-if="error || playersError" :message="error?.message || playersError!.message" />
+    <template v-else>
+      <p v-if="player">spiller</p>
+      <CreateUser v-else/>
+    </template>
+  </main>
 </template>
 
 <style scoped>

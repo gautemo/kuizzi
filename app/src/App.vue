@@ -49,7 +49,7 @@ body {
   transition: background-color 7s ease-in-out;
 }
 
-.fancyfont {
+.fancy {
   font-family: 'Audiowide', cursive;
 }
 
@@ -77,8 +77,8 @@ button {
   transition: background-color 0.2s ease;
 }
 
-button:hover:not(:disabled),
-button:focus:not(:disabled) {
+button:hover:not(:disabled, .fancy),
+button:focus:not(:disabled, .fancy) {
   background-color: var(--primary-focus);
 }
 
@@ -116,5 +116,48 @@ button.secondary:focus:not(:disabled) {
 
 main {
   margin: 20px;
+}
+
+label.fancy {
+  position: relative;
+}
+
+label.fancy input {
+  font-size: 1.3em;
+  margin-top: 50px;
+  padding: 5px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+label.fancy input + span {
+  font-size: 1.3em;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  opacity: 0.6;
+  transition: all 0.25s ease-in-out;
+  cursor: text;
+}
+
+label.fancy input:focus + span,
+label.fancy input + span.active {
+  opacity: 1;
+  transform: translate(-5px, calc(-1.3em - 15px));
+}
+
+button.fancy {
+  display: block;
+  font-size: 1.5em;
+  margin: 15px auto;
+  background: #333;
+  color: white;
+  box-shadow: inset 0px 45px 0px -30px #666666ce;
+  padding: 10px;
+  border: 1px solid rgb(161, 161, 161);
+}
+
+button.fancy:disabled {
+  opacity: 0.7;
 }
 </style>

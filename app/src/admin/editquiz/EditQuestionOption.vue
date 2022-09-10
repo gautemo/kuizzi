@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, Ref } from 'vue'
 import { ImageUtil } from '../../shared/imageUtil';
-import { Quiz } from '../types'
+import { Quiz } from '../../shared/types'
 import ImageComponent from '../../shared/ImageComponent.vue';
 
 const props = defineProps<{
