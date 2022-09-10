@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AdminView from './AdminView.vue'
-import SuspenseLoader from '../shared/SuspenseLoader.vue'
+import AdminView from '../AdminView.vue'
+import SuspenseLoader from '../../shared/SuspenseLoader.vue'
 import QuizList from './QuizList.vue'
 </script>
 

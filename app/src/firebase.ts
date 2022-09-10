@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, connectAuthEmulator } from 'firebase/auth'
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore'
+import { getStorage, connectStorageEmulator } from 'firebase/storage'
+import { ref, getDownloadURL } from 'firebase/storage'
 
 const app = initializeApp({
   apiKey: 'AIzaSyC2zSi5L3hsAudpae05vWNMm2ggv8Z8cuY',
@@ -15,8 +17,14 @@ const app = initializeApp({
 
 export const auth = getAuth(app)
 export const db = getFirestore(app)
+export const storage = getStorage(app)
 
 if (import.meta.env.VITE_FIREBASE_EMULATOR === 'true' && !auth.emulatorConfig) {
   connectAuthEmulator(auth, 'http://localhost:9099')
   connectFirestoreEmulator(db, 'localhost', 8080)
+  connectStorageEmulator(storage, "localhost", 9199)
+}
+
+export async function getImageUrl(path: string){
+  return await getDownloadURL(ref(storage, path))
 }

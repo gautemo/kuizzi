@@ -10,21 +10,21 @@ export const router = createRouter({
     },
     {
       path: '/my-games',
-      component: () => import('./admin/QuizListShell.vue'),
+      component: () => import('./admin/quizlist/QuizListShell.vue'),
       meta: {
         auth: true,
       },
     },
     {
       path: '/my-games/:id',
-      component: () => import('./admin/EditQuizShell.vue'),
+      component: () => import('./admin/editquiz/EditQuizShell.vue'),
       meta: {
         auth: true,
       },
     },
     {
       path: '/signin',
-      component: () => import('./admin/SignIn.vue'),
+      component: () => import('./admin/signin/SignIn.vue'),
     },
   ],
 })

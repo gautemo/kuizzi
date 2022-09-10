@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { router } from '../router'
-import { user } from './firebaseAuth'
-import { createQuiz, getQuizzes } from './firebaseGames'
+import { router } from '../../router'
+import { user } from '../firebaseAuth'
+import { createQuiz, getQuizzes } from '../firebaseGames'
 
 async function createQuizAndgoToPage() {
   const id = await createQuiz(user.value!.uid)

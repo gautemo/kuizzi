@@ -2,14 +2,18 @@
 import { useAsyncState } from '@vueuse/core'
 import { computed, provide, reactive, ref } from 'vue'
 import { onBeforeRouteLeave, useRoute } from 'vue-router'
-import { getQuiz, saveQuiz } from './firebaseGames'
+import { getQuiz, saveQuiz } from '../firebaseGames'
 import EditQuestion from './EditQuestion.vue'
+import AlertMessage from '../../shared/AlertMessage.vue'
 
 const route = useRoute()
 if (typeof route.params.id !== 'string') throw new Error('unknown id')
 const quiz = reactive(await getQuiz(route.params.id))
 provide('quiz', quiz)
 const quizInDB = ref(JSON.stringify(quiz))
+
+const images = ref<File[]>([])
+provide('images', images)
 
 const isChanged = computed(() => {
   return quizInDB.value !== JSON.stringify(quiz)
@@ -29,7 +33,7 @@ function addQuestion() {
     time: 20,
     isReveal: false,
   })
-  expanded.value = quiz.questions.length - 1
+  expanded.value = id
 }
 
 const {
@@ -40,7 +44,7 @@ const {
 } = useAsyncState(
   async () => {
     if (typeof route.params.id !== 'string') throw new Error('unknown id')
-    await saveQuiz(route.params.id, quiz)
+    await saveQuiz(route.params.id, quiz, images.value)
     quizInDB.value = JSON.stringify(quiz)
   },
   null,
@@ -48,6 +52,7 @@ const {
 )
 const error = computed(() => {
   if (!e.value) return null
+  console.error(e.value)
   if (e.value instanceof Error) return e.value
   return new Error('unkown error')
 })
@@ -97,14 +102,14 @@ function move(i: number, up: boolean) {
       <button :disabled="!isChanged" @click="save()">Save</button>
     </section>
     <span class="loader" v-if="isLoading"></span>
-    <p class="error" v-if="error">{{ error.message }}</p>
-    <p class="success" v-if="saved && !isChanged">Saved</p>
+    <AlertMessage v-if="error" type="error" :message="error.message" :autofocus="true"/>
+    <AlertMessage v-if="saved && !isChanged" type="success" message="Saved" />
   </main>
 </template>
 
 <style scoped>
 main {
-  padding: 1rem;
+  padding: 2rem 1rem;
 }
 
 section {
@@ -132,6 +137,7 @@ li {
   display: flex;
   gap: 5px;
   align-items: center;
+  border: 1px solid transparent;
 }
 
 li:not(:last-child) {
@@ -162,5 +168,9 @@ label {
 
 input {
   min-width: 300px;
+}
+
+li:has(>button:hover) {
+  border: 1px var(--danger) dashed;
 }
 </style>

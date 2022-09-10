@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { computed, inject } from 'vue'
-import { Quiz } from './types'
-import RevealBlocks from '../shared/RevealBlocks.vue'
+import { computed, inject, Ref } from 'vue'
+import { Quiz } from '../types'
+import RevealBlocks from '../../shared/RevealBlocks.vue'
 import EditQuestionOption from './EditQuestionOption.vue'
+import AlertMessage from '../../shared/AlertMessage.vue';
+import ImageComponent from '../../shared/ImageComponent.vue';
+import { ImageUtil } from '../../shared/imageUtil';
 
 const props = defineProps<{
   index: number
@@ -12,8 +15,12 @@ const props = defineProps<{
 const quiz = inject('quiz') as Quiz
 const question = computed(() => quiz.questions[props.index])
 
-function getImgSrc(input: HTMLInputElement) {
-  return URL.createObjectURL(input.files![0])
+const images = inject('images') as Ref<File[]>
+
+function addImage(input: HTMLInputElement) {
+  const file = input.files![0]
+  images.value.push(file)
+  return ImageUtil.fileToString(file)
 }
 </script>
 
@@ -30,13 +37,13 @@ function getImgSrc(input: HTMLInputElement) {
       </label>
       <label v-if="!question.img">
         <span>Image:</span>
-        <input type="file" accept="image/*" @input="event => question.img = getImgSrc(event.target as HTMLInputElement)" />
+        <input type="file" accept="image/*" @input="event => question.img = addImage(event.target as HTMLInputElement)" />
       </label>
       <label @click.prevent v-else>
         <span>Image:</span>
         <div class="img-container">
           <div class="q-img">
-            <img :src="question.img" alt="Question image" />
+            <ImageComponent :value="question.img" alt="Question image"/>
             <RevealBlocks v-if="question.isReveal" />
           </div>
           <button @click="question.img = null">Remove</button>
@@ -51,7 +58,7 @@ function getImgSrc(input: HTMLInputElement) {
       <EditQuestionOption option="c" :question-index="props.index" />
       <EditQuestionOption option="d" :question-index="props.index" />
     </div>
-    <p v-if="question.correct.length === 0" class="warning">No answer is selected as correct</p>
+    <AlertMessage v-if="question.correct.length === 0" message="No answer is selected as correct" type="warning"/>
   </div>
 </template>
 

@@ -1,5 +1,7 @@
 import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
-import { db } from '../firebase'
+import { ref, uploadBytes } from 'firebase/storage'
+import { db, storage } from '../firebase'
+import { ImageUtil } from '../shared/imageUtil'
 import { user } from './firebaseAuth'
 import { Quiz } from './types'
 
@@ -26,6 +28,34 @@ export async function getQuiz(id: string) {
   return snapshot.data() as Quiz
 }
 
-export async function saveQuiz(id: string, quiz: Quiz) {
+export async function saveQuiz(id: string, quiz: Quiz, images: File[]) {
+  for(const question of quiz.questions){
+    if(question.img && ImageUtil.isAddImage(question.img)){
+      const image = ImageUtil.valueToAddImage(question.img)
+      question.img = await uploadImage(id, ImageUtil.findImage(image, images))
+    }
+    if(ImageUtil.isAddImage(question.a)){
+      const image = ImageUtil.valueToAddImage(question.a)
+      question.a = ImageUtil.imagePrefix + await uploadImage(id, ImageUtil.findImage(image, images))
+    }
+    if(ImageUtil.isAddImage(question.b)){
+      const image = ImageUtil.valueToAddImage(question.b)
+      question.b = ImageUtil.imagePrefix + await uploadImage(id, ImageUtil.findImage(image, images))
+    }
+    if(ImageUtil.isAddImage(question.c)){
+      const image = ImageUtil.valueToAddImage(question.c)
+      question.c = ImageUtil.imagePrefix + await uploadImage(id, ImageUtil.findImage(image, images))
+    }
+    if(ImageUtil.isAddImage(question.d)){
+      const image = ImageUtil.valueToAddImage(question.d)
+      question.d = ImageUtil.imagePrefix + await uploadImage(id, ImageUtil.findImage(image, images))
+    }
+  }
   await setDoc(doc(db, 'quizzes', id), quiz)
+}
+
+export async function uploadImage(quizId: string, img: File) {
+  const path = `${user.value!.uid}/${quizId}/${img.name}-${img.lastModified}`;
+  await uploadBytes(ref(storage, path), img)
+  return path;
 }

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import SignInRedirect from './SignInRedirect.vue'
-import SuspenseLoader from '../shared/SuspenseLoader.vue'
+import SuspenseLoader from '../../shared/SuspenseLoader.vue'
 import { ref } from 'vue'
 import SignInEmailPassword from './SignInEmailPassword.vue'
 import SignInEmailLink from './SignInEmailLink.vue'
-import { signInGoogle } from './firebaseAuth'
+import { signInGoogle } from '../firebaseAuth'
 
 const type = ref<'email_password' | 'passwordless' | undefined>()
 </script>

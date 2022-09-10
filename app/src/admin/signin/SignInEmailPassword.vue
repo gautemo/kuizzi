@@ -2,7 +2,7 @@
 import { useAsyncState } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { getEmailState, signInEmailAndPassword, createAccount, resetPassword } from './firebaseAuth'
+import { getEmailState, signInEmailAndPassword, createAccount, resetPassword } from '../firebaseAuth'
 
 const email = ref('')
 const password = ref('')
@@ -62,7 +62,7 @@ async function resetEmailPassword() {
     <input type="password" v-model="password" @keyup.enter="executeSave()" />
   </label>
   <span class="loader" v-if="emailStateIsLoading || saveIsLoading"></span>
-  <p class="error" v-if="error">{{ error.message }}</p>
+  <AlertMessage v-if="error" type="error" :message="error.message" />
   <section>
     <div>
       <button @click="emit('close')" class="secondary">Close</button>

@@ -2,7 +2,8 @@
 import { useAsyncState } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { signInEmailLink } from './firebaseAuth'
+import { signInEmailLink } from '../firebaseAuth'
+import AlertMessage from '../../shared/AlertMessage.vue';
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -30,8 +31,8 @@ const error = computed(() => {
     <input type="email" v-model="email" @keyup.enter="execute()" />
   </label>
   <span class="loader" v-if="isLoading"></span>
-  <p class="error" v-if="error">{{ error.message }}</p>
-  <p class="success" v-if="isReady">We sent you an email with your login link</p>
+  <AlertMessage v-if="error" type="error" :message="error.message" />
+  <AlertMessage v-if="isReady" type="success" message="We sent you an email with your login link" />
   <section>
     <button @click="emit('close')" class="secondary">Close</button>
     <button @click="execute()" :disabled="!email">Get login link</button>

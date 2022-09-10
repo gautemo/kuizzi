@@ -28,6 +28,12 @@ setInterval(() => {
   --blue: #0a65d3;
   --yellow: #df9900;
   --green: #227e0a;
+
+  --primary: rgb(127, 176, 235);
+  --primary-focus: rgb(107, 164, 234);
+  --danger: rgb(247, 138, 138);
+  --warning: rgb(224, 219, 125);
+  --success: rgb(129, 229, 113);
 }
 
 body,
@@ -66,20 +72,22 @@ input {
 button {
   border: none;
   padding: 8px 10px;
-  background-color: rgb(127, 176, 235);
+  background-color: var(--primary);
   border-radius: 2px;
   transition: background-color 0.2s ease;
 }
 
-button:hover:not(:disabled) {
-  background-color: rgb(107, 164, 234);
+button:hover:not(:disabled),
+button:focus:not(:disabled) {
+  background-color: var(--primary-focus);
 }
 
 button.secondary {
   background-color: rgb(214, 214, 214);
 }
 
-button.secondary:hover:not(:disabled) {
+button.secondary:hover:not(:disabled),
+button.secondary:focus:not(:disabled) {
   background-color: rgb(193, 193, 193);
 }
 
@@ -104,20 +112,5 @@ button.secondary:hover:not(:disabled) {
   100% {
     transform: rotate(360deg);
   }
-}
-
-.error {
-  padding: 5px;
-  background-color: rgb(247, 138, 138);
-}
-
-.success {
-  padding: 5px;
-  background-color: rgb(129, 229, 113);
-}
-
-.warning {
-  padding: 5px;
-  background-color: rgb(224, 207, 125);
 }
 </style>
