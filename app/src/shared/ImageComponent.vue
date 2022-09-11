@@ -29,5 +29,6 @@ watchEffect(async () => {
 img {
   height: auto;
   object-fit: contain;
+  object-position: left;
 }
 </style>

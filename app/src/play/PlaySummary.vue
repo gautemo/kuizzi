@@ -19,7 +19,7 @@ const players = inject('players') as ComputedRef<Player[]>
 const player = inject('player') as ComputedRef<Player>
 
 const place = computed(() => {
-  const position = players.value.filter(p => p.score < player.value.score).length + 1
+  const position = players.value.filter(p => p.score > player.value.score).length + 1
   return `${position}${suffixes[pr.select(position)]}`
 })
 </script>

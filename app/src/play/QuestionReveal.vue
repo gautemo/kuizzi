@@ -67,5 +67,6 @@ h2 {
 
 h1 + img {
   max-width: 30vw;
+  max-height: 25vh;
 }
 </style>
