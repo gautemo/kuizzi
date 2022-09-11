@@ -36,7 +36,9 @@ const question = computed(() => game.value.quiz.questions[game.value.question-1]
         <RevealBlocks v-if="question.isReveal" />
       </div>
       <h1>{{question.text}}</h1>
-      <CountDown :from="question.time" @done="emit('next')"/>
+      <div class="right">
+        <CountDown :from="question.time" @done="emit('next')"/>
+      </div>
     </div>
     <div class="alternatives">
       <div class="a" v-if="question.a">
@@ -78,11 +80,15 @@ const question = computed(() => game.value.quiz.questions[game.value.question-1]
 }
 
 .top {
-  display: flex;
+  display: grid;
   gap: 5px;
-  justify-content: space-between;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   font-size: 2rem;
+}
+
+.top .right {
+  justify-self: end;
 }
 
 h1 {
@@ -133,11 +139,11 @@ h1 {
 
 .q-img img {
   width: 100%;
-  max-height: 1000px;
+  max-height: 25vh;
 }
 
 .alternatives img {
-  max-height: 35vh;
+  max-height: 30vh;
   max-width: 40vw;
 }
 </style>

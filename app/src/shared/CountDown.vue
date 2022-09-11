@@ -10,8 +10,6 @@ const props = defineProps<{
   delayMilliseconds?: number
 }>()
 
-console.log(props)
-
 const count = ref(props.from)
 
 let interval: number | undefined = undefined
@@ -19,7 +17,7 @@ let interval: number | undefined = undefined
 setTimeout(() => {
   interval = window.setInterval(() => {
     count.value--
-    if(count.value === 0){
+    if(count.value <= 0){
       emit('done')
     }
   }, 1000)

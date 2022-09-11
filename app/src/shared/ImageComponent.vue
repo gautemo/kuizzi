@@ -22,7 +22,7 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <img :src="src" :alt="props.alt" v-if="src" height="300" width="300">
+  <img :src="src" :alt="props.alt" v-if="src" height="500" width="500">
   <span v-else class="loader"></span>
 </template>
 
