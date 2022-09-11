@@ -90,6 +90,16 @@ function save() {
   localStorage.setItem('user', JSON.stringify(user))
   addPlayer(game.value.id, name.value, icon.value, color.value)
 }
+
+function enterIcon(i: string) {
+  icon.value = i
+  nextAfterIcon.value?.focus()
+}
+
+function enterColor(c: string) {
+  color.value = c
+  nextAfterColor.value?.focus()
+}
 </script>
 
 <template>
@@ -104,19 +114,9 @@ function save() {
   <section v-else-if="step === 1">
     <p>Chose your icon</p>
     <div class="select">
-      <span
-        class="icon"
-        v-for="i in icons"
-        :key="i"
-        @click="icon = i"
-        :class="{ selected: icon === i }"
-        tabindex="0"
-        @keyup.enter="
-          icon = i
-          nextAfterIcon?.focus()
-        "
-        >{{ i }}</span
-      >
+      <span class="icon" v-for="i in icons" :key="i" @click="icon = i" :class="{ selected: icon === i }" tabindex="0" @keyup.enter="enterIcon(i)">{{
+        i
+      }}</span>
     </div>
     <div class="buttons">
       <button @click="step--" class="fancy">Back</button>
@@ -133,10 +133,7 @@ function save() {
         @click="color = c"
         :class="{ selected: color === c }"
         :style="{ background: c }"
-        @keyup.enter="
-          color = c
-          nextAfterColor?.focus()
-        "
+        @keyup.enter="enterColor(c)"
         tabindex="0"
       ></span>
     </div>
