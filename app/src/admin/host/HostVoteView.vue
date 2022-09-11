@@ -40,4 +40,8 @@ section {
   gap: 15px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
+img {
+  max-width: 30vw;
+}
 </style>

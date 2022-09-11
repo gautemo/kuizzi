@@ -8,9 +8,9 @@ import { getGamePlayersQuery, getGameRef } from '../../firebase';
 import { updateGameState } from '../firebaseGames';
 import HostQuestion from './HostQuestion.vue';
 import HostVoteView from './HostVoteView.vue';
-import HostScores from './HostScores.vue';
 import HostEnd from './HostEnd.vue';
 import LobbyPlayers from '../../shared/LobbyPlayers.vue';
+import ScoreBoard from '../../shared/ScoreBoard.vue';
 
 const route = useRoute()
 if (typeof route.params.id !== 'string') throw new Error('unknown id')
@@ -57,7 +57,7 @@ function next() {
       </LobbyPlayers>
       <HostQuestion v-else-if="game!.state === 'question'" @next="next"/>
       <HostVoteView v-else-if="game!.state === 'reveal'" />
-      <HostScores v-else-if="game!.state === 'score'" />
+      <ScoreBoard v-else-if="game!.state === 'score'" />
       <HostEnd v-else />
     </template>
   </main>

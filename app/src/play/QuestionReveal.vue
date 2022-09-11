@@ -63,4 +63,8 @@ h2 {
 .success-icon {
   color: var(--success);
 }
+
+h1 + img {
+  max-width: 40vw;
+}
 </style>

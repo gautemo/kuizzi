@@ -26,7 +26,7 @@ const imgs = {
     'https://media.giphy.com/media/10UHehEC098kAE/giphy.gif',
     'https://media.giphy.com/media/l4pLY0zySvluEvr0c/giphy.gif',
     'https://media.giphy.com/media/JnAydKs2GZRqTb4C8v/giphy.gif',
-    'https://media.giphy.com/media/12rTjvF0ANQJsk/giphy.gif'
+    'https://media.giphy.com/media/12rTjvF0ANQJsk/giphy.gif',
   ],
   waiting: [
     'https://media.giphy.com/media/W3a0zO282fuBpsqqyD/giphy.gif',

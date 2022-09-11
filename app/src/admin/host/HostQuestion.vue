@@ -38,22 +38,22 @@ const question = computed(() => game.value.quiz.questions[game.value.question-1]
       <h1>{{question.text}}</h1>
       <CountDown :from="question.time" @done="emit('next')"/>
     </div>
-    <div class="alternatives" :class="{'two-rows': question.c}">
-      <div class="a">
+    <div class="alternatives">
+      <div class="a" v-if="question.a">
         <ImageComponent v-if="ImageUtil.hasImage(question.a)" :value="question.a" alt="Alternative A"/>
-        <p>{{question.a}}</p>
+        <p v-else>{{question.a}}</p>
       </div>
-      <div class="b">
+      <div class="b" v-if="question.b">
         <ImageComponent v-if="ImageUtil.hasImage(question.b)" :value="question.b" alt="Alternative B"/>
-        <p>{{question.b}}</p>
+        <p v-else>{{question.b}}</p>
       </div>
-      <div class="c">
+      <div class="c" v-if="question.c">
         <ImageComponent v-if="ImageUtil.hasImage(question.c)" :value="question.c" alt="Alternative C"/>
-        <p>{{question.c}}</p>
+        <p v-else>{{question.c}}</p>
       </div>
-      <div class="d">
+      <div class="d" v-if="question.d">
         <ImageComponent v-if="ImageUtil.hasImage(question.d)" :value="question.d" alt="Alternative D"/>
-        <p>{{question.d}}</p>
+        <p v-else>{{question.d}}</p>
       </div>
     </div>
   </section>
@@ -111,10 +111,6 @@ h1 {
   grid-template-columns: 1fr 1fr;
 }
 
-.alternatives.two-rows{
-  grid-template-rows: 1fr 1fr;
-}
-
 .alternatives > div{
   border-radius: 8px;
   padding: 5px;
@@ -128,5 +124,20 @@ h1 {
   font-weight: bold;
   color: white;
   text-align: center;
+}
+
+.q-img {
+  position: relative;
+  max-width: 30vw;
+}
+
+.q-img img {
+  width: 100%;
+  max-height: 1000px;
+}
+
+.alternatives img {
+  max-height: 35vh;
+  max-width: 40vw;
 }
 </style>

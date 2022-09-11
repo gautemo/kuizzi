@@ -22,10 +22,13 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <img :src="src" :alt="props.alt" v-if="src">
+  <img :src="src" :alt="props.alt" v-if="src" height="300" width="300">
   <span v-else class="loader"></span>
 </template>
 
 <style scoped>
-
+img {
+  height: auto;
+  object-fit: contain;
+}
 </style>

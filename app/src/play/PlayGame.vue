@@ -10,6 +10,8 @@ import LobbyPlayers from '../shared/LobbyPlayers.vue';
 import PlayQuestion from './PlayQuestion.vue';
 import FunnyGif from './FunnyGif.vue';
 import QuestionReveal from './QuestionReveal.vue';
+import ScoreBoard from '../shared/ScoreBoard.vue';
+import PlaySummary from './PlaySummary.vue';
 
 const route = useRoute()
 if (typeof route.params.id !== 'string') throw new Error('unknown id')
@@ -31,12 +33,15 @@ provide('player', player)
         <LobbyPlayers v-if="game!.state === 'notstarted'">
           <h1>Waiting for the host to start the Kuizzi</h1>
         </LobbyPlayers>
-        <div v-else-if="game!.state === 'question' && player[game!.question]">
+        <div v-else-if="game!.state === 'question' && player[game!.question]" class="mid">
           <p>Was that correct?</p>
           <FunnyGif type="waiting" />
         </div>
         <PlayQuestion v-else-if="game!.state === 'question'"/>
         <QuestionReveal v-else-if="game!.state === 'reveal'"/>
+        <ScoreBoard v-else-if="game!.state === 'score'">
+          <PlaySummary/>
+        </ScoreBoard>
         <!-- 
           <HostVoteView v-else-if="game!.state === 'reveal'" />
           <HostScores v-else-if="game!.state === 'score'" />
@@ -48,5 +53,8 @@ provide('player', player)
 </template>
 
 <style scoped>
-
+.mid {
+  display: grid;
+  place-items: center;
+}
 </style>

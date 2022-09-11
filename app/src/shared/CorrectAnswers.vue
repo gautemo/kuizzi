@@ -10,7 +10,7 @@ const question = computed(() => game.value.quiz.questions[game.value.question-1]
 </script>
 
 <template>
-    <b>Correct Answer:</b>
+    <p><b>Correct Answer:</b></p>
     <div class="flex">
       <p v-for="alternative in question.correct" :key="alternative" class="correct" :class="alternative">
         <ImageComponent v-if="ImageUtil.hasImage(question[alternative])" :value="question[alternative]" alt="Correct image alternative" class="alt-img"/>
