@@ -3,9 +3,9 @@ import { computed, inject, Ref } from 'vue'
 import { Quiz } from '../../shared/types'
 import RevealBlocks from '../../shared/RevealBlocks.vue'
 import EditQuestionOption from './EditQuestionOption.vue'
-import AlertMessage from '../../shared/AlertMessage.vue';
-import ImageComponent from '../../shared/ImageComponent.vue';
-import { ImageUtil } from '../../shared/imageUtil';
+import AlertMessage from '../../shared/AlertMessage.vue'
+import ImageComponent from '../../shared/ImageComponent.vue'
+import { ImageUtil } from '../../shared/imageUtil'
 
 const props = defineProps<{
   index: number
@@ -43,7 +43,7 @@ function addImage(input: HTMLInputElement) {
         <span>Image:</span>
         <div class="img-container">
           <div class="q-img">
-            <ImageComponent :value="question.img" alt="Question image"/>
+            <ImageComponent :value="question.img" alt="Question image" />
             <RevealBlocks v-if="question.isReveal" />
           </div>
           <button class="primary" @click="question.img = null">Remove</button>
@@ -58,7 +58,7 @@ function addImage(input: HTMLInputElement) {
       <EditQuestionOption option="c" :question-index="props.index" />
       <EditQuestionOption option="d" :question-index="props.index" />
     </div>
-    <AlertMessage v-if="question.correct.length === 0" message="No answer is selected as correct" type="warning"/>
+    <AlertMessage v-if="question.correct.length === 0" message="No answer is selected as correct" type="warning" />
   </div>
 </template>
 

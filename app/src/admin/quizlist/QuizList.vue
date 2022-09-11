@@ -7,7 +7,7 @@ async function createQuizAndGoToPage() {
   router.push(`/my-games/${id}`)
 }
 
-async function createGameAndGoToPage(quizId: string){
+async function createGameAndGoToPage(quizId: string) {
   const id = await createGame(quizId)
   router.push(`/host/${id}`)
 }

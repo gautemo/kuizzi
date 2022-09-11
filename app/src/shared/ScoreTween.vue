@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive } from 'vue'
 import gsap from 'gsap'
 
 const props = defineProps<{
@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const tweened = reactive({
-  number: props.score - props.addScore
+  number: props.score - props.addScore,
 })
 
 onMounted(() => {
@@ -17,5 +17,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <span>{{tweened.number.toFixed(0)}}</span>
+  <span>{{ tweened.number.toFixed(0) }}</span>
 </template>

@@ -1,13 +1,16 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  icon: string
-  color: string
-  size?: number
-}>(), {size: 80})
+withDefaults(
+  defineProps<{
+    icon: string
+    color: string
+    size?: number
+  }>(),
+  { size: 80 }
+)
 </script>
 
 <template>
-  <span :style="{height: `${size}px`, width: `${size}px`, 'font-size': `${size*0.5}px`}">{{icon}}</span>
+  <span :style="{ height: `${size}px`, width: `${size}px`, 'font-size': `${size * 0.5}px` }">{{ icon }}</span>
 </template>
 
 <style scoped>

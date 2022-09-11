@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
 
-const props = withDefaults(defineProps<{
-  type: 'error' | 'warning' | 'success',
-  message: string,
-  autofocus?: boolean
-}>(), { autofocus: false })
+const props = withDefaults(
+  defineProps<{
+    type: 'error' | 'warning' | 'success'
+    message: string
+    autofocus?: boolean
+  }>(),
+  { autofocus: false }
+)
 
 const element = ref<Element>()
 onMounted(() => {
-  if(props.autofocus){
-    element.value?.scrollIntoView({behavior: 'smooth'})
+  if (props.autofocus) {
+    element.value?.scrollIntoView({ behavior: 'smooth' })
   }
 })
 </script>

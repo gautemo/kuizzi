@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getUser } from '../firebase';
+import { getUser } from '../firebase'
 import { signUserOut } from './firebaseAuth'
 const user = getUser()
 </script>

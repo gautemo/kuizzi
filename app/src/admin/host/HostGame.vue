@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { computed, provide } from 'vue';
-import { Game, Player } from '../../shared/types';
+import { useRoute } from 'vue-router'
+import { computed, provide } from 'vue'
+import { Game, Player } from '../../shared/types'
 import { useFirestore, useFirestoreList } from '../../shared/useFirebase'
-import AlertMessage from '../../shared/AlertMessage.vue';
-import { getGamePlayersQuery, getGameRef } from '../../firebase';
-import { updateGameState } from '../firebaseGames';
-import HostQuestion from './HostQuestion.vue';
-import HostVoteView from './HostVoteView.vue';
-import HostEnd from './HostEnd.vue';
-import LobbyPlayers from '../../shared/LobbyPlayers.vue';
-import ScoreBoard from '../../shared/ScoreBoard.vue';
+import AlertMessage from '../../shared/AlertMessage.vue'
+import { getGamePlayersQuery, getGameRef } from '../../firebase'
+import { updateGameState } from '../firebaseGames'
+import HostQuestion from './HostQuestion.vue'
+import HostVoteView from './HostVoteView.vue'
+import HostEnd from './HostEnd.vue'
+import LobbyPlayers from '../../shared/LobbyPlayers.vue'
+import ScoreBoard from '../../shared/ScoreBoard.vue'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
 
 const route = useRoute()
@@ -24,20 +24,20 @@ function next() {
   switch (game.value?.state) {
     case 'notstarted':
       updateGameState(game.value.id, 'question', 1)
-      break;
+      break
     case 'question':
       updateGameState(game.value.id, 'reveal')
-      break;
+      break
     case 'reveal':
       if (game.value.question === game.value.quiz.questions.length) {
         updateGameState(game.value.id, 'ended')
       } else {
         updateGameState(game.value.id, 'score')
       }
-      break;
+      break
     case 'score':
       updateGameState(game.value.id, 'question', game.value.question + 1)
-      break;
+      break
   }
 }
 
@@ -47,7 +47,7 @@ const qrcode = useQRCode(url)
 
 <template>
   <Teleport to="#topright" v-if="game">
-    <p v-if="game.state === 'score' || game.state === 'reveal'">{{game.question}} of {{game.quiz.questions.length}}</p>
+    <p v-if="game.state === 'score' || game.state === 'reveal'">{{ game.question }} of {{ game.quiz.questions.length }}</p>
     <button class="primary" v-if="game.state !== 'ended' && game.state !== 'question'" @click="next">Next</button>
   </Teleport>
   <main>
@@ -56,10 +56,12 @@ const qrcode = useQRCode(url)
     <template v-else>
       <LobbyPlayers v-if="game!.state === 'notstarted'">
         <div class="columns">
-          <h1>{{game!.quiz.name}}</h1>
+          <h1>{{ game!.quiz.name }}</h1>
           <div>
             <h2>Go to kuizzi.app or use QR code to join!</h2>
-            <h3>Game PIN: <span>{{route.params.id}}</span></h3>
+            <h3>
+              Game PIN: <span>{{ route.params.id }}</span>
+            </h3>
             <img :src="qrcode" alt="QR code to join" />
           </div>
         </div>

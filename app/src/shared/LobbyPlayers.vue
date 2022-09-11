@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ComputedRef, inject } from 'vue';
-import { Player } from './types';
-import UserIcon from './UserIcon.vue';
+import { ComputedRef, inject } from 'vue'
+import { Player } from './types'
+import UserIcon from './UserIcon.vue'
 
 const players = inject('players') as ComputedRef<Player[]>
 </script>
@@ -13,7 +13,7 @@ const players = inject('players') as ComputedRef<Player[]>
     <ul>
       <li v-for="player in players" :key="player.id">
         <UserIcon :icon="player.icon" :color="player.color" />
-        <span>{{player.name}}</span>
+        <span>{{ player.name }}</span>
       </li>
     </ul>
   </section>

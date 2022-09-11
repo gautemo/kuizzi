@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, inject, Ref } from 'vue'
-import { ImageUtil } from '../../shared/imageUtil';
+import { ImageUtil } from '../../shared/imageUtil'
 import { Quiz } from '../../shared/types'
-import ImageComponent from '../../shared/ImageComponent.vue';
+import ImageComponent from '../../shared/ImageComponent.vue'
 
 const props = defineProps<{
   option: 'a' | 'b' | 'c' | 'd'
@@ -33,10 +33,10 @@ function toggleCorrect(checked: boolean) {
   <div class="option">
     <label :class="{ 'has-img': ImageUtil.hasImage(question[props.option]) }">
       <span :class="props.option">{{ props.option.toUpperCase() }}:</span>
-      <input type="text" v-model="question[props.option]" maxlength="70"/>
+      <input type="text" v-model="question[props.option]" maxlength="70" />
     </label>
     <div class="img-container" v-if="ImageUtil.hasImage(question[props.option])">
-      <ImageComponent :value="question[props.option]" :alt="`Option ${props.option} image`"/>
+      <ImageComponent :value="question[props.option]" :alt="`Option ${props.option} image`" />
       <button class="primary" @click="question[props.option] = ''">Remove</button>
     </div>
     <label v-else>

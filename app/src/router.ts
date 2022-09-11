@@ -40,8 +40,8 @@ export const router = createRouter({
       meta: {
         anonymAuth: true,
         hideNav: true,
-      }
-    }
+      },
+    },
   ],
 })
 

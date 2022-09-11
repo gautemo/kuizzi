@@ -102,7 +102,7 @@ function move(i: number, up: boolean) {
       <button class="primary" :disabled="!isChanged" @click="save()">Save</button>
     </section>
     <span class="loader" v-if="isLoading"></span>
-    <AlertMessage v-if="error" type="error" :message="error.message" :autofocus="true"/>
+    <AlertMessage v-if="error" type="error" :message="error.message" :autofocus="true" />
     <AlertMessage v-if="saved && !isChanged" type="success" message="Saved" />
   </main>
 </template>
@@ -166,7 +166,7 @@ input {
   min-width: 300px;
 }
 
-li:has(>button:hover) {
+li:has(> button:hover) {
   border: 1px var(--danger) dashed;
 }
 </style>

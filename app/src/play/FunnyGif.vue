@@ -37,7 +37,7 @@ const imgs = {
     'https://media.giphy.com/media/oT7ATDykMidsk/giphy.gif',
     'https://media.giphy.com/media/l3V0BVDTyuMzwpS1i/giphy.gif',
     'https://media.giphy.com/media/BMtGb8JSk2Ln1cnPMA/giphy.gif',
-    'https://media.giphy.com/media/ZFhhpKngh5QfcmhIDF/giphy.gif'
+    'https://media.giphy.com/media/ZFhhpKngh5QfcmhIDF/giphy.gif',
   ],
   won: [
     'https://media.giphy.com/media/xT0GqssRweIhlz209i/giphy.gif',
@@ -56,7 +56,7 @@ const imgs = {
     'https://media.giphy.com/media/qLWdMYX1NYF2g/giphy.gif',
     'https://media.giphy.com/media/Jq824R93JsLwZCaiSL/giphy.gif',
     'https://media.giphy.com/media/suCJQGchI6oBW/giphy.gif',
-    'https://media.giphy.com/media/oOX5qIDkzDjeo/giphy.gif'
+    'https://media.giphy.com/media/oOX5qIDkzDjeo/giphy.gif',
   ],
   lost: [
     'https://media.giphy.com/media/a4pvOry0Nd4dy/giphy.gif',
@@ -69,25 +69,25 @@ const imgs = {
     'https://media.giphy.com/media/O3JyUHiKqsviE/giphy.gif',
     'https://media.giphy.com/media/12rTjvF0ANQJsk/giphy.gif',
     'https://media.giphy.com/media/7VHV66bRjGRSo/giphy.gif',
-    'https://media.giphy.com/media/zFa3vjySsETPa/giphy.gif'
-  ]
+    'https://media.giphy.com/media/zFa3vjySsETPa/giphy.gif',
+  ],
 } as const
 
 function getRandomInt(max: number) {
-  return Math.floor(Math.random() * Math.floor(max));
+  return Math.floor(Math.random() * Math.floor(max))
 }
 
 const img = imgs[props.type][getRandomInt(imgs[props.type].length)]
 </script>
 
 <template>
-  <img :src="img" :alt="`funny ${props.type} gif image`">
+  <img :src="img" :alt="`funny ${props.type} gif image`" />
 </template>
 
 <style scoped>
-  img{
-    max-width: 90vw;
-    height: 230px;
-    border-radius: 5px;
-  }
-  </style>
+img {
+  max-width: 90vw;
+  height: 230px;
+  border-radius: 5px;
+}
+</style>

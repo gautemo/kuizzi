@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const hideNav = computed(() => route.meta.hideNav)
 </script>
 
 <template>
-  <header :class="{minimal: hideNav}">
+  <header :class="{ minimal: hideNav }">
     <router-link to="/" class="fancy" v-if="!hideNav">Kuizzi</router-link>
     <div id="topright"></div>
   </header>

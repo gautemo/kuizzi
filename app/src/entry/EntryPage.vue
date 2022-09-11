@@ -17,7 +17,7 @@ function enter() {
   <main>
     <h1>A quiz game for your friends!</h1>
     <label class="fancy">
-      <input type="text" v-model="gamePin" maxlength="25" @keyup.enter="enter" autofocus/>
+      <input type="text" v-model="gamePin" maxlength="25" @keyup.enter="enter" autofocus />
       <span :class="{ active: gamePin }">Game PIN</span>
     </label>
     <button class="fancy" @click="enter" :disabled="!gamePin">Enter</button>

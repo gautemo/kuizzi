@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, ComputedRef, inject, ref } from 'vue';
-import CountDown from '../shared/CountDown.vue';
-import { Game, Player } from '../shared/types';
-import RevealBlocks from '../shared/RevealBlocks.vue';
-import ImageComponent from '../shared/ImageComponent.vue';
-import { ImageUtil } from '../shared/imageUtil';
-import { addAnswer } from './firebaseGame';
-import { clamp } from '../shared/utils';
+import { computed, ComputedRef, inject, ref } from 'vue'
+import CountDown from '../shared/CountDown.vue'
+import { Game, Player } from '../shared/types'
+import RevealBlocks from '../shared/RevealBlocks.vue'
+import ImageComponent from '../shared/ImageComponent.vue'
+import { ImageUtil } from '../shared/imageUtil'
+import { addAnswer } from './firebaseGame'
+import { clamp } from '../shared/utils'
 
 const game = inject('game') as ComputedRef<Game>
 const player = inject('player') as ComputedRef<Player>
@@ -17,12 +17,12 @@ const question = computed(() => game.value.quiz.questions[game.value.question - 
 
 function answer(alternative: 'a' | 'b' | 'c' | 'd') {
   let scoreGained = 0
-  if(question.value.correct.includes(alternative)){
-    const questionTimeMillis = question.value.time * 1000;
-    const scorePerMillisecond = 500 / questionTimeMillis;
-    const timeSpent = Date.now() - (game.value.timeStarted + 3000);
+  if (question.value.correct.includes(alternative)) {
+    const questionTimeMillis = question.value.time * 1000
+    const scorePerMillisecond = 500 / questionTimeMillis
+    const timeSpent = Date.now() - (game.value.timeStarted + 3000)
     scoreGained = 500 + (questionTimeMillis - timeSpent) * scorePerMillisecond
-    if(scoreGained > 1500) scoreGained = 500 //cheat
+    if (scoreGained > 1500) scoreGained = 500 //cheat
     scoreGained = Math.floor(clamp(500, scoreGained, 1000))
   }
   addAnswer(game.value.id, game.value.question, alternative, scoreGained + player.value.score, scoreGained)
@@ -30,7 +30,7 @@ function answer(alternative: 'a' | 'b' | 'c' | 'd') {
 
 const countDown = clamp(0, 3000 - (Date.now() - game.value.timeStarted), 3000)
 </script>
-  
+
 <template>
   <section v-if="!started" class="splash fancy">
     <div>
@@ -44,33 +44,31 @@ const countDown = clamp(0, 3000 - (Date.now() - game.value.timeStarted), 3000)
         <ImageComponent :value="question.img" alt="Question image" />
         <RevealBlocks v-if="question.isReveal" />
       </div>
-      <h1>{{question.text}}</h1>
+      <h1>{{ question.text }}</h1>
       <CountDown :from="question.time" />
     </div>
     <div class="alternatives">
       <button v-if="question.a" class="a" @click="answer('a')">
         <ImageComponent v-if="ImageUtil.hasImage(question.a)" :value="question.a" alt="Alternative A" />
-        <p v-else>{{question.a}}</p>
+        <p v-else>{{ question.a }}</p>
       </button>
       <button v-if="question.b" class="b" @click="answer('b')">
         <ImageComponent v-if="ImageUtil.hasImage(question.b)" :value="question.b" alt="Alternative B" />
-        <p v-else>{{question.b}}</p>
+        <p v-else>{{ question.b }}</p>
       </button>
       <button v-if="question.c" class="c" @click="answer('c')">
         <ImageComponent v-if="ImageUtil.hasImage(question.c)" :value="question.c" alt="Alternative C" />
-        <p v-else>{{question.c}}</p>
+        <p v-else>{{ question.c }}</p>
       </button>
       <button v-if="question.d" class="d" @click="answer('d')">
         <ImageComponent v-if="ImageUtil.hasImage(question.d)" :value="question.d" alt="Alternative D" />
-        <p v-else>{{question.d}}</p>
+        <p v-else>{{ question.d }}</p>
       </button>
     </div>
   </section>
-  <section>
-
-  </section>
+  <section></section>
 </template>
-  
+
 <style scoped>
 .splash {
   height: 100%;

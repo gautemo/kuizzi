@@ -43,5 +43,5 @@ export interface Player {
   name: string
   score: number
   addedScore: number
-  [key: number]: 'a'|'b'|'c'|'d'
+  [key: number]: 'a' | 'b' | 'c' | 'd'
 }

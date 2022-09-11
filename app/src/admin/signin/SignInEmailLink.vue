@@ -3,7 +3,7 @@ import { useAsyncState } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { signInEmailLink } from '../firebaseAuth'
-import AlertMessage from '../../shared/AlertMessage.vue';
+import AlertMessage from '../../shared/AlertMessage.vue'
 
 const emit = defineEmits<{
   (e: 'close'): void

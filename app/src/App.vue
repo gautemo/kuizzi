@@ -10,7 +10,7 @@ setInterval(() => {
 
 <template>
   <HeaderComponent />
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -124,7 +124,7 @@ main {
   padding: 20px;
 }
 
-@media (max-width: 750px) { 
+@media (max-width: 750px) {
   main {
     padding: 5px;
   }

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, ComputedRef, inject, ref, watchEffect } from 'vue';
-import CountDown from '../../shared/CountDown.vue';
-import { Game, Player } from '../../shared/types';
-import RevealBlocks from '../../shared/RevealBlocks.vue';
-import ImageComponent from '../../shared/ImageComponent.vue';
-import { ImageUtil } from '../../shared/imageUtil';
+import { computed, ComputedRef, inject, ref, watchEffect } from 'vue'
+import CountDown from '../../shared/CountDown.vue'
+import { Game, Player } from '../../shared/types'
+import RevealBlocks from '../../shared/RevealBlocks.vue'
+import ImageComponent from '../../shared/ImageComponent.vue'
+import { ImageUtil } from '../../shared/imageUtil'
 
 const emit = defineEmits<{
   (e: 'next'): void
@@ -19,7 +19,7 @@ watchEffect(() => {
   if (done) setTimeout(() => emit('next'), 3000)
 })
 
-const question = computed(() => game.value.quiz.questions[game.value.question-1])
+const question = computed(() => game.value.quiz.questions[game.value.question - 1])
 </script>
 
 <template>
@@ -35,33 +35,31 @@ const question = computed(() => game.value.quiz.questions[game.value.question-1]
         <ImageComponent :value="question.img" alt="Question image" />
         <RevealBlocks v-if="question.isReveal" />
       </div>
-      <h1>{{question.text}}</h1>
+      <h1>{{ question.text }}</h1>
       <div class="right">
-        <CountDown :from="question.time" @done="emit('next')"/>
+        <CountDown :from="question.time" @done="emit('next')" />
       </div>
     </div>
     <div class="alternatives">
       <div class="a" v-if="question.a">
-        <ImageComponent v-if="ImageUtil.hasImage(question.a)" :value="question.a" alt="Alternative A"/>
-        <p v-else>{{question.a}}</p>
+        <ImageComponent v-if="ImageUtil.hasImage(question.a)" :value="question.a" alt="Alternative A" />
+        <p v-else>{{ question.a }}</p>
       </div>
       <div class="b" v-if="question.b">
-        <ImageComponent v-if="ImageUtil.hasImage(question.b)" :value="question.b" alt="Alternative B"/>
-        <p v-else>{{question.b}}</p>
+        <ImageComponent v-if="ImageUtil.hasImage(question.b)" :value="question.b" alt="Alternative B" />
+        <p v-else>{{ question.b }}</p>
       </div>
       <div class="c" v-if="question.c">
-        <ImageComponent v-if="ImageUtil.hasImage(question.c)" :value="question.c" alt="Alternative C"/>
-        <p v-else>{{question.c}}</p>
+        <ImageComponent v-if="ImageUtil.hasImage(question.c)" :value="question.c" alt="Alternative C" />
+        <p v-else>{{ question.c }}</p>
       </div>
       <div class="d" v-if="question.d">
-        <ImageComponent v-if="ImageUtil.hasImage(question.d)" :value="question.d" alt="Alternative D"/>
-        <p v-else>{{question.d}}</p>
+        <ImageComponent v-if="ImageUtil.hasImage(question.d)" :value="question.d" alt="Alternative D" />
+        <p v-else>{{ question.d }}</p>
       </div>
     </div>
   </section>
-  <section>
-
-  </section>
+  <section></section>
 </template>
 
 <style scoped>
@@ -95,29 +93,29 @@ h1 {
   font-size: 2rem;
 }
 
-.a{
+.a {
   background: var(--red);
 }
 
-.b{
+.b {
   background: var(--blue);
 }
 
-.c{
+.c {
   background: var(--yellow);
 }
 
-.d{
+.d {
   background: var(--green);
 }
 
-.alternatives{
+.alternatives {
   display: grid;
   gap: 5px;
   grid-template-columns: 1fr 1fr;
 }
 
-.alternatives > div{
+.alternatives > div {
   border-radius: 8px;
   padding: 5px;
   display: grid;
