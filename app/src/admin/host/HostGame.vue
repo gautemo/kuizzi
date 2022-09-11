@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { provide } from 'vue';
+import { computed, provide } from 'vue';
 import { Game, Player } from '../../shared/types';
 import { useFirestore, useFirestoreList } from '../../shared/useFirebase'
 import AlertMessage from '../../shared/AlertMessage.vue';
@@ -11,6 +11,7 @@ import HostVoteView from './HostVoteView.vue';
 import HostEnd from './HostEnd.vue';
 import LobbyPlayers from '../../shared/LobbyPlayers.vue';
 import ScoreBoard from '../../shared/ScoreBoard.vue';
+import { useQRCode } from '@vueuse/integrations/useQRCode'
 
 const route = useRoute()
 if (typeof route.params.id !== 'string') throw new Error('unknown id')
@@ -39,6 +40,9 @@ function next() {
       break;
   }
 }
+
+const url = computed(() => `https://kuizzi.app/${game.value?.id}`)
+const qrcode = useQRCode(url)
 </script>
 
 <template>
@@ -51,14 +55,37 @@ function next() {
     <AlertMessage type="error" v-else-if="error || playersError" :message="error?.message || playersError!.message" />
     <template v-else>
       <LobbyPlayers v-if="game!.state === 'notstarted'">
-        <h1>{{game!.quiz.name}}</h1>
-        <h2>Go to kuizzi.app to join!</h2>
-        <h3>Game PIN: <span>{{route.params.id}}</span></h3>
+        <div class="columns">
+          <h1>{{game!.quiz.name}}</h1>
+          <div>
+            <h2>Go to kuizzi.app or use QR code to join!</h2>
+            <h3>Game PIN: <span>{{route.params.id}}</span></h3>
+            <img :src="qrcode" alt="QR code to join" />
+          </div>
+        </div>
       </LobbyPlayers>
-      <HostQuestion v-else-if="game!.state === 'question'" @next="next"/>
+      <HostQuestion v-else-if="game!.state === 'question'" @next="next" />
       <HostVoteView v-else-if="game!.state === 'reveal'" />
       <ScoreBoard v-else-if="game!.state === 'score'" />
       <HostEnd v-else />
     </template>
   </main>
 </template>
+
+<style scoped>
+.columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0.5rem 0;
+}
+</style>
