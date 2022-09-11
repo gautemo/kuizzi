@@ -35,7 +35,7 @@ const error = computed(() => {
   <AlertMessage v-if="isReady" type="success" message="We sent you an email with your login link" />
   <section>
     <button @click="emit('close')" class="secondary">Close</button>
-    <button @click="execute()" :disabled="!email">Get login link</button>
+    <button class="primary" @click="execute()" :disabled="!email">Get login link</button>
   </section>
 </template>
 

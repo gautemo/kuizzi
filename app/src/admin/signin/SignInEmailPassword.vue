@@ -77,8 +77,8 @@ async function resetEmailPassword() {
         <span v-else>Reset password</span>
       </button>
     </div>
-    <button @click="executeEmailState()" :disabled="!email" v-if="emailState === null">Next</button>
-    <button @click="executeSave()" :disabled="!password" v-else>Save</button>
+    <button class="primary" @click="executeEmailState()" :disabled="!email" v-if="emailState === null">Next</button>
+    <button class="primary" @click="executeSave()" :disabled="!password" v-else>Save</button>
   </section>
 </template>
 

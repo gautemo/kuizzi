@@ -14,7 +14,7 @@ setInterval(() => {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Roboto+Flex&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Oswald:wght@500&display=swap');
 
 :root {
   --pastel1: #caffd0;
@@ -44,7 +44,7 @@ html,
 
 body {
   margin: 0;
-  font-family: 'Roboto Flex', sans-serif;
+  font-family: 'Oswald', sans-serif;
   background-color: var(--bg);
   transition: background-color 7s ease-in-out;
 }
@@ -69,7 +69,8 @@ input {
   text-decoration: underline;
 }
 
-button {
+button.primary,
+button.secondary {
   border: none;
   padding: 8px 10px;
   background-color: var(--primary);
@@ -77,8 +78,8 @@ button {
   transition: background-color 0.2s ease;
 }
 
-button:hover:not(:disabled, .fancy),
-button:focus:not(:disabled, .fancy) {
+button.primary:hover:not(:disabled),
+button.primary:focus:not(:disabled) {
   background-color: var(--primary-focus);
 }
 
@@ -114,8 +115,19 @@ button.secondary:focus:not(:disabled) {
   }
 }
 
+#app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
 main {
-  margin: 20px;
+  padding: 20px;
+}
+
+@media (max-width: 750px) { 
+  main {
+    padding: 5px;
+  }
 }
 
 label.fancy {

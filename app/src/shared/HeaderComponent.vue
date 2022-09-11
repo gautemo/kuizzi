@@ -1,6 +1,14 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+const hideNav = computed(() => route.meta.hideNav)
+</script>
+
 <template>
-  <header>
-    <router-link to="/" class="fancy">Kuizzi</router-link>
+  <header :class="{minimal: hideNav}">
+    <router-link to="/" class="fancy" v-if="!hideNav">Kuizzi</router-link>
     <div id="topright"></div>
   </header>
 </template>
@@ -12,6 +20,10 @@ header {
   grid-template-columns: auto 1fr auto;
 }
 
+.minimal {
+  padding: 0 20px;
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -20,5 +32,8 @@ a {
 
 #topright {
   grid-column: -1;
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 </style>

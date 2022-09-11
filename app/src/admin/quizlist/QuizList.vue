@@ -17,12 +17,12 @@ const quizzes = await getQuizzes()
 
 <template>
   <main>
-    <button @click="createQuizAndGoToPage">Create New Game</button>
+    <button class="primary" @click="createQuizAndGoToPage">Create New Game</button>
     <ul>
       <li v-for="quiz of quizzes" :key="quiz.id">
         <span>{{ quiz.name }}</span>
-        <button @click="router.push(`/my-games/${quiz.id}`)">Edit</button>
-        <button @click="createGameAndGoToPage(quiz.id)">Play</button>
+        <button class="primary" @click="router.push(`/my-games/${quiz.id}`)">Edit</button>
+        <button class="primary" @click="createGameAndGoToPage(quiz.id)">Play</button>
       </li>
     </ul>
   </main>
@@ -36,7 +36,7 @@ main {
 ul {
   list-style: none;
   padding: 0;
-  max-width: 550px;
+  max-width: 600px;
 }
 
 li {

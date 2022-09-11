@@ -27,10 +27,13 @@ export interface Game extends GameContent {
   id: string
 }
 
+export type GameState = 'notstarted' | 'question' | 'reveal' | 'score' | 'ended'
+
 export interface GameContent {
-  question: 0
+  question: number
   quiz: Quiz
-  state: 'notstarted'
+  state: GameState
+  timeStarted: number
 }
 
 export interface Player {
@@ -38,4 +41,7 @@ export interface Player {
   icon: string
   color: string
   name: string
+  score: number
+  addedScore: number
+  [key: number]: 'a'|'b'|'c'|'d'
 }

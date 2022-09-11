@@ -39,6 +39,7 @@ export const router = createRouter({
       component: () => import('./play/PlayGame.vue'),
       meta: {
         anonymAuth: true,
+        hideNav: true,
       }
     }
   ],

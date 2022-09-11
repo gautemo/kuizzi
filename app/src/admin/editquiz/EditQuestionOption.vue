@@ -33,11 +33,11 @@ function toggleCorrect(checked: boolean) {
   <div class="option">
     <label :class="{ 'has-img': ImageUtil.hasImage(question[props.option]) }">
       <span :class="props.option">{{ props.option.toUpperCase() }}:</span>
-      <input type="text" v-model="question[props.option]" />
+      <input type="text" v-model="question[props.option]" maxlength="70"/>
     </label>
     <div class="img-container" v-if="ImageUtil.hasImage(question[props.option])">
       <ImageComponent :value="question[props.option]" :alt="`Option ${props.option} image`"/>
-      <button @click="question[props.option] = ''">Remove</button>
+      <button class="primary" @click="question[props.option] = ''">Remove</button>
     </div>
     <label v-else>
       <span class="i-ic-baseline-image" />

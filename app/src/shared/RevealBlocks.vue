@@ -21,7 +21,7 @@ const count = ref(0)
 const reveal = computed(() => revealOrder.slice(0, count.value))
 
 onMounted(() => {
-  interval = setInterval(() => count.value++, 400)
+  interval = window.setInterval(() => count.value++, 400)
 })
 
 onUnmounted(() => clearInterval(interval))

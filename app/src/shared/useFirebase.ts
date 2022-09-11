@@ -1,5 +1,5 @@
 import { tryOnScopeDispose } from '@vueuse/core'
-import { Query, DocumentData, DocumentReference, onSnapshot, doc } from 'firebase/firestore'
+import { Query, DocumentData, DocumentReference, onSnapshot } from 'firebase/firestore'
 import { computed, ref } from 'vue'
 
 export function useFirestore<T extends { id: string }>(

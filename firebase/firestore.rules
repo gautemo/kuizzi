@@ -3,7 +3,8 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /games/{game} {
       allow read: if request.auth!=null;
-      allow write: if resource.data.owner == request.auth.uid;
+      allow create: if request.resource.data.quiz.owner == request.auth.uid
+      allow update: if resource.data.quiz.owner == request.auth.uid;
     }
     match /games/{game}/players/{uid} {
       allow read: if request.auth!=null;

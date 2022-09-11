@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ComputedRef, inject } from 'vue';
-import { Player } from '../../shared/types';
-import UserIcon from '../../shared/UserIcon.vue';
+import { Player } from './types';
+import UserIcon from './UserIcon.vue';
 
 const players = inject('players') as ComputedRef<Player[]>
 </script>

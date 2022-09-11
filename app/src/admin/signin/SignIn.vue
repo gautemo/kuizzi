@@ -19,15 +19,15 @@ const type = ref<'email_password' | 'passwordless' | undefined>()
         <SignInEmailPassword v-if="type === 'email_password'" @close="type = undefined" />
         <SignInEmailLink v-else-if="type === 'passwordless'" @close="type = undefined" />
         <template v-else>
-          <button @click="signInGoogle">
+          <button class="primary" @click="signInGoogle">
             <div class="i-logos-google-icon" />
             with Google
           </button>
-          <button @click="type = 'email_password'">
+          <button class="primary" @click="type = 'email_password'">
             <div class="i-ic-round-mail" />
             with email & password
           </button>
-          <button @click="type = 'passwordless'">
+          <button class="primary" @click="type = 'passwordless'">
             <div class="i-ic-baseline-key-off" />
             with passwordless email link
           </button>

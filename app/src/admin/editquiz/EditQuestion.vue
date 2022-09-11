@@ -46,7 +46,7 @@ function addImage(input: HTMLInputElement) {
             <ImageComponent :value="question.img" alt="Question image"/>
             <RevealBlocks v-if="question.isReveal" />
           </div>
-          <button @click="question.img = null">Remove</button>
+          <button class="primary" @click="question.img = null">Remove</button>
         </div>
       </label>
       <label v-if="question.img">
