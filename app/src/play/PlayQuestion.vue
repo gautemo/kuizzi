@@ -1,28 +1,41 @@
 <script setup lang="ts">
 import { computed, ComputedRef, inject, ref } from 'vue';
 import CountDown from '../shared/CountDown.vue';
-import { Game } from '../shared/types';
+import { Game, Player } from '../shared/types';
 import RevealBlocks from '../shared/RevealBlocks.vue';
 import ImageComponent from '../shared/ImageComponent.vue';
 import { ImageUtil } from '../shared/imageUtil';
 import { addAnswer } from './firebaseGame';
+import { clamp } from '../shared/utils';
 
 const game = inject('game') as ComputedRef<Game>
+const player = inject('player') as ComputedRef<Player>
 
 const started = ref(false)
 
 const question = computed(() => game.value.quiz.questions[game.value.question - 1])
 
 function answer(alternative: 'a' | 'b' | 'c' | 'd') {
-  addAnswer(game.value.id, game.value.question, alternative)
+  let scoreGained = 0
+  if(question.value.correct.includes(alternative)){
+    const questionTimeMillis = question.value.time * 1000;
+    const scorePerMillisecond = 500 / questionTimeMillis;
+    const timeSpent = Date.now() - (game.value.timeStarted + 3000);
+    scoreGained = 500 + (questionTimeMillis - timeSpent) * scorePerMillisecond
+    if(scoreGained > 1500) scoreGained = 500 //cheat
+    scoreGained = Math.floor(clamp(500, scoreGained, 1000))
+  }
+  addAnswer(game.value.id, game.value.question, alternative, scoreGained + player.value.score, scoreGained)
 }
+
+const countDown = clamp(0, 3000 - (Date.now() - game.value.timeStarted), 3000)
 </script>
   
 <template>
   <section v-if="!started" class="splash fancy">
     <div>
       <p>Get Ready!</p>
-      <CountDown @done="started = true" :from="3" />
+      <CountDown @done="started = true" :from="Math.floor(countDown / 1000)" :delay-milliseconds="countDown % 1000" />
     </div>
   </section>
   <section v-else class="game">

@@ -1,4 +1,5 @@
-<script setup lang="ts">import { computed, ComputedRef, inject } from 'vue';
+<script setup lang="ts">
+import { computed, ComputedRef, inject } from 'vue';
 import { Player } from '../shared/types';
 
 const suffixes = {

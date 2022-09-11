@@ -6,17 +6,25 @@ const emit = defineEmits<{
 }>()
 
 const props = defineProps<{
-  from: number
+  from: number,
+  delayMilliseconds?: number
 }>()
+
+console.log(props)
 
 const count = ref(props.from)
 
-const interval = setInterval(() => {
-  count.value--
-  if(count.value === 0){
-    emit('done')
-  }
-}, 1000)
+let interval: number | undefined = undefined
+
+setTimeout(() => {
+  interval = window.setInterval(() => {
+    count.value--
+    if(count.value === 0){
+      emit('done')
+    }
+  }, 1000)
+}, props.delayMilliseconds)
+
 
 onUnmounted(() => clearInterval(interval))
 </script>

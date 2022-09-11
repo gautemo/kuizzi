@@ -10,7 +10,7 @@ setInterval(() => {
 
 <template>
   <HeaderComponent />
-  <router-view />
+  <router-view/>
 </template>
 
 <style>

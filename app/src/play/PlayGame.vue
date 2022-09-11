@@ -12,6 +12,7 @@ import FunnyGif from './FunnyGif.vue';
 import QuestionReveal from './QuestionReveal.vue';
 import ScoreBoard from '../shared/ScoreBoard.vue';
 import PlaySummary from './PlaySummary.vue';
+import PlayEnd from './PlayEnd.vue';
 
 const route = useRoute()
 if (typeof route.params.id !== 'string') throw new Error('unknown id')
@@ -42,11 +43,7 @@ provide('player', player)
         <ScoreBoard v-else-if="game!.state === 'score'">
           <PlaySummary/>
         </ScoreBoard>
-        <!-- 
-          <HostVoteView v-else-if="game!.state === 'reveal'" />
-          <HostScores v-else-if="game!.state === 'score'" />
-          <HostEnd v-else />
-         -->
+        <PlayEnd v-else/>
       </template>
     </template>
   </main>

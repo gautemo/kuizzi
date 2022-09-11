@@ -10,7 +10,7 @@ const game = inject('game') as ComputedRef<Game>
 const player = inject('player') as ComputedRef<Player>
 const question = computed(() => game.value.quiz.questions[game.value.question-1])
 
-const isCorrect = computed(() => question.value.correct.includes(player.value[game.value.question-1]))
+const isCorrect = computed(() => question.value.correct.includes(player.value[game.value.question]))
 </script>
 
 <template>
@@ -65,6 +65,6 @@ h2 {
 }
 
 h1 + img {
-  max-width: 40vw;
+  max-width: 30vw;
 }
 </style>
