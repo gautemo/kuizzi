@@ -10,4 +10,7 @@ export default defineConfig({
       presets: [presetIcons({})],
     }),
   ],
+  build: {
+    outDir: '../firebase/public'
+  }
 })

@@ -17,12 +17,12 @@ const quizzes = await getQuizzes()
 
 <template>
   <main>
-    <button class="primary" @click="createQuizAndGoToPage">Create New Game</button>
+    <button @click="createQuizAndGoToPage">Create New Game</button>
     <ul>
       <li v-for="quiz of quizzes" :key="quiz.id">
         <span>{{ quiz.name }}</span>
-        <button class="primary" @click="router.push(`/my-games/${quiz.id}`)">Edit</button>
-        <button class="primary" @click="createGameAndGoToPage(quiz.id)">Play</button>
+        <button @click="router.push(`/my-games/${quiz.id}`)">Edit</button>
+        <button @click="createGameAndGoToPage(quiz.id)">Play</button>
       </li>
     </ul>
   </main>

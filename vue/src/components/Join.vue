@@ -44,7 +44,6 @@
 import { game } from '@/utils/game'
 import { addMe } from '@/utils/player'
 import { ref, reactive, computed, watch } from 'vue'
-import { db } from '@/firebase'
 import Portrait from '@/components/Portrait'
 
 const icons = [

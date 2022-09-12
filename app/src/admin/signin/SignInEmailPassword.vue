@@ -65,11 +65,10 @@ async function resetEmailPassword() {
   <AlertMessage v-if="error" type="error" :message="error.message" />
   <section>
     <div>
-      <button @click="emit('close')" class="secondary">Close</button>
+      <button @click="emit('close')" class="space-right">Close</button>
       <button
         v-if="emailState === 'has_password'"
         @click="resetEmailPassword"
-        class="secondary"
         :class="{ donereset: doneReset }"
         :disabled="doneReset"
       >
@@ -77,8 +76,8 @@ async function resetEmailPassword() {
         <span v-else>Reset password</span>
       </button>
     </div>
-    <button class="primary" @click="executeEmailState()" :disabled="!email" v-if="emailState === null">Next</button>
-    <button class="primary" @click="executeSave()" :disabled="!password" v-else>Save</button>
+    <button @click="executeEmailState()" :disabled="!email" v-if="emailState === null">Next</button>
+    <button @click="executeSave()" :disabled="!password" v-else>Save</button>
   </section>
 </template>
 
@@ -112,7 +111,7 @@ section {
   width: 100%;
 }
 
-.secondary {
+.space-right {
   margin-right: 5px;
 }
 

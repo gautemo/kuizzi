@@ -8,7 +8,7 @@ const user = getUser()
   <Teleport to="#topright">
     <router-link to="/my-games" class="my-games fancy">My Games</router-link>
     <span>{{ user.displayName ?? user.email }}</span>
-    <button @click="signUserOut" class="secondary">Sign out</button>
+    <button @click="signUserOut">Sign out</button>
   </Teleport>
   <slot></slot>
 </template>

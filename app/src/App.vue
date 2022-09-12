@@ -30,7 +30,6 @@ setInterval(() => {
   --green: #227e0a;
 
   --primary: rgb(127, 176, 235);
-  --primary-focus: rgb(107, 164, 234);
   --danger: rgb(247, 138, 138);
   --warning: rgb(224, 219, 125);
   --success: rgb(129, 229, 113);
@@ -47,6 +46,21 @@ body {
   font-family: 'Oswald', sans-serif;
   background-color: var(--bg);
   transition: background-color 7s ease-in-out;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+main {
+  padding: 20px;
+}
+
+@media (max-width: 750px) {
+  main {
+    padding: 5px;
+  }
 }
 
 .fancy {
@@ -69,27 +83,17 @@ input {
   text-decoration: underline;
 }
 
-button.primary,
-button.secondary {
-  border: none;
-  padding: 8px 10px;
-  background-color: var(--primary);
-  border-radius: 2px;
+button {
+  background: none;
+  border: 2px solid #000;
+  padding: 3px 15px;
+  border-radius: 3px;
   transition: background-color 0.2s ease;
 }
 
-button.primary:hover:not(:disabled),
-button.primary:focus:not(:disabled) {
-  background-color: var(--primary-focus);
-}
-
-button.secondary {
-  background-color: rgb(214, 214, 214);
-}
-
-button.secondary:hover:not(:disabled),
-button.secondary:focus:not(:disabled) {
-  background-color: rgb(193, 193, 193);
+button:hover:not(:disabled, .fancy),
+button:focus:not(:disabled, .fancy) {
+  background-color: var(--primary);
 }
 
 .loader {
@@ -112,23 +116,6 @@ button.secondary:focus:not(:disabled) {
 
   100% {
     transform: rotate(360deg);
-  }
-}
-
-#app {
-  display: grid;
-  grid-template-rows: auto 1fr;
-}
-
-main {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-@media (max-width: 750px) {
-  main {
-    padding: 5px;
   }
 }
 

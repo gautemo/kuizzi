@@ -5,3 +5,7 @@ Quiz game
 
 ## TODO
 - reveal image not working on iOS
+
+## Commands
+
+- `firebase emulators:export seed`

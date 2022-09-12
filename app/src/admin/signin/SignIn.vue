@@ -19,15 +19,15 @@ const type = ref<'email_password' | 'passwordless' | undefined>()
         <SignInEmailPassword v-if="type === 'email_password'" @close="type = undefined" />
         <SignInEmailLink v-else-if="type === 'passwordless'" @close="type = undefined" />
         <template v-else>
-          <button class="primary" @click="signInGoogle">
+          <button @click="signInGoogle">
             <div class="i-logos-google-icon" />
             with Google
           </button>
-          <button class="primary" @click="type = 'email_password'">
+          <button @click="type = 'email_password'">
             <div class="i-ic-round-mail" />
             with email & password
           </button>
-          <button class="primary" @click="type = 'passwordless'">
+          <button @click="type = 'passwordless'">
             <div class="i-ic-baseline-key-off" />
             with passwordless email link
           </button>
@@ -39,6 +39,7 @@ const type = ref<'email_password' | 'passwordless' | undefined>()
 
 <style scoped>
 main {
+  height: fit-content;
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
@@ -46,7 +47,7 @@ main {
   width: fit-content;
   gap: 0.5rem;
   background-color: rgb(249, 249, 249);
-  padding: 1rem;
+  padding: 2rem 1rem;
   box-shadow: 0px 2px 5px 0px #333;
   width: 350px;
 }
@@ -57,5 +58,9 @@ button {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+}
+
+h1 {
+  margin: 0.5rem 0;
 }
 </style>

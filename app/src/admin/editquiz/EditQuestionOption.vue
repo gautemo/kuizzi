@@ -37,7 +37,7 @@ function toggleCorrect(checked: boolean) {
     </label>
     <div class="img-container" v-if="ImageUtil.hasImage(question[props.option])">
       <ImageComponent :value="question[props.option]" :alt="`Option ${props.option} image`" />
-      <button class="primary" @click="question[props.option] = ''">Remove</button>
+      <button @click="question[props.option] = ''">Remove</button>
     </div>
     <label v-else>
       <span class="i-ic-baseline-image" />

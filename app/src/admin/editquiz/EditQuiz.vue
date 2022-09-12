@@ -94,12 +94,12 @@ function move(i: number, up: boolean) {
         <EditQuestion :index="i" :expanded="expanded === question.id" />
         <div :class="{ hide: i === 0 }" class="i-ic-round-arrow-upward icon" title="move up" @click="move(i, true)" />
         <div :class="{ hide: quiz.questions.length - 1 === i }" class="i-ic-round-arrow-downward icon" title="move down" @click="move(i, false)" />
-        <button class="primary" @click="quiz.questions.splice(i, 1)">Delete</button>
+        <button @click="quiz.questions.splice(i, 1)">Delete</button>
       </li>
     </ul>
     <section>
-      <button class="primary" @click="addQuestion">Add Question</button>
-      <button class="primary" :disabled="!isChanged" @click="save()">Save</button>
+      <button @click="addQuestion">Add Question</button>
+      <button :disabled="!isChanged" @click="save()">Save</button>
     </section>
     <span class="loader" v-if="isLoading"></span>
     <AlertMessage v-if="error" type="error" :message="error.message" :autofocus="true" />

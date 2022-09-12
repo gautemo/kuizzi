@@ -3,20 +3,21 @@ name: CI/CD
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: pnpm/action-setup@v2.2.2
+      with:
+        version: 7
     - name: vue - install & build
       run: |
-        cd vue
-        npm ci
-        npm run build
+        cd app
+        pnpm install
+        pnpm build
         cd ..
     - name: firebase - install & deploy
       run: |
