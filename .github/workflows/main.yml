@@ -19,8 +19,10 @@ jobs:
         pnpm install
         pnpm build
         cd ..
-    - name: firebase - install & deploy
-      run: |
-        cd firebase
-        sudo npm install -g firebase-tools
-        firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KUIZZI }}'
+        channelId: live
+        projectId: kuizzi
+        entryPoint: firebase
