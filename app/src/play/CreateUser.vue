@@ -105,7 +105,7 @@ function enterColor(c: string) {
 <template>
   <section v-if="step === 0 || nameTaken">
     <label class="fancy">
-      <input type="text" v-model="name" autofocus maxlength="25" @keyup.enter="step++" />
+      <input type="text" v-model="name" autofocus maxlength="15" @keyup.enter="step++" />
       <span :class="{ active: name }">Name</span>
     </label>
     <AlertMessage v-if="nameTaken" type="warning" message="Name is already taken" />

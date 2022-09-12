@@ -122,6 +122,8 @@ button.secondary:focus:not(:disabled) {
 
 main {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 750px) {

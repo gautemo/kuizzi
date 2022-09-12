@@ -38,6 +38,7 @@ section {
   padding: 10px;
   background: white;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 ul {

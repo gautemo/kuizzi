@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ComputedRef, inject } from 'vue'
+import { computed, ComputedRef, inject } from 'vue'
 import { Player } from './types'
 import UserIcon from './UserIcon.vue'
 
 const players = inject('players') as ComputedRef<Player[]>
+const reverse = computed(() => players.value.slice(0).reverse())
 </script>
 
 <template>
@@ -11,7 +12,7 @@ const players = inject('players') as ComputedRef<Player[]>
     <slot></slot>
     <h4>Players</h4>
     <ul>
-      <li v-for="player in players" :key="player.id">
+      <li v-for="player in reverse" :key="player.id">
         <UserIcon :icon="player.icon" :color="player.color" />
         <span>{{ player.name }}</span>
       </li>

@@ -80,11 +80,11 @@ export async function createGame(quizId: string) {
   return gameId
 }
 
-export function updateGameState(quizId: string, state: GameState, question?: number) {
+export function updateGameState(gameId: string, state: GameState, question?: number) {
   const update: Partial<GameContent> = { state }
   if (question) {
     update.question = question
     update.timeStarted = Date.now()
   }
-  setDoc(doc(db, 'games', quizId), update, { merge: true })
+  setDoc(doc(db, 'games', gameId), update, { merge: true })
 }

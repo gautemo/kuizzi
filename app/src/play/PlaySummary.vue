@@ -26,26 +26,14 @@ const place = computed(() => {
 </script>
 
 <template>
-  <section>
-    <p>{{ place }} of {{ players.length }} players with a total of {{ sum(player.points) }} points</p>
-  </section>
+  <p>{{ place }} of {{ players.length }} players with a total of {{ sum(player.points) }} points</p>
 </template>
 
 <style scoped>
-section {
-  position: absolute;
-  bottom: 20px;
-  padding: 0 15px;
+p {
+  padding: 10px 15px;
   background: white;
   border-radius: 5px;
-  margin: 0 50px;
-  left: 0;
-  right: 0;
-}
-
-@media only screen and (max-width: 600px) {
-  p {
-    margin: 5px 0;
-  }
+  margin: auto 50px 5px 50px;
 }
 </style>
