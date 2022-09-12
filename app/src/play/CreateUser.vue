@@ -112,7 +112,7 @@ function enterColor(c: string) {
     <button @click="step++" :disabled="!name || nameTaken" class="fancy">Next</button>
   </section>
   <section v-else-if="step === 1">
-    <p>Chose your icon</p>
+    <p class="fancy">Chose your icon</p>
     <div class="select">
       <span class="icon" v-for="i in icons" :key="i" @click="icon = i" :class="{ selected: icon === i }" tabindex="0" @keyup.enter="enterIcon(i)">{{
         i
@@ -124,7 +124,7 @@ function enterColor(c: string) {
     </div>
   </section>
   <section v-else-if="step === 2">
-    <p>Chose your color</p>
+    <p class="fancy">Chose your color</p>
     <div class="select colors">
       <span
         class="color"
@@ -143,7 +143,7 @@ function enterColor(c: string) {
     </div>
   </section>
   <section v-else>
-    <p>Use this?</p>
+    <p class="fancy">Use this?</p>
     <div class="user-info">
       <UserIcon :icon="icon" :color="color" :size="100" />
       <span class="fancy">{{ name }}</span>
@@ -174,8 +174,6 @@ input {
   gap: 3px;
   justify-content: center;
   justify-items: center;
-  max-height: 75vh;
-  overflow: auto;
 }
 
 .icon,
