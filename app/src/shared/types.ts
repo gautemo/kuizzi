@@ -41,7 +41,6 @@ export interface Player {
   icon: string
   color: string
   name: string
-  score: number
-  addedScore: number
+  points: number[]
   [key: number]: 'a' | 'b' | 'c' | 'd'
 }

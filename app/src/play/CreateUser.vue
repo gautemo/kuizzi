@@ -88,7 +88,7 @@ function save() {
     color: color.value,
   }
   localStorage.setItem('user', JSON.stringify(user))
-  addPlayer(game.value.id, name.value, icon.value, color.value)
+  addPlayer(game.value.id, name.value, icon.value, color.value, game.value.quiz.questions.length)
 }
 
 function enterIcon(i: string) {

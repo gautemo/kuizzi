@@ -86,7 +86,7 @@ const question = computed(() => game.value.quiz.questions[game.value.question - 
 }
 
 .top .right {
-  justify-self: end;
+  grid-column: -1;
 }
 
 h1 {

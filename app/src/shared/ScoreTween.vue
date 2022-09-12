@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { reactive, watchEffect } from 'vue'
 import gsap from 'gsap'
 
 const props = defineProps<{
   score: number
   addScore: number
+  startTween: boolean
 }>()
 
 const tweened = reactive({
   number: props.score - props.addScore,
 })
 
-onMounted(() => {
-  gsap.to(tweened, { duration: 1.5, number: props.score })
+watchEffect(() => {
+  if(props.startTween){
+    gsap.to(tweened, { duration: 3, number: props.score })
+  }
 })
 </script>
 

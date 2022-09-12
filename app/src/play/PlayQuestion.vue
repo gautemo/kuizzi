@@ -25,7 +25,9 @@ function answer(alternative: 'a' | 'b' | 'c' | 'd') {
     if (scoreGained > 1500) scoreGained = 500 //cheat
     scoreGained = Math.floor(clamp(500, scoreGained, 1000))
   }
-  addAnswer(game.value.id, game.value.question, alternative, scoreGained + player.value.score, scoreGained)
+  const points = player.value.points
+  points[game.value.question-1] = scoreGained
+  addAnswer(game.value.id, game.value.question, alternative, points)
 }
 
 const countDown = clamp(0, 3000 - (Date.now() - game.value.timeStarted), 3000)

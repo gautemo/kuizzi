@@ -4,12 +4,13 @@ import { Player } from '../shared/types'
 import FireWorks from '../shared/FireWorks.vue'
 import PlaySummary from './PlaySummary.vue'
 import FunnyGif from './FunnyGif.vue'
+import { sum } from '../shared/utils'
 
 const players = inject('players') as ComputedRef<Player[]>
 const player = inject('player') as ComputedRef<Player>
 
 const place = computed(() => {
-  return players.value.filter(p => p.score < player.value.score).length
+  return players.value.filter(p => sum(p.points) < sum(player.value.points)).length
 })
 const gifType: { [key: number]: 'won' | 'close' } = {
   0: 'won',
@@ -36,7 +37,7 @@ h2 {
   display: flex;
   justify-content: center;
   opacity: 0;
-  animation: show 2s ease-in-out 1s forwards;
+  animation: show 2s ease-in-out 3s forwards;
 }
 
 @keyframes show {

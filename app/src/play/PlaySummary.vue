@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ComputedRef, inject } from 'vue'
 import { Player } from '../shared/types'
+import { sum } from '../shared/utils';
 
 const suffixes = {
   zero: '',
@@ -19,14 +20,14 @@ const players = inject('players') as ComputedRef<Player[]>
 const player = inject('player') as ComputedRef<Player>
 
 const place = computed(() => {
-  const position = players.value.filter(p => p.score > player.value.score).length + 1
+  const position = players.value.filter(p => sum(p.points) > sum(player.value.points)).length + 1
   return `${position}${suffixes[pr.select(position)]}`
 })
 </script>
 
 <template>
   <section>
-    <p>{{ place }} of {{ players.length }} players with a total of {{ player.score }} points</p>
+    <p>{{ place }} of {{ players.length }} players with a total of {{ sum(player.points) }} points</p>
   </section>
 </template>
 

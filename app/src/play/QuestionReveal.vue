@@ -23,7 +23,7 @@ const isCorrect = computed(() => question.value.correct.includes(player.value[ga
         Correct!
       </h2>
       <FunnyGif type="correct" />
-      <p>+{{ player.addedScore }}</p>
+      <p>+{{ player.points[game.question-1] }}</p>
     </template>
     <template v-else>
       <h2>
