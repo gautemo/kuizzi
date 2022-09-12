@@ -12,7 +12,7 @@ function enter() {
 
 <template>
   <Teleport to="#topright">
-    <router-link to="/my-games" class="my-games fancyfont">My Games</router-link>
+    <router-link to="/my-games" class="my-games fancy">My Games</router-link>
   </Teleport>
   <main>
     <h1>A quiz game for your friends!</h1>
