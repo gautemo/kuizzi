@@ -42,6 +42,7 @@ export const router = createRouter({
         hideNav: true,
       },
     },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('./shared/NotFound.vue') },
   ],
 })
 

@@ -41,7 +41,7 @@ function next() {
   }
 }
 
-const url = computed(() => `https://kuizzi.app/${game.value?.id}`)
+const url = computed(() => `https://kuizzi.app/play/${game.value?.id}`)
 const qrcode = useQRCode(url)
 </script>
 
