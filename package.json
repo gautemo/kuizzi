@@ -5,5 +5,11 @@
     "postinstall": "cd vue && pnpm i",
     "firebase:emulator": "cd firebase && firebase emulators:start --import seed"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "@gautemo/vite-plugin-service-worker": "^0.0.2"
+  },
+  "dependencies": {
+    "workbox-routing": "^6.5.4",
+    "workbox-strategies": "^6.5.4"
+  }
 }

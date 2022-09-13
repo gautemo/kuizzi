@@ -14,7 +14,7 @@ setInterval(() => {
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Oswald:wght@500&display=swap');
+@import url('https://fonts.bunny.net/css2?family=Audiowide&family=Oswald:wght@500&display=swap');
 
 :root {
   --pastel1: #caffd0;
@@ -29,7 +29,7 @@ setInterval(() => {
   --yellow: #C49500;
   --green: #00AD2B;
 
-  --primary: rgb(127, 176, 235);
+  --primary: #7fb0eb;
   --danger: rgb(247, 138, 138);
   --warning: rgb(224, 219, 125);
   --success: rgb(129, 229, 113);

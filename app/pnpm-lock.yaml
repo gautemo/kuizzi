@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@gautemo/vite-plugin-service-worker': ^0.0.2
   '@iconify-json/ic': ^1.1.9
   '@iconify-json/logos': ^1.1.15
   '@unocss/preset-icons': ^0.45.18
@@ -23,6 +24,8 @@ specifiers:
   vue: ^3.2.39
   vue-router: ^4.1.5
   vue-tsc: ^0.40.13
+  workbox-routing: ^6.5.4
+  workbox-strategies: ^6.5.4
 
 dependencies:
   '@vueuse/integrations': 9.2.0_qrcode@1.5.1+vue@3.2.39
@@ -31,8 +34,11 @@ dependencies:
   qrcode: 1.5.1
   vue: 3.2.39
   vue-router: 4.1.5_vue@3.2.39
+  workbox-routing: 6.5.4
+  workbox-strategies: 6.5.4
 
 devDependencies:
+  '@gautemo/vite-plugin-service-worker': 0.0.2
   '@iconify-json/ic': 1.1.9
   '@iconify-json/logos': 1.1.15
   '@unocss/preset-icons': 0.45.18
@@ -586,6 +592,10 @@ packages:
   /@firebase/webchannel-wrapper/0.6.2:
     resolution: {integrity: sha512-zThUKcqIU6utWzM93uEvhlh8qj8A5LMPFJPvk/ODb+8GSSif19xM2Lw1M2ijyBy8+6skSkQBbavPzOU5Oh/8tQ==}
     dev: false
+
+  /@gautemo/vite-plugin-service-worker/0.0.2:
+    resolution: {integrity: sha512-NXB0MtIxFBziv8Tp/WFyfDwfNq7sAaZri7FkFD7Fpoz6AJXJ7uRI+BDXZKe/umI526URMB/5aKYXZxjuWB8URw==}
+    dev: true
 
   /@grpc/grpc-js/1.6.12:
     resolution: {integrity: sha512-JmvQ03OTSpVd9JTlj/K3IWHSz4Gk/JMLUTtW7Zb0KvO1LcOYGATh5cNuRYzCAeDR3O8wq+q8FZe97eO9MBrkUw==}
@@ -3174,6 +3184,22 @@ packages:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /workbox-core/6.5.4:
+    resolution: {integrity: sha512-OXYb+m9wZm8GrORlV2vBbE5EC1FKu71GGp0H4rjmxmF4/HLbMCoTFws87M3dFwgpmg0v00K++PImpNQ6J5NQ6Q==}
+    dev: false
+
+  /workbox-routing/6.5.4:
+    resolution: {integrity: sha512-apQswLsbrrOsBUWtr9Lf80F+P1sHnQdYodRo32SjiByYi36IDyL2r7BH1lJtFX8fwNHDa1QOVY74WKLLS6o5Pg==}
+    dependencies:
+      workbox-core: 6.5.4
+    dev: false
+
+  /workbox-strategies/6.5.4:
+    resolution: {integrity: sha512-DEtsxhx0LIYWkJBTQolRxG4EI0setTJkqR4m7r4YpBdxtWJH1Mbg01Cj8ZjNOO8etqfA3IZaOPHUxCs8cBsKLw==}
+    dependencies:
+      workbox-core: 6.5.4
+    dev: false
 
   /wrap-ansi/6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}

@@ -3,6 +3,7 @@ import App from './App.vue'
 import { router } from './router'
 import 'uno.css'
 import { checkIsSignInWithEmailLink } from './admin/firebaseAuth'
+import { serviceWorkerFile } from 'virtual:vite-plugin-service-worker'
 
 checkIsSignInWithEmailLink()
 
@@ -23,3 +24,10 @@ if (import.meta.env.VITE_DISABLE_ANALYTICS !== 'true') {
   sessionStorage.setItem('_swa', '1')
 }
 
+try {
+  navigator.serviceWorker.register(serviceWorkerFile, {
+    type: 'module',
+  })
+} catch (error) {
+  console.error('Service worker registration failed', error)
+}

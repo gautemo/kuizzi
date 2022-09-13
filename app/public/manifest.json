@@ -1,0 +1,28 @@
+{
+  "name": "Kuizzi",
+  "description": "A quiz game for your friends!",
+  "theme_color": "#7fb0eb",
+  "background_color": "#caffd0",
+  "display": "minimal-ui",
+  "orientation": "",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "images/maskable_icon_x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

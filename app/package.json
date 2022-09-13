@@ -17,9 +17,12 @@
     "gsap": "^3.11.1",
     "qrcode": "^1.5.1",
     "vue": "^3.2.39",
-    "vue-router": "^4.1.5"
+    "vue-router": "^4.1.5",
+    "workbox-routing": "^6.5.4",
+    "workbox-strategies": "^6.5.4"
   },
   "devDependencies": {
+    "@gautemo/vite-plugin-service-worker": "^0.0.2",
     "@iconify-json/ic": "^1.1.9",
     "@iconify-json/logos": "^1.1.15",
     "@unocss/preset-icons": "^0.45.18",
