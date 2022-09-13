@@ -63,7 +63,7 @@ export async function createGame(quizId: string) {
   const gameId = await runTransaction(db, async transaction => {
     const pinsRef = doc(db, 'info', 'pins')
     const pinsDoc = await transaction.get(pinsRef)
-    if (!pinsDoc.exists()) throw 'Document does not exist!'
+    if (!pinsDoc.exists()) throw 'Document pins does not exist!'
     const pin: number = pinsDoc.data().count + 1
 
     const quizDoc = await transaction.get(doc(db, 'quizzes', quizId))

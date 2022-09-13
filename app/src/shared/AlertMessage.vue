@@ -34,6 +34,7 @@ p {
   align-items: center;
   padding: 5px;
   border-radius: 2px;
+  min-width: 75px;
 }
 
 .error {
