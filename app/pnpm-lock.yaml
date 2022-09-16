@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@gautemo/vite-plugin-service-worker': ^0.0.2
+  '@gautemo/vite-plugin-service-worker': ^0.0.3
   '@iconify-json/ic': ^1.1.9
   '@iconify-json/logos': ^1.1.15
   '@unocss/preset-icons': ^0.45.18
@@ -38,7 +38,7 @@ dependencies:
   workbox-strategies: 6.5.4
 
 devDependencies:
-  '@gautemo/vite-plugin-service-worker': 0.0.2
+  '@gautemo/vite-plugin-service-worker': 0.0.3
   '@iconify-json/ic': 1.1.9
   '@iconify-json/logos': 1.1.15
   '@unocss/preset-icons': 0.45.18
@@ -593,8 +593,8 @@ packages:
     resolution: {integrity: sha512-zThUKcqIU6utWzM93uEvhlh8qj8A5LMPFJPvk/ODb+8GSSif19xM2Lw1M2ijyBy8+6skSkQBbavPzOU5Oh/8tQ==}
     dev: false
 
-  /@gautemo/vite-plugin-service-worker/0.0.2:
-    resolution: {integrity: sha512-NXB0MtIxFBziv8Tp/WFyfDwfNq7sAaZri7FkFD7Fpoz6AJXJ7uRI+BDXZKe/umI526URMB/5aKYXZxjuWB8URw==}
+  /@gautemo/vite-plugin-service-worker/0.0.3:
+    resolution: {integrity: sha512-vKczEXfJVB6qQt+0YIiqt587NpZgtQZGVzwHB2ffHqW6rMwhcgwMAkSfSgHJzNOGhe532GmB+BgcNT035g0dYw==}
     dev: true
 
   /@grpc/grpc-js/1.6.12:

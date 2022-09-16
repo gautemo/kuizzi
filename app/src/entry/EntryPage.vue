@@ -22,6 +22,18 @@ function enter() {
     </label>
     <button class="fancy" @click="enter" :disabled="!gamePin">Enter</button>
   </main>
+  <footer>
+    <i>Created by Gaute Meek Olsen</i>
+    <a href="https://twitter.com/GauteMeekOlsen" target="_blank" rel="noopener">
+      <div class="i-logos-twitter" title="Twitter"></div>
+    </a>
+    <a href="https://gaute.dev" target="_blank" rel="noopener">
+      <div class="i-ic-baseline-link icon" title="https://gaute.dev"></div>
+    </a>
+    <a href="mailto:gautedevelopment@gmail.com">
+      <div class="i-ic-baseline-email icon" title="mailto:gautedevelopment@gmail.com"></div>
+    </a>
+  </footer>
 </template>
 
 <style scoped>
@@ -33,5 +45,22 @@ input,
 button {
   width: 200px;
   text-align: center;
+}
+
+footer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px;
+  font-size: 0.9rem;
+}
+
+footer a {
+  font-size: 1.2rem;
+}
+
+.icon {
+  background-color: #333;
 }
 </style>
