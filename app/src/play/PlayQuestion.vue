@@ -41,13 +41,15 @@ const countDown = clamp(0, 3000 - (Date.now() - game.value.timeStarted), 3000)
     </div>
   </section>
   <section v-else class="game">
-    <div class="top">
+    <div class="top" :class="{ three: question.img }">
       <div class="q-img" v-if="question.img">
         <ImageComponent :value="question.img" alt="Question image" />
         <RevealBlocks v-if="question.isReveal" />
       </div>
       <h1>{{ question.text }}</h1>
-      <CountDown :from="question.time" />
+      <div class="right">
+        <CountDown :from="question.time" />
+      </div>
     </div>
     <div class="alternatives">
       <button v-if="question.a" class="a" @click="answer('a')">
@@ -87,11 +89,26 @@ const countDown = clamp(0, 3000 - (Date.now() - game.value.timeStarted), 3000)
 }
 
 .top {
-  display: flex;
-  gap: 5px;
-  justify-content: space-between;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr auto;
   align-items: center;
   font-size: 1.2rem;
+}
+
+.top.three {
+  gap: 10px;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "img question right";
+}
+
+.top.three .right {
+  grid-area: right;
+}
+
+.top .right {
+  display: flex;
+  justify-content: flex-end;
 }
 
 h1 {
@@ -134,16 +151,18 @@ button {
   font-weight: bold;
   color: white;
   text-align: center;
+  word-break: break-word;
 }
 
 .q-img {
   position: relative;
-  max-width: 30vw;
+  width: fit-content;
+  min-width: 150px;
 }
 
 .q-img img {
   width: 100%;
-  max-height: 1000px;
+  max-height: 25vh;
 }
 
 .alternatives img {

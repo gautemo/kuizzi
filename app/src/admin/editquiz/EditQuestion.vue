@@ -28,7 +28,7 @@ function addImage(input: HTMLInputElement) {
   <div class="container">
     <label class="question">
       <span>Question:</span>
-      <input type="text" v-model="question.text" maxlength="115" />
+      <input type="text" v-model="question.text" maxlength="120" />
     </label>
     <div v-if="expanded" class="details">
       <label>

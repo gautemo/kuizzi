@@ -30,7 +30,7 @@ const question = computed(() => game.value.quiz.questions[game.value.question - 
     </div>
   </section>
   <section v-else class="game">
-    <div class="top">
+    <div class="top" :class="{ three: question.img }">
       <div class="q-img" v-if="question.img">
         <ImageComponent :value="question.img" alt="Question image" />
         <RevealBlocks v-if="question.isReveal" />
@@ -79,14 +79,25 @@ const question = computed(() => game.value.quiz.questions[game.value.question - 
 
 .top {
   display: grid;
-  gap: 5px;
-  grid-template-columns: 1fr auto 1fr;
+  gap: 30px;
+  grid-template-columns: 1fr auto;
   align-items: center;
   font-size: 2rem;
 }
 
+.top.three {
+  gap: 10px;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "img question right";
+}
+
+.top.three .right {
+  grid-area: right;
+}
+
 .top .right {
-  grid-column: -1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 h1 {
@@ -128,11 +139,13 @@ h1 {
   font-weight: bold;
   color: white;
   text-align: center;
+  word-break: break-word;
 }
 
 .q-img {
   position: relative;
-  max-width: 30vw;
+  width: fit-content;
+  min-width: 300px;
 }
 
 .q-img img {

@@ -32,3 +32,12 @@ img {
   object-position: left;
 }
 </style>
+
+<style>
+.a > img,
+.b > img,
+.c > img,
+.d > img {
+  object-position: center;
+}
+</style>

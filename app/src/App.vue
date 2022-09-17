@@ -91,8 +91,8 @@ button {
   transition: background-color 0.2s ease;
 }
 
-button:hover:not(:disabled, .fancy),
-button:focus:not(:disabled, .fancy) {
+button:hover:not(:disabled, .fancy, .a, .b, .c, .d),
+button:focus:not(:disabled, .fancy, .a, .b, .c, .d) {
   background-color: var(--primary);
 }
 

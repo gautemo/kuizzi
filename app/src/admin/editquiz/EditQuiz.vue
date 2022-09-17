@@ -81,7 +81,7 @@ function move(i: number, up: boolean) {
   <main>
     <label>
       <span>Quiz name: </span>
-      <input type="text" v-model="quiz.name" maxlength="50" />
+      <input type="text" v-model="quiz.name" maxlength="70" />
     </label>
     <ul>
       <li v-for="(question, i) in quiz.questions" :key="question.id">

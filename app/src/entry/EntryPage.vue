@@ -31,7 +31,7 @@ function enter() {
       <div class="i-ic-baseline-link icon" title="https://gaute.dev"></div>
     </a>
     <a href="mailto:gautedevelopment@gmail.com">
-      <div class="i-ic-baseline-email icon" title="mailto:gautedevelopment@gmail.com"></div>
+      <div class="i-ic-baseline-email icon" title="gautedevelopment@gmail.com"></div>
     </a>
   </footer>
 </template>
@@ -53,7 +53,7 @@ footer {
   align-items: center;
   justify-content: flex-end;
   padding: 5px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 footer a {
