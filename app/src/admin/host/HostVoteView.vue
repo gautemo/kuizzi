@@ -11,10 +11,14 @@ const question = computed(() => game.value.quiz.questions[game.value.question - 
 
 <template>
   <section>
-    <div>
-      <h2>{{ question.text }}</h2>
-      <ImageComponent v-if="question.img" :value="question.img" alt="Question image" />
-      <CorrectAnswers />
+    <div class="grid">
+      <div>
+        <h2>{{ question.text }}</h2>
+        <ImageComponent v-if="question.img" :value="question.img" alt="Question image" />
+      </div>
+      <div>
+        <CorrectAnswers />
+      </div>
     </div>
     <div class="bars">
       <HostVoteBar alternative="a" />
@@ -43,5 +47,16 @@ section {
 
 img {
   max-width: 30vw;
+  max-height: 25vh;
+}
+
+h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+.grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr fit-content(20%);
 }
 </style>
