@@ -47,6 +47,7 @@ const qrcode = useQRCode(url)
 
 <template>
   <Teleport to="#topright" v-if="game">
+    <p v-if="game.state !== 'ended'">Game PIN: {{ route.params.id }}</p>
     <p v-if="game.state === 'score' || game.state === 'reveal'">{{ game.question }} of {{ game.quiz.questions.length }}</p>
     <button v-if="game.state !== 'ended' && game.state !== 'question'" @click="next">Next</button>
   </Teleport>
@@ -89,5 +90,9 @@ h1,
 h2,
 h3 {
   margin: 0.5rem 0;
+}
+
+p {
+  margin: 0;
 }
 </style>
