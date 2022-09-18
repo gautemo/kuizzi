@@ -152,6 +152,7 @@ button {
   color: white;
   text-align: center;
   word-break: break-word;
+  text-shadow: 1px 2px 1px #00000078;
 }
 
 .q-img {
