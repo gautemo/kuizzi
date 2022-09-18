@@ -34,7 +34,7 @@ onMounted(() => {
       <div class="bar">
         <template v-for="player of playersOnBar" :key="player.id">
           <Transition>
-            <UserIcon v-if="show" :icon="player.icon" :color="player.color" :size="Math.max(75 - players.length, 40)" />
+            <UserIcon v-if="show" :icon="player.icon" :color="player.color" :size="Math.max(60 - players.length, 35)" />
           </Transition>
         </template>
       </div>
