@@ -88,7 +88,7 @@ const question = computed(() => game.value.quiz.questions[game.value.question - 
 .top.three {
   gap: 10px;
   grid-template-columns: 1fr auto 1fr;
-  grid-template-areas: "img question right";
+  grid-template-areas: 'img question right';
 }
 
 .top.three .right {

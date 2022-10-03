@@ -10,7 +10,7 @@ const reverse = computed(() => players.value.slice(0).reverse())
 <template>
   <section>
     <slot></slot>
-    <h4>Players</h4>
+    <h4>{{ players.length }} player{{ players.length === 1 ? '' : 's' }} have joined</h4>
     <ul>
       <li v-for="player in reverse" :key="player.id">
         <UserIcon :icon="player.icon" :color="player.color" />

@@ -26,7 +26,7 @@ function answer(alternative: 'a' | 'b' | 'c' | 'd') {
     scoreGained = Math.floor(clamp(500, scoreGained, 1000))
   }
   const points = player.value.points
-  points[game.value.question-1] = scoreGained
+  points[game.value.question - 1] = scoreGained
   addAnswer(game.value.id, game.value.question, alternative, points)
 }
 
@@ -99,7 +99,7 @@ const countDown = clamp(0, 3000 - (Date.now() - game.value.timeStarted), 3000)
 .top.three {
   gap: 10px;
   grid-template-columns: 1fr auto 1fr;
-  grid-template-areas: "img question right";
+  grid-template-areas: 'img question right';
 }
 
 .top.three .right {

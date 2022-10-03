@@ -1,5 +1,5 @@
-import {registerRoute} from 'workbox-routing';
-import {StaleWhileRevalidate} from 'workbox-strategies';
+import { registerRoute } from 'workbox-routing'
+import { StaleWhileRevalidate } from 'workbox-strategies'
 
 declare let self: ServiceWorkerGlobalScope
 
@@ -10,6 +10,4 @@ self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim())
 })
 
-registerRoute(/https:\/\/fonts.bunny.net\/css.*/,
-  new StaleWhileRevalidate()
-);
+registerRoute(/https:\/\/fonts.bunny.net\/css.*/, new StaleWhileRevalidate())

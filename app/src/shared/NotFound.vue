@@ -8,9 +8,9 @@
 </template>
 
 <style scoped>
-  main {
-    display: grid;
-    place-items: center;
-    text-align: center;
-  }
+main {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
 </style>

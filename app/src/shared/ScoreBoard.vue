@@ -10,11 +10,12 @@ const game = inject('game') as ComputedRef<Game>
 const updated = ref(false)
 
 const sorted = computed(() => {
-  if(!updated.value) return players.value.slice(0).sort((a, b) => sum(b.points.slice(0, game.value.question-2)) - sum(a.points.slice(0,game.value.question-2)))
+  if (!updated.value)
+    return players.value.slice(0).sort((a, b) => sum(b.points.slice(0, game.value.question - 2)) - sum(a.points.slice(0, game.value.question - 2)))
   return players.value.slice(0).sort((a, b) => sum(b.points) - sum(a.points))
 })
 
-onMounted(() => setTimeout(() => updated.value = true, 500))
+onMounted(() => setTimeout(() => (updated.value = true), 500))
 </script>
 
 <template>
@@ -25,7 +26,7 @@ onMounted(() => setTimeout(() => updated.value = true, 500))
         <span v-if="i < 5">{{ i + 1 }}</span>
         <UserIcon :icon="player.icon" :color="player.color" :size="40" />
         <span v-if="i < 5" class="name">{{ player.name }}</span>
-        <ScoreTween v-if="i < 5" :add-score="player.points[game.question-1]" :score="sum(player.points)" :start-tween="updated"/>
+        <ScoreTween v-if="i < 5" :add-score="player.points[game.question - 1]" :score="sum(player.points)" :start-tween="updated" />
       </li>
     </transition-group>
   </section>

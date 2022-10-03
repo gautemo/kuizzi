@@ -22,10 +22,22 @@ const quizzes = await getQuizzes()
       <li v-for="quiz of quizzes" :key="quiz.id">
         <span>{{ quiz.name }}</span>
         <button @click="router.push(`/my-games/${quiz.id}`)">Edit</button>
-        <button @click="createGameAndGoToPage(quiz.id)">Play</button>
+        <button @click="createGameAndGoToPage(quiz.id)" :disabled="quiz.questions.length === 0">Play</button>
       </li>
     </ul>
   </main>
+  <footer>
+    <i>Created by Gaute Meek Olsen</i>
+    <a href="https://twitter.com/GauteMeekOlsen" target="_blank" rel="noopener">
+      <div class="i-logos-twitter" title="Twitter"></div>
+    </a>
+    <a href="https://gaute.dev" target="_blank" rel="noopener">
+      <div class="i-ic-baseline-link icon" title="https://gaute.dev"></div>
+    </a>
+    <a href="mailto:gautedevelopment@gmail.com">
+      <div class="i-ic-baseline-email icon" title="gautedevelopment@gmail.com"></div>
+    </a>
+  </footer>
 </template>
 
 <style scoped>
@@ -55,5 +67,22 @@ li > span {
 
 li:not(:last-child) {
   border-bottom: 1px solid #333;
+}
+
+footer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px;
+  font-size: 0.85rem;
+}
+
+footer a {
+  font-size: 1.2rem;
+}
+
+.icon {
+  background-color: #333;
 }
 </style>

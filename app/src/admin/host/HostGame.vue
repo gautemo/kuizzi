@@ -60,10 +60,12 @@ const qrcode = useQRCode(url)
           <h1>{{ game!.quiz.name }}</h1>
           <div>
             <h2>Go to kuizzi.app or use QR code to join!</h2>
-            <h3>
-              Game PIN: <span>{{ route.params.id }}</span>
-            </h3>
-            <img :src="qrcode" alt="QR code to join" />
+            <div class="columns">
+              <h3>
+                Game PIN: <span>{{ route.params.id }}</span>
+              </h3>
+              <img :src="qrcode" alt="QR code to join" />
+            </div>
           </div>
         </div>
       </LobbyPlayers>
@@ -94,5 +96,9 @@ h3 {
 
 p {
   margin: 0;
+}
+
+img {
+  height: 30vh;
 }
 </style>

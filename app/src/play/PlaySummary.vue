@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ComputedRef, inject } from 'vue'
 import { Player } from '../shared/types'
-import { sum } from '../shared/utils';
+import { sum } from '../shared/utils'
 
 const suffixes = {
   zero: '',

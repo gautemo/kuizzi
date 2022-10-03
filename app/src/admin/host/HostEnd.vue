@@ -3,7 +3,7 @@ import { computed, ComputedRef, inject, onMounted, reactive } from 'vue'
 import { Player } from '../../shared/types'
 import UserIcon from '../../shared/UserIcon.vue'
 import FireWorks from '../../shared/FireWorks.vue'
-import { sum } from '../../shared/utils';
+import { sum } from '../../shared/utils'
 
 const players = inject('players') as ComputedRef<Player[]>
 const sorted = computed(() => {

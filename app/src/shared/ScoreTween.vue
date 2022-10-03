@@ -13,7 +13,7 @@ const tweened = reactive({
 })
 
 watchEffect(() => {
-  if(props.startTween){
+  if (props.startTween) {
     gsap.to(tweened, { duration: 3, number: props.score })
   }
 })

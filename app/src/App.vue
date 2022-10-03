@@ -24,10 +24,10 @@ setInterval(() => {
   --pastel5: #c6d2ed;
   --bg: var(--pastel1);
 
-  --red: #BA020B;
-  --blue: #1328C2;
-  --yellow: #C49500;
-  --green: #00AD2B;
+  --red: #ba020b;
+  --blue: #1328c2;
+  --yellow: #c49500;
+  --green: #00ad2b;
 
   --primary: #7fb0eb;
   --danger: rgb(247, 138, 138);

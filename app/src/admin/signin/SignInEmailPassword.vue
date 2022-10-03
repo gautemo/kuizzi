@@ -66,12 +66,7 @@ async function resetEmailPassword() {
   <section>
     <div>
       <button @click="emit('close')" class="space-right">Close</button>
-      <button
-        v-if="emailState === 'has_password'"
-        @click="resetEmailPassword"
-        :class="{ donereset: doneReset }"
-        :disabled="doneReset"
-      >
+      <button v-if="emailState === 'has_password'" @click="resetEmailPassword" :class="{ donereset: doneReset }" :disabled="doneReset">
         <span v-if="doneReset">Reset password email sent</span>
         <span v-else>Reset password</span>
       </button>

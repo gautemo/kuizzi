@@ -6,7 +6,7 @@ export function addPlayer(gameId: string, name: string, icon: string, color: str
     name,
     icon,
     color,
-    points: Array.from({length: nrQuestions}, () => 0),
+    points: Array.from({ length: nrQuestions }, () => 0),
   })
 }
 
