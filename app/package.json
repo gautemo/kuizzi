@@ -12,32 +12,32 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@vueuse/integrations": "^9.3.0",
-    "firebase": "^9.10.0",
-    "gsap": "^3.11.2",
+    "@vueuse/integrations": "^9.3.1",
+    "firebase": "^9.12.1",
+    "gsap": "^3.11.3",
     "qrcode": "^1.5.1",
-    "vue": "^3.2.40",
-    "vue-router": "^4.1.5",
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.6",
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4"
   },
   "devDependencies": {
     "@gautemo/vite-plugin-service-worker": "^0.0.3",
     "@iconify-json/ic": "^1.1.9",
-    "@iconify-json/logos": "^1.1.16",
-    "@unocss/preset-icons": "^0.45.26",
+    "@iconify-json/logos": "^1.1.17",
+    "@unocss/preset-icons": "^0.45.30",
     "@vitejs/plugin-vue": "^3.1.2",
     "@vue/eslint-config-typescript": "^11.0.2",
-    "@vueuse/core": "^9.3.0",
+    "@vueuse/core": "^9.3.1",
     "autoprefixer": "^10.4.12",
-    "eslint": "^8.24.0",
+    "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.5.1",
-    "postcss": "^8.4.17",
+    "eslint-plugin-vue": "^9.6.0",
+    "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4",
-    "unocss": "^0.45.26",
-    "vite": "^3.1.4",
-    "vue-tsc": "^0.40.13"
+    "unocss": "^0.45.30",
+    "vite": "^3.1.8",
+    "vue-tsc": "^1.0.9"
   }
 }

@@ -2,6 +2,7 @@
 import { useAsyncState } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import AlertMessage from '../../shared/AlertMessage.vue';
 import { getEmailState, signInEmailAndPassword, createAccount, resetPassword } from '../firebaseAuth'
 
 const email = ref('')
@@ -50,9 +51,11 @@ async function resetEmailPassword() {
 </script>
 
 <template>
-  <Teleport v-if="emailState === 'not_user'" to="#sign-in-header">Create account</Teleport>
-  <Teleport v-else-if="emailState === 'no_password'" to="#sign-in-header">Create password</Teleport>
-  <Teleport v-else to="#sign-in-header">Sign in</Teleport>
+  <Teleport to="#sign-in-header">
+    <span v-if="emailState === 'not_user'">Create account</span>
+    <span v-else-if="emailState === 'no_password'">Create password</span>
+    <span v-else>Sign in</span>
+  </Teleport>
   <label>
     <span>Email</span>
     <input type="email" v-model="email" @keyup.enter="executeEmailState()" :disabled="emailState !== null" />
