@@ -10,8 +10,9 @@ const game = inject('game') as ComputedRef<Game>
 const updated = ref(false)
 
 const sorted = computed(() => {
-  if (!updated.value)
-    return players.value.slice(0).sort((a, b) => sum(b.points.slice(0, game.value.question - 2)) - sum(a.points.slice(0, game.value.question - 2)))
+  if (!updated.value) {
+    return players.value.slice(0).sort((a, b) => sum(b.points.slice(0, game.value.question - 1)) - sum(a.points.slice(0, game.value.question - 1)))
+  }
   return players.value.slice(0).sort((a, b) => sum(b.points) - sum(a.points))
 })
 

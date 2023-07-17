@@ -10,7 +10,7 @@ const players = inject('players') as ComputedRef<Player[]>
 const player = inject('player') as ComputedRef<Player>
 
 const place = computed(() => {
-  return players.value.filter(p => sum(p.points) < sum(player.value.points)).length
+  return players.value.filter(p => sum(p.points) > sum(player.value.points)).length
 })
 const gifType: { [key: number]: 'won' | 'close' } = {
   0: 'won',
