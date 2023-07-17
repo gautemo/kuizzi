@@ -6,7 +6,7 @@ import { ref, getDownloadURL } from 'firebase/storage'
 
 const app = initializeApp({
   apiKey: 'AIzaSyC2zSi5L3hsAudpae05vWNMm2ggv8Z8cuY',
-  authDomain: 'kuizzi.firebaseapp.com',
+  authDomain: 'kuizzi.app',
   databaseURL: 'https://kuizzi.firebaseio.com',
   projectId: 'kuizzi',
   storageBucket: 'kuizzi.appspot.com',
