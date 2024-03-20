@@ -48,7 +48,7 @@ const {
     quizInDB.value = JSON.stringify(quiz)
   },
   null,
-  { immediate: false }
+  { immediate: false },
 )
 const error = computed(() => {
   if (!e.value) return null

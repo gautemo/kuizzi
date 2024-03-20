@@ -23,7 +23,7 @@ export function userIsSignedIn(): Promise<boolean> {
         unsubscribe()
         resolve(user !== null && !user.isAnonymous)
       },
-      reject
+      reject,
     )
   })
 }

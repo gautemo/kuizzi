@@ -7,7 +7,7 @@ const props = withDefaults(
     message: string
     autofocus?: boolean
   }>(),
-  { autofocus: false }
+  { autofocus: false },
 )
 
 const element = ref<Element>()

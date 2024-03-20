@@ -37,7 +37,7 @@ function addImage(input: HTMLInputElement) {
       </label>
       <label v-if="!question.img">
         <span>Image:</span>
-        <input type="file" accept="image/*" @input="event => question.img = addImage(event.target as HTMLInputElement)" />
+        <input type="file" accept="image/*" @input="event => (question.img = addImage(event.target as HTMLInputElement))" />
       </label>
       <label @click.prevent v-else>
         <span>Image:</span>

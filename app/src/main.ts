@@ -18,7 +18,7 @@ if (import.meta.env.VITE_DISABLE_ANALYTICS !== 'true') {
           screen: screen.width + 'x' + screen.height,
           id: '7927cc40-3229-4986-b981-0e1e6c4a93c6',
           utcoffset: '1',
-        })
+        }),
     )
   }
   sessionStorage.setItem('_swa', '1')

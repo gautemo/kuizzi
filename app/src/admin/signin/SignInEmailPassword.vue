@@ -2,7 +2,7 @@
 import { useAsyncState } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import AlertMessage from '../../shared/AlertMessage.vue';
+import AlertMessage from '../../shared/AlertMessage.vue'
 import { getEmailState, signInEmailAndPassword, createAccount, resetPassword } from '../firebaseAuth'
 
 const email = ref('')

@@ -21,7 +21,7 @@ export function useFirestore<T extends { id: string }>(docRef: DocumentReference
     err => {
       error.value = err
       isLoading.value = false
-    }
+    },
   )
   tryOnScopeDispose(unsubscribe)
   return {
@@ -39,12 +39,12 @@ export function useFirestoreList<T extends { id: string }>(query: Query<Document
     query,
     snapshot => {
       isLoading.value = false
-      data.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as T))
+      data.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }) as T)
     },
     err => {
       error.value = err
       isLoading.value = false
-    }
+    },
   )
   tryOnScopeDispose(unsubscribe)
   return {

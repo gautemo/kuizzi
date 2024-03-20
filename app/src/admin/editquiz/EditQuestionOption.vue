@@ -41,7 +41,7 @@ function toggleCorrect(checked: boolean) {
     </div>
     <label v-else>
       <span class="i-ic-baseline-image" />
-      <input type="file" accept="image/*" @input="event => question[props.option] = addImage(event.target as HTMLInputElement)" />
+      <input type="file" accept="image/*" @input="event => (question[props.option] = addImage(event.target as HTMLInputElement))" />
     </label>
     <label>
       <span>Correct</span>

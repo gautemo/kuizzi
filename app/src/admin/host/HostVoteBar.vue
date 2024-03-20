@@ -20,7 +20,7 @@ const height = ref('1px')
 onMounted(() =>
   setTimeout(() => {
     height.value = (playersOnBar.value.length / players.value.length) * barwrap.value!.clientHeight + 'px'
-  }, 500)
+  }, 500),
 )
 const show = ref(false)
 onMounted(() => {

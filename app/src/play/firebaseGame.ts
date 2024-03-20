@@ -17,6 +17,6 @@ export function addAnswer(gameId: string, questionNr: number, alternative: 'a' |
       [questionNr]: alternative,
       points,
     },
-    { merge: true }
+    { merge: true },
   )
 }

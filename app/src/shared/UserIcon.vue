@@ -5,7 +5,7 @@ withDefaults(
     color: string
     size?: number
   }>(),
-  { size: 80 }
+  { size: 80 },
 )
 </script>
 
