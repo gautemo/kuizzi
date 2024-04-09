@@ -2,7 +2,7 @@
 
 Quiz game
 
-[https://kuizzi.web.app/](https://kuizzi.web.app/)
+[https://kuizzi.app/](https://kuizzi.app/)
 
 ## Commands
 
