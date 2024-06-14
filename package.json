@@ -2,7 +2,6 @@
   "scripts": {
     "deploy": "npm run build --prefix app && (cd firebase && firebase deploy)",
     "dev": "npm run dev --prefix app",
-    "postinstall": "cd vue && pnpm i",
     "firebase:emulator": "cd firebase && firebase emulators:start --import seed"
   }
 }
