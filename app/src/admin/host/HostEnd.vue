@@ -14,10 +14,11 @@ const show = reactive({
   first: false,
   second: false,
   third: false,
+  fullList: false,
 })
 onMounted(() => {
-  setTimeout(() => (show.first = true), 4500)
-  setTimeout(() => (show.second = true), 2200)
+  setTimeout(() => (show.first = true), 5000)
+  setTimeout(() => (show.second = true), 2500)
   setTimeout(() => (show.third = true), 1000)
 })
 </script>
@@ -44,6 +45,19 @@ onMounted(() => {
     </h3>
     <FireWorks size="5px" />
     <FireWorks v-if="show.first" size="12px" />
+    <section v-if="show.first" class="full-list">
+      <ol v-if="show.fullList">
+        <li v-for="player of sorted" :key="player.id">
+          <div>
+            <UserIcon :icon="player.icon" :color="player.color" :size="40" />
+            <span class="name">{{ player.name }}</span> -
+            <span>{{ sum(player.points) }}</span>
+          </div>
+        </li>
+      </ol>
+      <button v-if="!show.fullList" @click="show.fullList = true">Show full list</button>
+      <button v-else @click="show.fullList = false">Hide full list</button>
+    </section>
   </div>
 </template>
 
@@ -69,9 +83,43 @@ h3 {
   align-items: center;
   height: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .icon {
   font-size: 2.5em;
+}
+
+.full-list {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.full-list button {
+  min-width: 125px;
+}
+
+.full-list ol {
+  min-width: 200px;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-height: 75vh;
+  overflow: auto;
+}
+
+.full-list li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.full-list li > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 </style>
